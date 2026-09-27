@@ -110,7 +110,10 @@ export default function ContactPage() {
 							</option>
 							{serviceCategories.flatMap((category) =>
 								category.capabilities.map((capability) => (
-									<option value={capability} key={`${category.id}-${capability}`}>
+									<option
+										value={capability}
+										key={`${category.id}-${capability}`}
+									>
 										{capability}
 									</option>
 								)),
