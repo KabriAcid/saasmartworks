@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 import { SiteFooter } from '@/components/shared/site-footer';
 import { SiteHeader } from '@/components/shared/site-header';
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 	return (
 		<html lang="en">
 			<body>
+				<NextTopLoader color="#ffa64d" showSpinner={false} height={3} />
 				<SiteHeader />
 				{children}
 				<SiteFooter />

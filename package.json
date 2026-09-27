@@ -21,6 +21,7 @@
     "@next/env": "16.3.6",
     "drizzle-orm": "0.45.3",
     "next": "16.3.6",
+    "nextjs-toploader": "3.9.17",
     "radix-ui": "1.6.7",
     "react": "19.3.0",
     "react-dom": "19.3.0",
