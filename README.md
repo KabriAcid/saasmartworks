@@ -1,15 +1,15 @@
-# SA'A SMART WORKS
+# SAASMARTWORKS
 
-The SA'A SMART WORKS platform is a single Next.js application for the company's public Services experience and its future central administration system. The project is being built as a modular monolith, with shared infrastructure designed to support multiple business units over time.
+The SAASMARTWORKS platform is a single Next.js application for the company's public Services experience and its future central administration system. The project is being built as a modular monolith, with shared infrastructure designed to support multiple business units over time.
 
 > **Project status:** Initial implementation. The Services and Admin routes are starter experiences; authentication, operational administration, and inquiry workflows are not yet implemented.
 
 ## Applications
 
-| Route | Purpose | Status |
-| --- | --- | --- |
-| `/` | Professional & Digital Services | Starter experience |
-| `/admin` | Central administration | Starter experience; no operational access |
+| Route    | Purpose                         | Status                                    |
+| -------- | ------------------------------- | ----------------------------------------- |
+| `/`      | Professional & Digital Services | Starter experience                        |
+| `/admin` | Central administration          | Starter experience; no operational access |
 
 Customers do not need accounts to use the future Services experience. The platform is intended to support SA'A Eatery later, but Eatery features are not currently implemented.
 
@@ -59,16 +59,16 @@ SQLite file storage is for local development and is not durable production stora
 
 ## Available Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the Next.js development server |
-| `npm run build` | Create a production build |
-| `npm run start` | Serve a production build |
-| `npm run typecheck` | Run TypeScript without emitting files |
-| `npm run lint` | Run ESLint |
-| `npm run db:generate` | Generate SQL migrations from the schema |
-| `npm run db:migrate` | Apply migrations to the configured database |
-| `npm run db:seed` | Insert the starter business units and service categories |
+| Command               | Description                                              |
+| --------------------- | -------------------------------------------------------- |
+| `npm run dev`         | Start the Next.js development server                     |
+| `npm run build`       | Create a production build                                |
+| `npm run start`       | Serve a production build                                 |
+| `npm run typecheck`   | Run TypeScript without emitting files                    |
+| `npm run lint`        | Run ESLint                                               |
+| `npm run db:generate` | Generate SQL migrations from the schema                  |
+| `npm run db:migrate`  | Apply migrations to the configured database              |
+| `npm run db:seed`     | Insert the starter business units and service categories |
 
 ## Project Structure
 

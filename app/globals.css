@@ -401,6 +401,8 @@ h3 {
 }
 .stack-list {
 	display: flex;
+	flex-direction: column;
+	width: 100%;
 	align-items: stretch;
 	gap: 1.25rem;
 	margin-top: 2rem;
@@ -409,6 +411,7 @@ h3 {
 	position: relative;
 	display: grid;
 	grid-template-columns: 1fr;
+	width: 100%;
 	align-items: stretch;
 	gap: 1.75rem;
 	min-height: 18rem;
@@ -431,8 +434,8 @@ h3 {
 .service-card-copy h2 { margin: 0.45rem 0 0.8rem; font-size: clamp(1.45rem, 2.2vw, 2.15rem); }
 .service-card-copy > p:last-child { max-width: 34rem; color: var(--color-muted); margin: 0; }
 .service-card-kicker { margin: 0; color: #a85514; font-family: Arial, sans-serif; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
-.service-capabilities { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
-.service-capabilities li { display: flex; min-height: 3.2rem; align-items: center; gap: 0.7rem; border: 1px solid rgb(31 41 51 / 9%); border-radius: 0.85rem; background: rgb(255 255 255 / 42%); padding: 0.65rem 0.75rem; color: var(--color-muted); font-family: Arial, sans-serif; font-size: 0.82rem; line-height: 1.4; }
+.service-capabilities { display: grid; grid-template-columns: 1fr; width: 100%; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+.service-capabilities li { display: flex; width: 100%; min-height: 3.2rem; align-items: center; gap: 0.7rem; border: 1px solid rgb(31 41 51 / 9%); border-radius: 0.85rem; background: rgb(255 255 255 / 42%); padding: 0.65rem 0.75rem; color: var(--color-muted); font-family: Arial, sans-serif; font-size: 0.82rem; line-height: 1.4; }
 .service-bullet { display: grid; width: 1.8rem; height: 1.8rem; flex: none; place-items: center; border-radius: 0.55rem; background: rgb(255 166 77 / 18%); color: #a85514; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.04em; }
 .service-card-action { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; border-top: 1px solid rgb(31 41 51 / 12%); padding-top: 1.25rem; color: var(--color-muted); font-family: Arial, sans-serif; font-size: 0.75rem; font-weight: 700; }
 .service-arrow { display: grid; width: 2.5rem; height: 2.5rem; flex: none; place-items: center; border: 1px solid rgb(189 104 27 / 28%); border-radius: 999px; background: var(--color-primary); color: var(--color-ink); transition: transform 180ms ease; }

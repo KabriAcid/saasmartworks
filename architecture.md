@@ -1,6 +1,6 @@
 > Current implementation override (2026-09-27): use one Next.js app with root app/ and src/components/, no monorepo. Initial local database: Drizzle + SQLite. Read docs/DECISIONS.md; older structure/database sections below are historical.
 
-# SA'A SMART WORKS — Engineering & UI/UX Skill
+# SAASMARTWORKS — Engineering & UI/UX Skill
 
 > Repository-level implementation standard for humans and AI coding agents.
 >
@@ -8,7 +8,7 @@
 
 ## 1. Project Context
 
-SA'A SMART WORKS is a modular business platform serving multiple business units.
+SAASMARTWORKS is a modular business platform serving multiple business units.
 
 Current and planned applications:
 
@@ -147,14 +147,14 @@ Do not install multiple libraries that solve substantially the same problem with
 --color-primary: #ffa64d;
 ```
 
-Orange is the primary SA'A SMART WORKS brand color.
+Orange is the primary SAASMARTWORKS brand color.
 
 ### Secondary color
 
 The secondary brand color is **dark blue**, but its exact approved hex value has not yet been supplied.
 
 ```css
---color-secondary: /* TBD: approved SA'A SMART WORKS dark blue */;
+--color-secondary: /* TBD: approved SAASMARTWORKS dark blue */;
 ```
 
 **Never invent or permanently hardcode a secondary dark-blue value.**
@@ -167,33 +167,33 @@ Recommended conceptual token structure:
 
 ```css
 :root {
-  --color-primary: #ffa64d;
-  --color-secondary: /* approved dark blue */;
+	--color-primary: #ffa64d;
+	--color-secondary: /* approved dark blue */;
 
-  --color-background: ...;
-  --color-surface: ...;
-  --color-surface-elevated: ...;
-  --color-surface-glass: ...;
+	--color-background: ...;
+	--color-surface: ...;
+	--color-surface-elevated: ...;
+	--color-surface-glass: ...;
 
-  --color-text-primary: ...;
-  --color-text-secondary: ...;
-  --color-text-muted: ...;
+	--color-text-primary: ...;
+	--color-text-secondary: ...;
+	--color-text-muted: ...;
 
-  --color-success: ...;
-  --color-warning: ...;
-  --color-error: ...;
-  --color-info: ...;
+	--color-success: ...;
+	--color-warning: ...;
+	--color-error: ...;
+	--color-info: ...;
 
-  --radius-button: ...;
-  --radius-input: ...;
-  --radius-card: ...;
-  --radius-modal: ...;
+	--radius-button: ...;
+	--radius-input: ...;
+	--radius-card: ...;
+	--radius-modal: ...;
 
-  --shadow-card: ...;
-  --shadow-card-hover: ...;
-  --shadow-elevated: ...;
+	--shadow-card: ...;
+	--shadow-card-hover: ...;
+	--shadow-elevated: ...;
 
-  --blur-glass: ...;
+	--blur-glass: ...;
 }
 ```
 
@@ -205,7 +205,7 @@ Changing the brand theme should primarily require editing design tokens, not doz
 
 ## 6. Logo Component
 
-The supplied SA'A SMART WORKS logo must be implemented through a reusable `Logo` component.
+The supplied SAASMARTWORKS logo must be implemented through a reusable `Logo` component.
 
 Do not duplicate logo markup/images across applications.
 
@@ -237,7 +237,7 @@ If the logo changes later, applications should not require individual rewrites.
 
 ## 7. UI/UX Design Philosophy
 
-The product uses an **Apple-inspired Liquid Glass design language** adapted into a distinct SA'A SMART WORKS identity.
+The product uses an **Apple-inspired Liquid Glass design language** adapted into a distinct SAASMARTWORKS identity.
 
 Apple-inspired means adopting useful design principles — restraint, clarity, depth, hierarchy, motion quality and material treatment — **not cloning Apple interfaces**.
 
@@ -1014,4 +1014,4 @@ Until the missing brand information is supplied, **do not guess it**.
 
 When multiple implementations are possible, prefer the solution that is:
 
-**secure, clear, reusable, maintainable and appropriately simple — in that order — while respecting the approved SA'A SMART WORKS architecture and visual identity.**
+**secure, clear, reusable, maintainable and appropriately simple — in that order — while respecting the approved SAASMARTWORKS architecture and visual identity.**

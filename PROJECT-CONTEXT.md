@@ -1,8 +1,8 @@
 > Current implementation override (2026-09-27): use one Next.js app with root app/ and src/components/, no monorepo. Initial local database: Drizzle + SQLite. Read docs/DECISIONS.md; older structure/database sections below are historical.
 
-# SA'A SMART WORKS — Project Context & AI Engineering Guide
+# SAASMARTWORKS — Project Context & AI Engineering Guide
 
-> **Purpose:** This document is the core source of truth for AI coding agents, developers, and future contributors working on the SA'A SMART WORKS platform.
+> **Purpose:** This document is the core source of truth for AI coding agents, developers, and future contributors working on the SAASMARTWORKS platform.
 >
 > Before making architectural decisions, installing dependencies, creating major features, or changing established patterns, read this document completely.
 >
@@ -14,9 +14,9 @@
 
 # 1. Project Overview
 
-## 1.1 What is SA'A SMART WORKS?
+## 1.1 What is SAASMARTWORKS?
 
-SA'A SMART WORKS is a growing multi-service business based in Maiduguri, Borno State, Nigeria.
+SAASMARTWORKS is a growing multi-service business based in Maiduguri, Borno State, Nigeria.
 
 The company was established in 2025.
 
@@ -27,7 +27,7 @@ The business currently consists of two major business units:
 
 The software must therefore NOT be designed as a website for only one department.
 
-It should be designed as an extensible **SA'A SMART WORKS Business Platform** capable of supporting multiple business units while sharing common infrastructure.
+It should be designed as an extensible **SAASMARTWORKS Business Platform** capable of supporting multiple business units while sharing common infrastructure.
 
 The initial development focus is the **Professional & Digital Services business** and the **central Administration system**.
 
@@ -42,7 +42,7 @@ Business units are a first-class architectural concept.
 The initial business units are:
 
 ```text
-SA'A SMART WORKS
+SAASMARTWORKS
 │
 ├── Professional & Digital Services
 │
@@ -315,7 +315,7 @@ Visitors should be able to:
 - browse service categories
 - browse services
 - view company information
-- contact SA'A SMART WORKS
+- contact SAASMARTWORKS
 - submit inquiries
 
 ---
@@ -585,7 +585,7 @@ Do NOT allow future scope to delay Phase 1 unnecessarily.
 Do NOT use:
 
 ```ts
-isAdmin: true
+isAdmin: true;
 ```
 
 as the primary authorization architecture.
@@ -823,7 +823,7 @@ Each eligible Eatery customer should eventually have a wallet.
 A wallet should NOT be modeled merely as:
 
 ```ts
-balance: 50000
+balance: 50000;
 ```
 
 with arbitrary mutations.
@@ -1098,7 +1098,7 @@ It does NOT mean blindly cloning Apple.
 
 The interface must remain recognizably:
 
-**SA'A SMART WORKS**
+**SAASMARTWORKS**
 
 Design goals:
 
@@ -1153,24 +1153,24 @@ Prefer semantic variables:
 
 ```css
 :root {
-  --color-primary: #ffa64d;
-  --color-secondary: /* TBD */;
+	--color-primary: #ffa64d;
+	--color-secondary: /* TBD */;
 
-  --color-background: ...;
+	--color-background: ...;
 
-  --surface-base: ...;
-  --surface-elevated: ...;
-  --surface-glass: ...;
+	--surface-base: ...;
+	--surface-elevated: ...;
+	--surface-glass: ...;
 
-  --text-primary: ...;
-  --text-secondary: ...;
-  --text-muted: ...;
+	--text-primary: ...;
+	--text-secondary: ...;
+	--text-muted: ...;
 
-  --radius-button: ...;
-  --radius-card: ...;
+	--radius-button: ...;
+	--radius-card: ...;
 
-  --shadow-card: ...;
-  --shadow-elevated: ...;
+	--shadow-card: ...;
+	--shadow-elevated: ...;
 }
 ```
 
@@ -1190,7 +1190,7 @@ A future brand refresh should mostly involve changing tokens rather than rewriti
 
 # 33. Logo
 
-The project owner has an official SA'A SMART WORKS logo.
+The project owner has an official SAASMARTWORKS logo.
 
 Do NOT recreate the logo using arbitrary text.
 
@@ -1288,7 +1288,7 @@ MockFlow-specific tooling
 generic Apple branding
 ```
 
-SA'A SMART WORKS rules take precedence.
+SAASMARTWORKS rules take precedence.
 
 ---
 
@@ -1385,7 +1385,7 @@ Typography should feel:
 
 Do not blindly use Apple's SF Pro simply because the design is Apple-inspired.
 
-The final font system should align with the SA'A SMART WORKS identity and technical licensing/availability requirements.
+The final font system should align with the SAASMARTWORKS identity and technical licensing/availability requirements.
 
 Use a consistent typography scale.
 
@@ -1575,7 +1575,7 @@ Use TypeScript strictly.
 Avoid:
 
 ```ts
-any
+any;
 ```
 
 as an escape hatch.
@@ -2354,4 +2354,7 @@ Once this works cleanly, expand the platform incrementally.
 ---
 
 # END OF PROJECT CONTEXT
+
+```
+
 ```
