@@ -36,7 +36,7 @@ export function SiteHeader() {
 						width={48}
 						height={48}
 					/>
-					<span className="wordmark-subtitle">SAASMARTWORKS</span>
+					<span className="wordmark-subtitle">SA'A SMART WORKS</span>
 				</Link>
 				<nav className="desktop-nav" aria-label="Primary navigation">
 					{links.map(([href, label]) => (

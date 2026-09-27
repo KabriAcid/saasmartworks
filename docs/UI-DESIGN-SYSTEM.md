@@ -1,10 +1,10 @@
-# SAASMARTWORKS UI/UX Direction
+# SA'A SMART WORKS UI/UX Direction
 
 ## Purpose
 
-This is the visual and interaction standard for SAASMARTWORKS. Use it when creating new public pages, login screens, dashboards, admin modules, forms, empty states, and future Eatery surfaces.
+This is the visual and interaction standard for SA'A SMART WORKS. Use it when creating new public pages, login screens, dashboards, admin modules, forms, empty states, and future Eatery surfaces.
 
-The goal is a premium, calm, capable interface: practical enough for repeated operational work, distinctive enough to feel like SAASMARTWORKS, and restrained enough to preserve trust.
+The goal is a premium, calm, capable interface: practical enough for repeated operational work, distinctive enough to feel like SA'A SMART WORKS, and restrained enough to preserve trust.
 
 The canonical implementation is the root Next.js application:
 
@@ -267,7 +267,7 @@ Current visible brand treatment:
 
 - asset: `48px` by `48px`;
 - radius: `.85rem`;
-- brand text: `SAASMARTWORKS`;
+- brand text: `SA'A SMART WORKS`;
 - no apostrophe or whitespace in the displayed brand name;
 - no line wrap in the brand name.
 

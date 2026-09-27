@@ -29,7 +29,7 @@ export default function AboutPage() {
 	return (
 		<main>
 			<ImageCarousel
-				label="About SAASMARTWORKS"
+				label="About SA'A SMART WORKS"
 				description="Professional standards, local understanding, and useful support from Maiduguri."
 				images={siteCarouselImages}
 			/>

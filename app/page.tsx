@@ -33,9 +33,7 @@ export default function HomePage() {
 		<main>
 			<section className="hero-band">
 				<div className="shell hero-content">
-					<p className="eyebrow">
-						Professional &amp; Digital Services
-					</p>
+					<p className="eyebrow">Professional &amp; Digital Services</p>
 					<h1>Practical support for organizations doing meaningful work.</h1>
 					<p className="hero-copy">
 						Consultancy, capacity building, digital support, and creative
@@ -131,7 +129,7 @@ export default function HomePage() {
 						/>
 						<div className="eatery-preview-shade" />
 						<div className="eatery-preview-copy">
-							<span className="eyebrow">Another side of SAASMARTWORKS</span>
+							<span className="eyebrow">Another side of SA'A SMART WORKS</span>
 							<h3>SA’A Eatery</h3>
 							<p>
 								A future business unit for good food, warm hospitality, and a

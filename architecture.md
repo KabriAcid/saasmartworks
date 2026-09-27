@@ -1,6 +1,6 @@
 > Current implementation override (2026-09-27): use one Next.js app with root app/ and src/components/, no monorepo. Initial local database: Drizzle + SQLite. Read docs/DECISIONS.md; older structure/database sections below are historical.
 
-# SAASMARTWORKS — Engineering & UI/UX Skill
+# SA'A SMART WORKS — Engineering & UI/UX Skill
 
 > Repository-level implementation standard for humans and AI coding agents.
 >
@@ -8,7 +8,7 @@
 
 ## 1. Project Context
 
-SAASMARTWORKS is a modular business platform serving multiple business units.
+SA'A SMART WORKS is a modular business platform serving multiple business units.
 
 Current and planned applications:
 
@@ -147,14 +147,14 @@ Do not install multiple libraries that solve substantially the same problem with
 --color-primary: #ffa64d;
 ```
 
-Orange is the primary SAASMARTWORKS brand color.
+Orange is the primary SA'A SMART WORKS brand color.
 
 ### Secondary color
 
 The secondary brand color is **dark blue**, but its exact approved hex value has not yet been supplied.
 
 ```css
---color-secondary: /* TBD: approved SAASMARTWORKS dark blue */;
+--color-secondary: /* TBD: approved SA'A SMART WORKS dark blue */;
 ```
 
 **Never invent or permanently hardcode a secondary dark-blue value.**
@@ -205,7 +205,7 @@ Changing the brand theme should primarily require editing design tokens, not doz
 
 ## 6. Logo Component
 
-The supplied SAASMARTWORKS logo must be implemented through a reusable `Logo` component.
+The supplied SA'A SMART WORKS logo must be implemented through a reusable `Logo` component.
 
 Do not duplicate logo markup/images across applications.
 
@@ -237,7 +237,7 @@ If the logo changes later, applications should not require individual rewrites.
 
 ## 7. UI/UX Design Philosophy
 
-The product uses an **Apple-inspired Liquid Glass design language** adapted into a distinct SAASMARTWORKS identity.
+The product uses an **Apple-inspired Liquid Glass design language** adapted into a distinct SA'A SMART WORKS identity.
 
 Apple-inspired means adopting useful design principles — restraint, clarity, depth, hierarchy, motion quality and material treatment — **not cloning Apple interfaces**.
 
@@ -1014,4 +1014,4 @@ Until the missing brand information is supplied, **do not guess it**.
 
 When multiple implementations are possible, prefer the solution that is:
 
-**secure, clear, reusable, maintainable and appropriately simple — in that order — while respecting the approved SAASMARTWORKS architecture and visual identity.**
+**secure, clear, reusable, maintainable and appropriately simple — in that order — while respecting the approved SA'A SMART WORKS architecture and visual identity.**

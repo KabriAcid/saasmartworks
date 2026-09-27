@@ -3,7 +3,7 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 
 export const metadata: Metadata = {
 	title: "Login",
-	description: "Sign in to the SAASMARTWORKS platform.",
+	description: "Sign in to the SA'A SMART WORKS platform.",
 };
 
 export default function LoginPage() {

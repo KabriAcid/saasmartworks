@@ -1,6 +1,6 @@
-# SAASMARTWORKS
+# SA'A SMART WORKS
 
-The SAASMARTWORKS platform is a single Next.js application for the company's public Services experience and its future central administration system. The project is being built as a modular monolith, with shared infrastructure designed to support multiple business units over time.
+The SA'A SMART WORKS platform is a single Next.js application for the company's public Services experience and its future central administration system. The project is being built as a modular monolith, with shared infrastructure designed to support multiple business units over time.
 
 > **Project status:** Initial implementation. The Services and Admin routes are starter experiences; authentication, operational administration, and inquiry workflows are not yet implemented.
 

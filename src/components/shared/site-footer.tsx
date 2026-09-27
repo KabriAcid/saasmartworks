@@ -14,7 +14,7 @@ export function SiteFooter() {
 							width={48}
 							height={48}
 						/>
-						<span className="wordmark-name">SAASMARTWORKS</span>
+						<span className="wordmark-name">SA'A SMART WORKS</span>
 					</Link>
 					<p className="footer-intro">
 						Professional and digital services for organizations, institutions,
@@ -51,7 +51,7 @@ export function SiteFooter() {
 				</div>
 			</div>
 			<div className="shell footer-bottom">
-				<span>© {new Date().getFullYear()} SAASMARTWORKS</span>
+				<span>© {new Date().getFullYear()} SA'A SMART WORKS</span>
 				<span>Professional &amp; Digital Services · Maiduguri, Nigeria</span>
 			</div>
 		</footer>
