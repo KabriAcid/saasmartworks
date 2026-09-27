@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-	ArrowLeftIcon,
-	ArrowRightIcon,
-	CheckCircleIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { getCategoryBySlug, serviceCategories } from "@/lib/services-data";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -38,7 +34,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 					</Link>
 					<p className="eyebrow">{category.shortTitle}</p>
 					<h1>{category.title}</h1>
-					<p className="hero-copy">{category.description}</p>
+					<p className="hero-copy mb-5">{category.description}</p>
 					<Link className="button" href="/contact">
 						Discuss this service <ArrowRightIcon aria-hidden="true" />
 					</Link>
@@ -54,9 +50,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 					</p>
 				</div>
 				<div className="capability-grid">
-					{category.capabilities.map((capability) => (
-						<div className="content-card capability" key={capability}>
-							<CheckCircleIcon aria-hidden="true" />
+					{category.capabilities.map((capability, index) => (
+						<div className="detail-capability" key={capability}>
+							<span className="service-bullet" aria-hidden="true">
+								{String(index + 1).padStart(2, "0")}
+							</span>
 							<span>{capability}</span>
 						</div>
 					))}
