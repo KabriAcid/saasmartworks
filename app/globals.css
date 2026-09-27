@@ -198,15 +198,14 @@ textarea {
 	padding: 5rem 0 4rem;
 }
 .service-carousel {
-	padding-top: 1rem;
+	width: 100%;
 }
 .service-carousel-frame {
 	position: relative;
-	height: clamp(22rem, 52vw, 38rem);
+	height: min(82svh, 56rem);
+	min-height: 34rem;
 	overflow: hidden;
-	border-radius: 1.5rem;
 	background: var(--color-dark);
-	box-shadow: 0 24px 60px rgb(31 41 51 / 14%);
 }
 .service-carousel-image {
 	object-fit: cover;
@@ -219,10 +218,14 @@ textarea {
 }
 .service-carousel-caption {
 	position: absolute;
-	bottom: 2rem;
-	left: 2rem;
+	bottom: 4.5rem;
+	left: max(1.5rem, calc((100vw - 72rem) / 2));
 	display: grid;
-	gap: 0.35rem;
+	max-width: min(42rem, calc(100vw - 3rem));
+	gap: 0.45rem;
+	padding: 1.5rem 5rem 1.5rem 1.5rem;
+	border-radius: 0 1.25rem 1.25rem 0;
+	background: linear-gradient(90deg, rgb(8 22 30 / 86%), rgb(8 22 30 / 62%) 68%, rgb(8 22 30 / 0%));
 	color: white;
 }
 .service-carousel-caption span {
@@ -234,12 +237,47 @@ textarea {
 	opacity: 0.78;
 }
 .service-carousel-caption strong {
-	font-size: clamp(1.5rem, 3vw, 2.5rem);
+	background: linear-gradient(100deg, #fff 12%, #ffd09e 52%, #ffa64d 100%);
+	background-clip: text;
+	font-size: clamp(2rem, 5vw, 4.8rem);
+	line-height: 1.02;
+	color: transparent;
+	-webkit-background-clip: text;
+}
+.service-carousel-caption p {
+	max-width: 34rem;
+	margin: 0.45rem 0 0;
+	color: rgb(255 255 255 / 82%);
+	font-size: clamp(1rem, 1.5vw, 1.25rem);
+	line-height: 1.45;
+}
+.service-carousel-progress {
+	position: absolute;
+	right: max(1.5rem, calc((100vw - 72rem) / 2));
+	bottom: 8.5rem;
+	display: flex;
+	gap: 0.4rem;
+}
+.service-carousel-progress button {
+	width: 2.75rem;
+	height: 0.25rem;
+	border: 0;
+	border-radius: 999px;
+	background: rgb(255 255 255 / 35%);
+	cursor: pointer;
+	transition: background 180ms ease, width 180ms ease;
+}
+.service-carousel-progress button.active,
+.service-carousel-progress button:hover {
+	background: var(--color-primary);
+}
+.service-carousel-progress button.active {
+	width: 4.5rem;
 }
 .service-carousel-controls {
 	position: absolute;
-	right: 2rem;
-	bottom: 2rem;
+	right: max(1.5rem, calc((100vw - 72rem) / 2));
+	bottom: 4.5rem;
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;
@@ -838,12 +876,21 @@ h3 {
 	.page-hero {
 		padding-block: 3.5rem;
 	}
-	.service-carousel-frame {
-		height: 24rem;
-	}
 	.service-carousel-caption {
-		bottom: 1.25rem;
+		bottom: 5.5rem;
 		left: 1.25rem;
+		max-width: calc(100vw - 2.5rem);
+		padding: 1.25rem 1.5rem 1.25rem 1.25rem;
+	}
+	.service-carousel-progress {
+		right: 1.25rem;
+		bottom: 4.75rem;
+	}
+	.service-carousel-progress button {
+		width: 1.75rem;
+	}
+	.service-carousel-progress button.active {
+		width: 3rem;
 	}
 	.service-carousel-controls {
 		right: 1.25rem;

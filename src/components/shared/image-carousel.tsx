@@ -11,11 +11,16 @@ type CarouselImage = {
 };
 
 type ImageCarouselProps = {
-	images: CarouselImage[];
+	images: readonly CarouselImage[];
 	label: string;
+	description: string;
 };
 
-export function ImageCarousel({ images, label }: ImageCarouselProps) {
+export function ImageCarousel({
+	images,
+	label,
+	description,
+}: ImageCarouselProps) {
 	const [activeIndex, setActiveIndex] = useState(0);
 	const [paused, setPaused] = useState(false);
 
@@ -36,7 +41,7 @@ export function ImageCarousel({ images, label }: ImageCarouselProps) {
 
 	return (
 		<section
-			className="service-carousel shell"
+			className="service-carousel"
 			aria-label={label}
 			aria-roledescription="carousel"
 			onMouseEnter={() => setPaused(true)}
@@ -55,6 +60,19 @@ export function ImageCarousel({ images, label }: ImageCarouselProps) {
 				<div className="service-carousel-caption">
 					<span>{activeImage.credit}</span>
 					<strong>{label}</strong>
+					<p>{description}</p>
+				</div>
+				<div className="service-carousel-progress" role="tablist" aria-label="Carousel slides">
+					{images.map((image, index) => (
+						<button
+							aria-label={`Show ${image.credit} slide`}
+							aria-selected={activeIndex === index}
+							className={activeIndex === index ? "active" : ""}
+							key={image.credit}
+						type="button"
+							onClick={() => setActiveIndex(index)}
+						/>
+					))}
 				</div>
 				<div className="service-carousel-controls">
 					<button

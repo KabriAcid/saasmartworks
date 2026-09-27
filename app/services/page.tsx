@@ -8,6 +8,8 @@ import {
 	PrinterIcon,
 } from "@heroicons/react/24/outline";
 import { serviceCategories } from "@/lib/services-data";
+import { ImageCarousel } from "@/components/shared/image-carousel";
+import { siteCarouselImages } from "@/lib/site-media";
 
 export const metadata: Metadata = {
 	title: "Services",
@@ -24,6 +26,11 @@ const categoryIcons = {
 export default function ServicesPage() {
 	return (
 		<main>
+			<ImageCarousel
+				label="Our services"
+				description="Practical consultancy, digital support, and creative production for the work that matters."
+				images={siteCarouselImages}
+			/>
 			<section className="page-hero">
 				<div className="shell">
 					<p className="eyebrow">Our services</p>
@@ -51,7 +58,8 @@ export default function ServicesPage() {
 							<div className="service-card-header">
 								<div className="service-card-icon" aria-hidden="true">
 									{(() => {
-										const Icon = categoryIcons[category.id as keyof typeof categoryIcons];
+										const Icon =
+											categoryIcons[category.id as keyof typeof categoryIcons];
 										return <Icon />;
 									})()}
 								</div>
@@ -74,7 +82,11 @@ export default function ServicesPage() {
 							</ul>
 							<div className="service-card-action">
 								<span>Explore this discipline</span>
-								<Link className="service-arrow" href={`/services/${category.slug}`} aria-label={`Explore ${category.shortTitle}`}>
+								<Link
+									className="service-arrow"
+									href={`/services/${category.slug}`}
+									aria-label={`Explore ${category.shortTitle}`}
+								>
 									<ArrowRightIcon aria-hidden="true" />
 								</Link>
 							</div>

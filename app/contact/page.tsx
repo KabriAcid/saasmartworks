@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { serviceCategories } from "@/lib/services-data";
+import { ImageCarousel } from "@/components/shared/image-carousel";
+import { siteCarouselImages } from "@/lib/site-media";
 
 export const metadata: Metadata = {
 	title: "Contact",
@@ -10,6 +12,11 @@ export const metadata: Metadata = {
 export default function ContactPage() {
 	return (
 		<main>
+			<ImageCarousel
+				label="Start a conversation"
+				description="Tell us what you are trying to achieve and let us help shape the next step."
+				images={siteCarouselImages}
+			/>
 			<section className="page-hero">
 				<div className="shell">
 					<p className="eyebrow">Contact us</p>

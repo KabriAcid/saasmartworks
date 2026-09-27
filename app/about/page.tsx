@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRightIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import { ImageCarousel } from "@/components/shared/image-carousel";
+import { siteCarouselImages } from "@/lib/site-media";
 
 export const metadata: Metadata = {
 	title: "About",
@@ -26,6 +28,11 @@ const principles = [
 export default function AboutPage() {
 	return (
 		<main>
+			<ImageCarousel
+				label="About SAASMARTWORKS"
+				description="Professional standards, local understanding, and useful support from Maiduguri."
+				images={siteCarouselImages}
+			/>
 			<section className="page-hero">
 				<div className="shell">
 					<p className="eyebrow">About us</p>
