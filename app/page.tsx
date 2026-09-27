@@ -17,11 +17,11 @@ export default function HomePage() {
 						Borno State and beyond.
 					</p>
 					<div className="action-row">
-						<Link className="button" href="/contact">
-							Make an inquiry <ArrowRightIcon aria-hidden="true" />
-						</Link>
 						<Link className="button button-secondary" href="/services">
 							Explore services
+						</Link>
+						<Link className="button" href="/contact">
+							Make an inquiry <ArrowRightIcon aria-hidden="true" />
 						</Link>
 					</div>
 				</div>
