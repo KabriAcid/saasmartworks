@@ -34,7 +34,7 @@ export default function HomePage() {
 			<section className="hero-band">
 				<div className="shell hero-content">
 					<p className="eyebrow">
-						Professional &amp; Digital Services · Maiduguri
+						Professional &amp; Digital Services
 					</p>
 					<h1>Practical support for organizations doing meaningful work.</h1>
 					<p className="hero-copy">

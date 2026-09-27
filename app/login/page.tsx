@@ -14,7 +14,7 @@ export default function LoginPage() {
 					<UserCircleIcon />
 				</div>
 				<p className="eyebrow">Platform access</p>
-				<h1 id="login-heading">Welcome back.</h1>
+				<h1 id="login-heading">Sign in.</h1>
 				<form className="auth-form">
 					<label htmlFor="login-email">
 						Email address

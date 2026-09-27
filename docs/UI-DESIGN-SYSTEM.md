@@ -17,6 +17,14 @@ The canonical implementation is the root Next.js application:
 
 Do not treat the old `project/` folder as the design source. It is legacy reference material only.
 
+### 0. Utility-first styling
+
+Use Tailwind utility classes as the default styling mechanism for screens, layouts, forms, and admin surfaces. Keep custom CSS classes limited to shared tokens, reset rules, and a small number of reusable primitives that are genuinely shared across multiple screens.
+
+Do not keep adding page-specific class names to the global stylesheet. If a pattern is repeated across multiple components, extract it into a shared utility or token; otherwise prefer a direct Tailwind class composition in the component.
+
+This keeps the design system maintainable and prevents the global stylesheet from turning into a dumping ground of one-off page styling.
+
 ## Design Principles
 
 ### 1. Practical confidence
@@ -65,7 +73,7 @@ Use labels such as `Coming later`, `Not available yet`, or a disabled action wit
 
 ## Brand Tokens
 
-The current source of truth is `app/globals.css`.
+The current source of truth is `app/globals.css`, but the implementation pattern is utility-first: semantic CSS tokens are defined once, then consumed through Tailwind utilities in components.
 
 ```css
 :root {
@@ -78,6 +86,20 @@ The current source of truth is `app/globals.css`.
 	--shadow-card: 0 18px 45px rgb(31 41 51 / 8%), 0 2px 8px rgb(31 41 51 / 5%);
 }
 ```
+
+### Token usage rule
+
+Prefer semantic utility usage such as:
+
+```tsx
+<div className="rounded-2xl border border-border bg-surface p-6 shadow-card">
+	<button className="bg-primary text-primary-foreground hover:bg-primary/90">
+		Sign in
+	</button>
+</div>
+```
+
+Do not hard-code the same hex values repeatedly inside JSX. Use the semantic token names or their Tailwind equivalents instead of introducing page-specific color constants in multiple places.
 
 ### Color usage
 
@@ -148,6 +170,26 @@ Use responsive sizes only for true display headings. Do not scale every text ele
 | Metadata   | `.75rem` to `.86rem`         | `1.4`       | 600 to 800 |
 
 Headings should wrap naturally. Use a `max-width` in characters for readability; do not force long words into cramped controls.
+
+## CSS Hygiene And Global Styles
+
+The global stylesheet is not a catch-all for one-off page styling. It should remain concise and intentional.
+
+Use it for:
+
+- root theming tokens;
+- shared resets and base typography;
+- a very small set of reusable primitives that genuinely repeat across multiple pages;
+- rare cross-cutting utilities such as glass surfaces or shell scaffolding only when they are not adequately expressed by Tailwind composition.
+
+Do not use it for:
+
+- admin-specific card styles;
+- one-off form treatment;
+- page-local button classes;
+- repeated layout patterns that can be expressed with utility classes.
+
+When in doubt, prefer the component-local Tailwind class string over a new global CSS selector.
 
 ## Layout Geometry
 
