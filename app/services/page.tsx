@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRightIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import {
+	AcademicCapIcon,
+	ArrowRightIcon,
+	CheckCircleIcon,
+	ComputerDesktopIcon,
+	PrinterIcon,
+} from "@heroicons/react/24/outline";
 import { serviceCategories } from "@/lib/services-data";
 
 export const metadata: Metadata = {
@@ -8,6 +14,12 @@ export const metadata: Metadata = {
 	description:
 		"Management consultancy, digital support, and printing and branding services from SA’A SMART WORKS.",
 };
+
+const categoryIcons = {
+	"management-consultancy": AcademicCapIcon,
+	"digital-services": ComputerDesktopIcon,
+	"printing-branding": PrinterIcon,
+} as const;
 
 export default function ServicesPage() {
 	return (
@@ -35,23 +47,37 @@ export default function ServicesPage() {
 				</div>
 				<div className="stack-list">
 					{serviceCategories.map((category) => (
-						<article className="content-card service-row" key={category.id}>
-							<div>
-								<span className="card-number">{category.number}</span>
+						<article className="service-card" key={category.id}>
+							<div className="service-card-header">
+								<div className="service-card-icon" aria-hidden="true">
+									{(() => {
+										const Icon = categoryIcons[category.id as keyof typeof categoryIcons];
+										return <Icon />;
+									})()}
+								</div>
+								<span className="card-number">/ {category.number}</span>
+							</div>
+							<div className="service-card-copy">
+								<p className="service-card-kicker">{category.shortTitle}</p>
 								<h2>{category.title}</h2>
 								<p>{category.description}</p>
 							</div>
-							<ul className="check-list compact">
-								{category.capabilities.map((capability) => (
+							<ul className="service-capabilities">
+								{category.capabilities.map((capability, index) => (
 									<li key={capability}>
-										<CheckCircleIcon aria-hidden="true" />
-										{capability}
+										<span className="service-bullet" aria-hidden="true">
+											{String(index + 1).padStart(2, "0")}
+										</span>
+										<span>{capability}</span>
 									</li>
 								))}
 							</ul>
-							<Link className="text-link" href={`/services/${category.slug}`}>
-								View category <ArrowRightIcon aria-hidden="true" />
-							</Link>
+							<div className="service-card-action">
+								<span>Explore this discipline</span>
+								<Link className="service-arrow" href={`/services/${category.slug}`} aria-label={`Explore ${category.shortTitle}`}>
+									<ArrowRightIcon aria-hidden="true" />
+								</Link>
+							</div>
 						</article>
 					))}
 				</div>
