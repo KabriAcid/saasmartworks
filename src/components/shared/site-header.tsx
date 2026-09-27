@@ -20,7 +20,9 @@ export function SiteHeader() {
 	const pathname = usePathname();
 	const [open, setOpen] = useState(false);
 	const isActive = (href: string) =>
-		href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+		href === "/"
+			? pathname === href
+			: pathname === href || pathname.startsWith(`${href}/`);
 
 	return (
 		<header className="site-header">
@@ -57,7 +59,11 @@ export function SiteHeader() {
 				</button>
 			</div>
 			{open && (
-				<nav className="shell mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
+				<nav
+					className="shell mobile-nav"
+					id="mobile-navigation"
+					aria-label="Mobile navigation"
+				>
 					{links.map(([href, label]) => (
 						<Link
 							aria-current={isActive(href) ? "page" : undefined}
