@@ -1,3 +1,6 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import type { Metadata } from "next";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 
@@ -7,6 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
+	const router = useRouter();
+
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		router.push("/admin");
+	};
+
 	return (
 		<main className="auth-page">
 			<section className="auth-panel" aria-labelledby="login-heading">
@@ -15,7 +25,7 @@ export default function LoginPage() {
 				</div>
 				<p className="eyebrow">Platform access</p>
 				<h1 id="login-heading">Sign in.</h1>
-				<form className="auth-form">
+				<form className="auth-form" method="post" onSubmit={handleSubmit}>
 					<label htmlFor="login-email">
 						Email address
 						<input
