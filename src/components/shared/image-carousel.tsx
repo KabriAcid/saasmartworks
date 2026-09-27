@@ -49,6 +49,7 @@ export function ImageCarousel({
 		>
 			<div className="service-carousel-frame">
 				<Image
+					key={activeIndex}
 					className="service-carousel-image"
 					src={activeImage.src}
 					alt={activeImage.alt}
@@ -57,7 +58,10 @@ export function ImageCarousel({
 					sizes="(max-width: 768px) 100vw, 1200px"
 				/>
 				<div className="service-carousel-shade" />
-				<div className="service-carousel-caption">
+				<div
+					className="service-carousel-caption"
+					key={`caption-${activeIndex}`}
+				>
 					<span>{activeImage.credit}</span>
 					<strong>{label}</strong>
 					<p>{description}</p>
