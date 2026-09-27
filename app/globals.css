@@ -207,8 +207,8 @@ textarea {
 }
 .service-carousel-frame {
 	position: relative;
-	height: min(82svh, 56rem);
-	min-height: 34rem;
+	height: calc(100svh - var(--navbar-height));
+	min-height: 28rem;
 	overflow: hidden;
 	background: var(--color-dark);
 }
@@ -357,9 +357,9 @@ h3 {
 	line-height: 1.12;
 }
 h1 {
-	max-width: 18ch;
+	max-width: 24ch;
 	margin-bottom: 1.4rem;
-	font-size: clamp(2.7rem, 7vw, 5.4rem);
+	font-size: clamp(2.35rem, 5vw, 4rem);
 }
 h2 {
 	font-size: clamp(1.8rem, 3vw, 2.8rem);

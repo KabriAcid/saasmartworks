@@ -15,7 +15,7 @@ export const serviceCategories: ServiceCategory[] = [
 		number: "01",
 		slug: "management-consultancy",
 		shortTitle: "Management Consultancy",
-		title: "Management Consultancy & Capacity Building",
+		title: "Management Consultancy",
 		tagline: "Strengthening organizations and building capability.",
 		description:
 			"Practical consultancy, training, policy, documentation, and institutional support for organizations operating in demanding contexts.",
