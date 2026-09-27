@@ -29,11 +29,13 @@ export function SiteHeader() {
 		<header className="site-header">
 			<div className="shell header-inner">
 				<Link className="wordmark" href="/">
-					<Logo src="/favicon.png" className="wordmark-mark" width={36} height={36} />
-					<span className="wordmark-copy">
-						<span className="wordmark-name">SA’A</span>
-						<span className="wordmark-subtitle">SMART WORKS</span>
-					</span>
+					<Logo
+						src="/favicon.png"
+						className="wordmark-mark"
+						width={48}
+						height={48}
+					/>
+					<span className="wordmark-subtitle">SAASMARTWORKS</span>
 				</Link>
 				<nav className="desktop-nav" aria-label="Primary navigation">
 					{links.map(([href, label]) => (

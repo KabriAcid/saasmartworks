@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/shared/site-footer";
 import { SiteHeader } from "@/components/shared/site-header";
 
 export const metadata: Metadata = {
-	title: { default: "SA’A SMART WORKS", template: "%s | SA’A SMART WORKS" },
+	title: { default: "SAASMARTWORKS", template: "%s | SAASMARTWORKS" },
 	description:
 		"Professional and digital services in Maiduguri, Borno State, Nigeria.",
 	icons: {

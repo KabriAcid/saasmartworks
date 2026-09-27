@@ -7,11 +7,13 @@ export function SiteFooter() {
 			<div className="shell footer-grid">
 				<div>
 					<Link className="wordmark" href="/">
-						<Logo src="/favicon.png" className="wordmark-mark" width={36} height={36} />
-						<span className="wordmark-copy">
-							<span className="wordmark-name">SA’A</span>
-							<span className="wordmark-subtitle">SMART WORKS</span>
-						</span>
+						<Logo
+							src="/favicon.png"
+							className="wordmark-mark"
+							width={48}
+							height={48}
+						/>
+						<span className="wordmark-subtitle">SAASMARTWORKS</span>
 					</Link>
 					<p>
 						Professional and digital services for organizations, institutions,

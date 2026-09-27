@@ -19,7 +19,6 @@ html {
 }
 
 /* hide app scrollbar */
- 
 
 body {
 	margin: 0;
@@ -87,15 +86,15 @@ textarea {
 	flex-direction: row;
 	flex-shrink: 0;
 	gap: 0.65rem;
-	font-size: 1.05rem;
+	font-size: 1.18rem;
 	font-weight: 800;
 	line-height: 1;
 	letter-spacing: 0.02em;
 }
 .wordmark-mark {
-	width: 2.25rem;
-	height: 2.25rem;
-	border-radius: 0.7rem;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 0.85rem;
 	object-fit: cover;
 }
 .wordmark-copy {
@@ -104,10 +103,11 @@ textarea {
 }
 .wordmark-name {
 	color: var(--color-ink);
+	white-space: nowrap;
 }
 .wordmark-subtitle {
 	color: var(--color-muted);
-	font-size: 0.62rem;
+	font-size: 0.72rem;
 	letter-spacing: 0.16em;
 	margin-top: 0.35rem;
 }
