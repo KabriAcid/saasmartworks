@@ -433,6 +433,7 @@ h3 {
 }
 .inquiry-form {
 	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 1rem;
 	padding: 2rem;
 	background: var(--color-card);
@@ -440,11 +441,29 @@ h3 {
 	box-shadow: var(--shadow-card);
 }
 .inquiry-form label {
-	display: grid;
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
 	gap: 0.4rem;
 	font-family: Arial, sans-serif;
 	font-size: 0.85rem;
 	font-weight: 700;
+}
+.field-label {
+	display: inline-flex;
+	min-height: 1.3rem;
+	align-items: baseline;
+	gap: 0.3rem;
+}
+.field-wide,
+.inquiry-form .button,
+.inquiry-form .form-note {
+	grid-column: 1 / -1;
+}
+.field-optional {
+	color: var(--color-muted);
+	font-size: 0.75rem;
+	font-weight: 400;
 }
 .inquiry-form input,
 .inquiry-form select,
@@ -498,6 +517,14 @@ h3 {
 	}
 	.tag-list {
 		justify-content: flex-start;
+	}
+	.inquiry-form {
+		grid-template-columns: 1fr;
+	}
+	.field-wide,
+	.inquiry-form .button,
+	.inquiry-form .form-note {
+		grid-column: auto;
 	}
 }
 @media (max-width: 34rem) {
