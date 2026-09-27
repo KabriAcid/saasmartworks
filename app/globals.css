@@ -28,6 +28,29 @@ html::-webkit-scrollbar {
 body {
 	margin: 0;
 	background: var(--color-surface);
+	background-image:
+		radial-gradient(
+			circle at 1px 1px,
+			rgb(31 41 51 / 6%) 1px,
+			transparent 1.5px
+		),
+		linear-gradient(135deg, #fff8ee 0%, #f6f7f8 58%, #eaf0f2 100%),
+		linear-gradient(
+			135deg,
+			transparent 45%,
+			rgb(255 166 77 / 4%) 78%,
+			rgb(23 43 58 / 5%) 100%
+		);
+	background-position: 0 0;
+	background-repeat: repeat, no-repeat, no-repeat;
+	background-size:
+		24px 24px,
+		100% 100%,
+		70% 62%;
+	background-position:
+		0 0,
+		0 0,
+		right bottom;
 	color: var(--color-ink);
 	font-family:
 		system-ui,
@@ -171,6 +194,28 @@ textarea {
 	transform: translateY(-1px);
 	box-shadow: 0 12px 24px rgb(189 104 27 / 24%);
 }
+.login-link {
+	display: grid;
+	width: 2.75rem;
+	height: 2.75rem;
+	place-items: center;
+	border: 1px solid rgb(31 41 51 / 12%);
+	border-radius: 999px;
+	color: var(--color-ink);
+	transition:
+		color 180ms ease,
+		background 180ms ease,
+		transform 180ms ease;
+}
+.login-link:hover {
+	background: rgb(255 166 77 / 14%);
+	color: #a85514;
+	transform: translateY(-1px);
+}
+.login-link svg {
+	width: 1.35rem;
+	height: 1.35rem;
+}
 .header-cta svg,
 .button svg,
 .text-link svg,
@@ -198,6 +243,19 @@ textarea {
 }
 .hero-band {
 	padding: 7rem 0 6rem;
+	background-image:
+		radial-gradient(
+			circle at 1px 1px,
+			rgb(31 41 51 / 10%) 1px,
+			transparent 1.5px
+		),
+		linear-gradient(135deg, #fff8ee 0%, #f6f7f8 58%, #eaf0f2 100%);
+	background-position:
+		0 0,
+		0 0;
+	background-size:
+		24px 24px,
+		auto;
 }
 .page-hero {
 	padding: 5rem 0 4rem;
@@ -1113,14 +1171,80 @@ h3 {
 	font-family: Arial, sans-serif;
 	font-size: 0.78rem;
 }
+.auth-page {
+	display: grid;
+	min-height: calc(100svh - 6rem);
+	place-items: center;
+	padding: 4rem 1.25rem;
+}
+.auth-panel {
+	width: min(100%, 28rem);
+	border: 1px solid rgb(255 255 255 / 78%);
+	border-radius: 1.5rem;
+	background: rgb(255 255 255 / 72%);
+	padding: clamp(1.5rem, 5vw, 2.5rem);
+	box-shadow:
+		0 24px 60px rgb(31 41 51 / 10%),
+		inset 0 1px 0 rgb(255 255 255 / 88%);
+	backdrop-filter: blur(22px) saturate(130%);
+}
+.auth-icon {
+	display: grid;
+	width: 3.25rem;
+	height: 3.25rem;
+	margin-bottom: 1.5rem;
+	place-items: center;
+	border-radius: 1rem;
+	background: rgb(255 166 77 / 16%);
+	color: #a85514;
+}
+.auth-icon svg {
+	width: 1.8rem;
+	height: 1.8rem;
+}
+.auth-panel h1 {
+	max-width: none;
+	margin-bottom: 0.75rem;
+	font-size: clamp(2.1rem, 5vw, 3rem);
+}
+.auth-lead {
+	margin: 0 0 1.75rem;
+	color: var(--color-muted);
+}
+.auth-form {
+	display: grid;
+	gap: 1rem;
+}
+.auth-form label {
+	display: grid;
+	gap: 0.4rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+}
+.auth-form input {
+	width: 100%;
+	border: 1px solid rgb(31 41 51 / 18%);
+	border-radius: 0.5rem;
+	background: white;
+	padding: 0.75rem;
+	color: var(--color-ink);
+}
+.auth-form input:focus-visible {
+	outline: none;
+	border-color: var(--color-primary);
+	box-shadow: inset 0 0 0 1px var(--color-primary);
+}
 @media (max-width: 52rem) {
 	.desktop-nav,
 	.header-cta {
 		display: none;
 	}
+	.login-link {
+		margin-left: auto;
+	}
 	.menu-button {
 		display: block;
-		margin-left: auto;
+		margin-left: 0;
 	}
 	.mobile-nav {
 		display: flex;

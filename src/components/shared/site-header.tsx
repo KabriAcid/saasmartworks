@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
 	ArrowRightIcon,
 	Bars3Icon,
+	UserCircleIcon,
 	XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
@@ -49,6 +50,14 @@ export function SiteHeader() {
 						</Link>
 					))}
 				</nav>
+				<Link
+					className="login-link"
+					href="/login"
+					title="Log in"
+					aria-label="Log in"
+				>
+					<UserCircleIcon aria-hidden="true" />
+				</Link>
 				<Link className="header-cta" href="/contact">
 					<span>Start a conversation</span>
 					<ArrowRightIcon aria-hidden="true" />
