@@ -19,16 +19,21 @@ const links = [
 export function SiteHeader() {
 	const pathname = usePathname();
 	const [open, setOpen] = useState(false);
+	const isActive = (href: string) =>
+		href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+
 	return (
 		<header className="site-header">
 			<div className="shell header-inner">
 				<Link className="wordmark" href="/">
-					SA’A <span>SMART WORKS</span>
+					<span className="wordmark-name">SA’A</span>
+					<span className="wordmark-subtitle">SMART WORKS</span>
 				</Link>
 				<nav className="desktop-nav" aria-label="Primary navigation">
 					{links.map(([href, label]) => (
 						<Link
-							className={pathname === href ? "active" : ""}
+							aria-current={isActive(href) ? "page" : undefined}
+							className={isActive(href) ? "active" : ""}
 							href={href}
 							key={href}
 						>
@@ -37,9 +42,11 @@ export function SiteHeader() {
 					))}
 				</nav>
 				<Link className="header-cta" href="/contact">
-					Make an inquiry <ArrowRightIcon aria-hidden="true" />
+					<span>Start a conversation</span>
+					<ArrowRightIcon aria-hidden="true" />
 				</Link>
 				<button
+					aria-controls="mobile-navigation"
 					className="menu-button"
 					type="button"
 					aria-label={open ? "Close menu" : "Open menu"}
@@ -50,9 +57,15 @@ export function SiteHeader() {
 				</button>
 			</div>
 			{open && (
-				<nav className="mobile-nav" aria-label="Mobile navigation">
+				<nav className="shell mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
 					{links.map(([href, label]) => (
-						<Link href={href} key={href} onClick={() => setOpen(false)}>
+						<Link
+							aria-current={isActive(href) ? "page" : undefined}
+							className={isActive(href) ? "active" : ""}
+							href={href}
+							key={href}
+							onClick={() => setOpen(false)}
+						>
 							{label}
 						</Link>
 					))}
