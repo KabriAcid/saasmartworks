@@ -15,9 +15,6 @@ export default function LoginPage() {
 				</div>
 				<p className="eyebrow">Platform access</p>
 				<h1 id="login-heading">Welcome back.</h1>
-				<p className="auth-lead">
-					Sign in to access your SAASMARTWORKS workspace.
-				</p>
 				<form className="auth-form">
 					<label htmlFor="login-email">
 						Email address
@@ -41,13 +38,9 @@ export default function LoginPage() {
 							required
 						/>
 					</label>
-					<button className="button" type="submit" disabled>
-						Sign in coming soon
+					<button className="w-100 block button" type="submit">
+						Sign in
 					</button>
-					<p className="form-note">
-						Authentication is not active yet. This page is ready for the
-						approved auth implementation.
-					</p>
 				</form>
 			</section>
 		</main>
