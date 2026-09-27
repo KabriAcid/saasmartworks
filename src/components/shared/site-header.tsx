@@ -8,6 +8,7 @@ import {
 	XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { Logo } from "@/components/shared/logo";
 
 const links = [
 	["/", "Home"],
@@ -28,8 +29,11 @@ export function SiteHeader() {
 		<header className="site-header">
 			<div className="shell header-inner">
 				<Link className="wordmark" href="/">
-					<span className="wordmark-name">SA’A</span>
-					<span className="wordmark-subtitle">SMART WORKS</span>
+					<Logo src="/favicon.png" className="wordmark-mark" width={36} height={36} />
+					<span className="wordmark-copy">
+						<span className="wordmark-name">SA’A</span>
+						<span className="wordmark-subtitle">SMART WORKS</span>
+					</span>
 				</Link>
 				<nav className="desktop-nav" aria-label="Primary navigation">
 					{links.map(([href, label]) => (

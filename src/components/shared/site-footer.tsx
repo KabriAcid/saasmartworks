@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/shared/logo";
 
 export function SiteFooter() {
 	return (
@@ -6,7 +7,11 @@ export function SiteFooter() {
 			<div className="shell footer-grid">
 				<div>
 					<Link className="wordmark" href="/">
-						SA’A <span>SMART WORKS</span>
+						<Logo src="/favicon.png" className="wordmark-mark" width={36} height={36} />
+						<span className="wordmark-copy">
+							<span className="wordmark-name">SA’A</span>
+							<span className="wordmark-subtitle">SMART WORKS</span>
+						</span>
 					</Link>
 					<p>
 						Professional and digital services for organizations, institutions,

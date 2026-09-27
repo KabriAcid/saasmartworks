@@ -8,6 +8,11 @@ export const metadata: Metadata = {
 	title: { default: "SA’A SMART WORKS", template: "%s | SA’A SMART WORKS" },
 	description:
 		"Professional and digital services in Maiduguri, Borno State, Nigeria.",
+	icons: {
+		icon: "/favicon.png",
+		shortcut: "/favicon.png",
+		apple: "/favicon.png",
+	},
 };
 
 export default function RootLayout({
