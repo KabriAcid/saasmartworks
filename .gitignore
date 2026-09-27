@@ -24,6 +24,7 @@ Thumbs.db
 !.vscode/settings.json
 
 package-lock.json
+project
 
 
 dependency-audit.json
