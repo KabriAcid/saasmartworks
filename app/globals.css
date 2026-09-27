@@ -1,0 +1,48 @@
+﻿@import "tailwindcss";
+
+:root {
+  --color-primary: #ffa64d;
+  /* Approved secondary dark-blue value is still pending. */
+  --surface-base: #f7f7f8;
+  --surface-elevated: #fff;
+  --surface-loading: #e2e2e5;
+  --text-primary: #202124;
+  --text-secondary: #52545a;
+  --radius-button: .5rem;
+  --radius-card: 1rem;
+  --shadow-card: 0 12px 32px #00000008, 0 2px 6px #00000005;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.shell { max-width: 72rem; margin: auto; padding: clamp(1.25rem, 5vw, 5rem); }
+h1 { font-size: clamp(2.25rem, 6vw, 4.8rem); line-height: 1.1; letter-spacing: -.035em; max-width: 18ch; }
+h2 { font-size: 1.2rem; line-height: 1.4; }
+.eyebrow { font-weight: 700; letter-spacing: .07em; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-block: 3rem; }
+.card { padding: 1.5rem; border-radius: var(--radius-card); background: var(--surface-elevated); box-shadow: var(--shadow-card); }
+.note { color: var(--text-secondary); }
+.button {
+  background: var(--color-primary);
+  color: var(--text-primary);
+  padding: .75rem 1.25rem;
+  border: 0;
+  border-radius: var(--radius-button);
+  font: inherit;
+  cursor: pointer;
+}
+.button:disabled { opacity: .6; cursor: not-allowed; }
+.input { font: inherit; padding: .75rem; border: 1px solid var(--text-secondary); border-radius: var(--radius-button); background: var(--surface-elevated); color: var(--text-primary); max-width: 100%; }
+.skeleton { background: var(--surface-loading); border-radius: var(--radius-button); min-height: 1rem; }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+@media (max-width: 48rem) { .grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
