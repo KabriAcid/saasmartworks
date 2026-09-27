@@ -14,12 +14,14 @@ type ImageCarouselProps = {
 	images: readonly CarouselImage[];
 	label: string;
 	description: string;
+	contained?: boolean;
 };
 
 export function ImageCarousel({
 	images,
 	label,
 	description,
+	contained = false,
 }: ImageCarouselProps) {
 	const [activeIndex, setActiveIndex] = useState(0);
 	const [paused, setPaused] = useState(false);
@@ -41,7 +43,7 @@ export function ImageCarousel({
 
 	return (
 		<section
-			className="service-carousel"
+			className={`service-carousel${contained ? " service-carousel-contained" : ""}`}
 			aria-label={label}
 			aria-roledescription="carousel"
 			onMouseEnter={() => setPaused(true)}

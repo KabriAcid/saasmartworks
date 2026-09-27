@@ -15,3 +15,8 @@ export const siteCarouselImages = [
 		credit: "Shared direction",
 	},
 ] as const;
+
+export const eateryPreviewImage = {
+	src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=85",
+	alt: "A warm table setting prepared for a shared meal",
+};

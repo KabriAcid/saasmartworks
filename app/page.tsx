@@ -1,6 +1,32 @@
-import { ArrowRightIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import {
+	AcademicCapIcon,
+	ArrowRightIcon,
+	CheckBadgeIcon,
+	ComputerDesktopIcon,
+	DocumentTextIcon,
+	GlobeAltIcon,
+	PrinterIcon,
+	WrenchScrewdriverIcon,
+} from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 import { serviceCategories, trainingAreas } from "@/lib/services-data";
+import { FaqAccordion } from "@/components/shared/faq-accordion";
+import { ImageCarousel } from "@/components/shared/image-carousel";
+import { eateryPreviewImage, siteCarouselImages } from "@/lib/site-media";
+
+const categoryIcons = {
+	"management-consultancy": AcademicCapIcon,
+	"digital-services": ComputerDesktopIcon,
+	"printing-branding": PrinterIcon,
+} as const;
+
+const whyProofs = [
+	{ label: "Context-aware solutions", Icon: GlobeAltIcon },
+	{ label: "Professional documentation", Icon: DocumentTextIcon },
+	{ label: "Hands-on digital support", Icon: WrenchScrewdriverIcon },
+	{ label: "Support across sectors", Icon: CheckBadgeIcon },
+];
 
 export default function HomePage() {
 	return (
@@ -47,6 +73,15 @@ export default function HomePage() {
 							href={`/services/${category.slug}`}
 							key={category.id}
 						>
+							{(() => {
+								const Icon =
+									categoryIcons[category.id as keyof typeof categoryIcons];
+								return (
+									<span className="content-card-icon">
+										<Icon aria-hidden="true" />
+									</span>
+								);
+							})()}
 							<span className="card-number">{category.number}</span>
 							<h3>{category.shortTitle}</h3>
 							<p>{category.tagline}</p>
@@ -58,29 +93,53 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			<section className="section-tint section-space">
-				<div className="shell two-column">
-					<div className="section-heading">
+			<ImageCarousel
+				contained
+				label="How we work"
+				description="A thoughtful, practical approach to helping people and organizations move forward."
+				images={siteCarouselImages}
+			/>
+
+			<section className="why-section section-space">
+				<div className="shell why-layout">
+					<div className="why-content">
 						<p className="eyebrow">Why work with us</p>
 						<h2>Organized, professional, and capable.</h2>
-						<p>
+						<p className="why-lead">
 							We bring structure, modern tools, and practical local
-							understanding to every engagement.
+							understanding to every engagement, whether you need one focused
+							service or a joined-up solution.
 						</p>
+						<div className="why-proof-grid">
+							{whyProofs.map(({ label, Icon }, index) => (
+								<div className="why-proof" key={label}>
+									<span className="why-proof-icon">
+										<Icon aria-hidden="true" />
+									</span>
+									<span>{String(index + 1).padStart(2, "0")}</span>
+									<strong>{label}</strong>
+								</div>
+							))}
+						</div>
 					</div>
-					<div className="check-list">
-						{[
-							"Context-aware solutions",
-							"Professional documentation",
-							"Hands-on digital support",
-							"Support across sectors",
-						].map((item) => (
-							<p key={item}>
-								<CheckCircleIcon aria-hidden="true" />
-								{item}
+					<aside className="eatery-preview">
+						<Image
+							src={eateryPreviewImage.src}
+							alt={eateryPreviewImage.alt}
+							fill
+							sizes="(max-width: 768px) 100vw, 420px"
+						/>
+						<div className="eatery-preview-shade" />
+						<div className="eatery-preview-copy">
+							<span className="eyebrow">Another side of SAASMARTWORKS</span>
+							<h3>SA’A Eatery</h3>
+							<p>
+								A future business unit for good food, warm hospitality, and a
+								different kind of shared experience.
 							</p>
-						))}
-					</div>
+							<span className="eatery-status">Coming later</span>
+						</div>
+					</aside>
 				</div>
 			</section>
 
@@ -97,6 +156,8 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
+
+			<FaqAccordion />
 		</main>
 	);
 }

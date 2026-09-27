@@ -20,7 +20,7 @@ export const serviceCategories: ServiceCategory[] = [
 		description:
 			"Practical consultancy, training, policy, documentation, and institutional support for organizations operating in demanding contexts.",
 		capabilities: [
-			"Capacity building and structured training",
+			"Capacity building and structured training",    
 			"Training of Trainers",
 			"Policy development and review",
 			"Proposal and concept note development",
