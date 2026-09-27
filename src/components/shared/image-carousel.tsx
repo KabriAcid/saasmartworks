@@ -62,14 +62,18 @@ export function ImageCarousel({
 					<strong>{label}</strong>
 					<p>{description}</p>
 				</div>
-				<div className="service-carousel-progress" role="tablist" aria-label="Carousel slides">
+				<div
+					className="service-carousel-progress"
+					role="tablist"
+					aria-label="Carousel slides"
+				>
 					{images.map((image, index) => (
 						<button
 							aria-label={`Show ${image.credit} slide`}
 							aria-selected={activeIndex === index}
 							className={activeIndex === index ? "active" : ""}
 							key={image.credit}
-						type="button"
+							type="button"
 							onClick={() => setActiveIndex(index)}
 						/>
 					))}
