@@ -17,6 +17,10 @@
 html {
 	scroll-behavior: smooth;
 }
+
+/* hide app scrollbar */
+ 
+
 body {
 	margin: 0;
 	background: var(--color-surface);
@@ -121,8 +125,6 @@ textarea {
 .desktop-nav a.active {
 	color: var(--color-ink);
 }
-.desktop-nav a.active {
-}
 .desktop-nav a.active::after {
 	position: absolute;
 	right: 0.9rem;
@@ -182,6 +184,80 @@ textarea {
 }
 .page-hero {
 	padding: 5rem 0 4rem;
+}
+.service-carousel {
+	padding-top: 1rem;
+}
+.service-carousel-frame {
+	position: relative;
+	height: clamp(22rem, 52vw, 38rem);
+	overflow: hidden;
+	border-radius: 1.5rem;
+	background: var(--color-dark);
+	box-shadow: 0 24px 60px rgb(31 41 51 / 14%);
+}
+.service-carousel-image {
+	object-fit: cover;
+	transition: opacity 400ms ease;
+}
+.service-carousel-shade {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgb(23 43 58 / 4%), rgb(23 43 58 / 72%));
+}
+.service-carousel-caption {
+	position: absolute;
+	bottom: 2rem;
+	left: 2rem;
+	display: grid;
+	gap: 0.35rem;
+	color: white;
+}
+.service-carousel-caption span {
+	font-family: Arial, sans-serif;
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+	opacity: 0.78;
+}
+.service-carousel-caption strong {
+	font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+.service-carousel-controls {
+	position: absolute;
+	right: 2rem;
+	bottom: 2rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	color: white;
+	font-family: Arial, sans-serif;
+	font-size: 0.76rem;
+	font-weight: 800;
+}
+.service-carousel-controls button {
+	display: grid;
+	width: 2.5rem;
+	height: 2.5rem;
+	place-items: center;
+	border: 1px solid rgb(255 255 255 / 42%);
+	border-radius: 999px;
+	background: rgb(255 255 255 / 14%);
+	color: white;
+	backdrop-filter: blur(14px);
+	cursor: pointer;
+	transition:
+		background 180ms ease,
+		transform 180ms ease;
+}
+.service-carousel-controls button:hover {
+	background: rgb(255 255 255 / 28%);
+	transform: translateY(-2px);
+}
+.service-carousel-controls svg {
+	width: 1.1rem;
+	height: 1.1rem;
 }
 .eyebrow {
 	margin: 0 0 1rem;
@@ -749,6 +825,17 @@ h3 {
 	}
 	.page-hero {
 		padding-block: 3.5rem;
+	}
+	.service-carousel-frame {
+		height: 24rem;
+	}
+	.service-carousel-caption {
+		bottom: 1.25rem;
+		left: 1.25rem;
+	}
+	.service-carousel-controls {
+		right: 1.25rem;
+		bottom: 1.25rem;
 	}
 	.compact,
 	.capability-grid {

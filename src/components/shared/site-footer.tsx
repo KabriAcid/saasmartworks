@@ -21,12 +21,12 @@ export function SiteFooter() {
 				</div>
 				<div>
 					<p className="footer-label">Based in</p>
-					<p>Maiduguri, Borno State, Nigeria</p>
-					<p>hello@saasmartworks.com</p>
+					<p>Abuja, Nigeria</p>
+					<p>saasmartworks@gmail.com</p>
 				</div>
 			</div>
 			<div className="shell footer-bottom">
-				<span>© {new Date().getFullYear()} SA’A SMART WORKS</span>
+				<span>© {new Date().getFullYear()} SAASMARTWORKS</span>
 				<span>Professional &amp; Digital Services</span>
 			</div>
 		</footer>

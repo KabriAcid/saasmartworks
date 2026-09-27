@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { getCategoryBySlug, serviceCategories } from "@/lib/services-data";
+import { ImageCarousel } from "@/components/shared/image-carousel";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -27,6 +28,26 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
 	return (
 		<main>
+			<ImageCarousel
+				label={category.shortTitle}
+				images={[
+					{
+						src: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85",
+						alt: "Team collaborating around a table in a bright workspace",
+						credit: "Collaboration",
+					},
+					{
+						src: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=85",
+						alt: "Modern workspace prepared for focused professional work",
+						credit: "Professional practice",
+					},
+					{
+						src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=85",
+						alt: "Colleagues reviewing ideas and planning a project",
+						credit: "Shared direction",
+					},
+				]}
+			/>
 			<section className="page-hero">
 				<div className="shell">
 					<Link className="back-link" href="/services">

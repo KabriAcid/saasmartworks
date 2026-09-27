@@ -32,7 +32,7 @@ export default function ContactPage() {
 					<dl className="contact-details">
 						<div>
 							<dt>Email</dt>
-							<dd>hello@saasmartworks.com</dd>
+							<dd>saasmartworks@gmail.com</dd>
 						</div>
 						<div>
 							<dt>Location</dt>
