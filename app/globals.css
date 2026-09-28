@@ -1411,8 +1411,3 @@ h3 {
 		transition: none !important;
 	}
 }
-
-body,
-body * {
-	font-family: "Figtree", sans-serif;
-}
