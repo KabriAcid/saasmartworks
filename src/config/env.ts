@@ -1,19 +1,26 @@
 import { z } from "zod";
 
-// Explicit target prevents a local DATABASE_URL from silently masking Turso credentials.
+// Explicit target prevents a local DATABASE_URL from silently masking Turso or Supabase credentials.
 export function databaseEnvironment() {
 	const target = process.env.DB_TARGET ?? "auto";
-	if (!["auto", "local", "turso"].includes(target))
-		throw new Error("DB_TARGET must be auto, local or turso.");
+	if (!["auto", "local", "turso", "supabase"].includes(target))
+		throw new Error("DB_TARGET must be auto, local, turso or supabase.");
 	const useTurso =
 		target === "turso" ||
 		(target === "auto" && !!process.env.TURSO_DATABASE_URL);
-	const url = useTurso
-		? process.env.TURSO_DATABASE_URL
-		: process.env.DATABASE_URL || "file:./local.db";
-	const token = useTurso
-		? process.env.TURSO_AUTH_TOKEN || process.env.DATABASE_AUTH_TOKEN
-		: process.env.DATABASE_AUTH_TOKEN;
+	const useSupabase =
+		target === "supabase" ||
+		(target === "auto" && !!process.env.POSTGRES_URL && !useTurso);
+	const url = useSupabase
+		? process.env.POSTGRES_URL || process.env.SUPABASE_URL || ""
+		: useTurso
+			? process.env.TURSO_DATABASE_URL
+			: process.env.DATABASE_URL || "file:./local.db";
+	const token = useSupabase
+		? process.env.DATABASE_AUTH_TOKEN
+		: useTurso
+			? process.env.TURSO_AUTH_TOKEN || process.env.DATABASE_AUTH_TOKEN
+			: process.env.DATABASE_AUTH_TOKEN;
 	const parsed = z
 		.object({
 			DATABASE_URL: z.string().min(1),
@@ -23,6 +30,11 @@ export function databaseEnvironment() {
 	if (!parsed.success)
 		throw new Error("Missing database configuration for the selected target.");
 	const value = parsed.data;
+	if (useSupabase) {
+		if (!/^postgres(ql)?:\/\//i.test(value.DATABASE_URL))
+			throw new Error("Supabase target requires a Postgres URL.");
+		return value;
+	}
 	if (!/^(file:|libsql:\/\/|https:\/\/)/.test(value.DATABASE_URL))
 		throw new Error("Unsupported database URL scheme.");
 	if (target === "local" && !value.DATABASE_URL.startsWith("file:"))
