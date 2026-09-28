@@ -30,6 +30,8 @@ On Windows PowerShell execution-policy restrictions, use npm.cmd rather than cha
 
 Set `POSTGRES_URL` to the Supabase PostgreSQL pooled connection string for application requests. Set `POSTGRES_URL_NON_POOLING` to the direct connection string for Drizzle schema migrations when available. Never prefix database credentials with `NEXT_PUBLIC_`. Preserve existing `.env` values and remove obsolete provider variables only after confirming they are unused.
 
+Authentication requires a server-only `SESSION_SECRET` with at least 32 bytes of random data. Do not commit or expose it in a `NEXT_PUBLIC_` variable.
+
 Drizzle migrations are PostgreSQL-only. The checked-in schema describes the application model; switching the connection does not migrate or reconcile existing hosted tables or data. Review generated migrations against the live schema before applying them.
 
 ## UI and remaining work

@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { logout } from "@/app/auth/actions";
 
 export function AdminTopbar() {
 	const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -105,13 +106,15 @@ export function AdminTopbar() {
 										<Cog6ToothIcon className="h-4 w-4" />
 										Security
 									</Link>
-									<Link
-										href="/login"
-										className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-100"
-									>
-										<ArrowLeftStartOnRectangleIcon className="h-4 w-4" />
-										Log out
-									</Link>
+									<form action={logout}>
+										<button
+											type="submit"
+											className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-100"
+										>
+											<ArrowLeftStartOnRectangleIcon className="h-4 w-4" />
+											Log out
+										</button>
+									</form>
 								</div>
 							</div>
 						)}

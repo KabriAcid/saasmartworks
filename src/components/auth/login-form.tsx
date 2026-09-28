@@ -1,15 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { login } from "@/app/auth/actions";
 
 export default function LoginForm() {
-	const router = useRouter();
-
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		router.push("/admin");
-	};
+	const [state, formAction, pending] = useActionState(login, { message: null });
 
 	return (
 		<main className="auth-page">
@@ -19,7 +15,7 @@ export default function LoginForm() {
 				</div>
 				<p className="eyebrow">Platform access</p>
 				<h1 id="login-heading">Sign in.</h1>
-				<form className="auth-form" method="post" onSubmit={handleSubmit}>
+				<form className="auth-form" action={formAction}>
 					<label htmlFor="login-email">
 						Email address
 						<input
@@ -42,8 +38,17 @@ export default function LoginForm() {
 							required
 						/>
 					</label>
-					<button className="w-100 block button" type="submit">
-						Sign in
+					{state.message && (
+						<p className="auth-error" role="alert">
+							{state.message}
+						</p>
+					)}
+					<button
+						className="w-100 block button"
+						type="submit"
+						disabled={pending}
+					>
+						{pending ? "Signing in..." : "Sign in"}
 					</button>
 				</form>
 			</section>
