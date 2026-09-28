@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-import { SiteFooter } from "@/components/shared/site-footer";
-import { SiteHeader } from "@/components/shared/site-header";
+import { PublicShell } from "@/components/shared/public-shell";
 
 export const metadata: Metadata = {
 	title: { default: "SA'A SMART WORKS", template: "%s | SA'A SMART WORKS" },
@@ -22,9 +21,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				<NextTopLoader color="#ffa64d" showSpinner={false} height={3} />
-				<SiteHeader />
-				{children}
-				<SiteFooter />
+				<PublicShell>{children}</PublicShell>
 			</body>
 		</html>
 	);

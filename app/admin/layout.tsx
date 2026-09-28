@@ -121,21 +121,26 @@ export default function AdminLayout({
 				</aside>
 
 				<div className="flex min-w-0 flex-1 flex-col">
-					<header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
-						<div className="flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-							<div>
-								<p className="text-[11px] font-semibold tracking-[0.22em] text-slate-500 uppercase">
-									Administration
-								</p>
-								<h1 className="mt-1 text-xl font-bold text-[var(--color-ink)] sm:text-2xl">
-									Overview
-								</h1>
+					<header className="sticky top-4 z-20 px-4 pb-4 sm:px-6 lg:px-8">
+						<div className="flex h-20 items-center justify-between rounded-[999px] border border-white/80 bg-white/70 px-4 shadow-[0_18px_45px_rgba(31,41,51,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-2xl sm:px-5">
+							<div className="flex items-center gap-3">
+								<div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-primary)] text-sm font-black text-[var(--color-ink)] shadow-[0_12px_24px_rgba(255,166,77,0.28)]">
+									SA
+								</div>
+								<div>
+									<p className="text-[10px] font-semibold tracking-[0.22em] text-slate-500 uppercase">
+										Administration
+									</p>
+									<h1 className="mt-1 text-xl font-bold text-[var(--color-ink)] sm:text-2xl">
+										Overview
+									</h1>
+								</div>
 							</div>
 
 							<div className="flex items-center gap-3">
 								<button
 									type="button"
-									className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 shadow-sm transition hover:border-slate-300 hover:text-slate-900 sm:flex"
+									className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-sm font-medium text-slate-600 shadow-sm transition hover:border-slate-300 hover:text-slate-900 sm:flex"
 								>
 									<MagnifyingGlassIcon className="h-4 w-4" />
 									Search
@@ -143,7 +148,7 @@ export default function AdminLayout({
 
 								<button
 									type="button"
-									className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2.5 text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900"
+									className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/90 p-2.5 text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-900"
 									aria-label="Notifications"
 								>
 									<svg
@@ -161,7 +166,7 @@ export default function AdminLayout({
 									</svg>
 								</button>
 
-								<div className="flex items-center gap-3 rounded-full border border-slate-200 bg-white px-2.5 py-1.5 shadow-sm">
+								<div className="flex items-center gap-3 rounded-full border border-slate-200 bg-white/90 px-2.5 py-1.5 shadow-sm">
 									<div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-sm font-bold text-[var(--color-ink)]">
 										AD
 									</div>
