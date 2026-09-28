@@ -12,7 +12,10 @@ export function databaseEnvironment() {
 		target === "supabase" ||
 		(target === "auto" && !!process.env.POSTGRES_URL && !useTurso);
 	const url = useSupabase
-		? process.env.POSTGRES_URL || process.env.SUPABASE_URL || ""
+		? process.env.POSTGRES_URL_NON_POOLING ||
+			process.env.POSTGRES_URL ||
+			process.env.SUPABASE_URL ||
+			""
 		: useTurso
 			? process.env.TURSO_DATABASE_URL
 			: process.env.DATABASE_URL || "file:./local.db";
