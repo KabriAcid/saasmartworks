@@ -6,6 +6,7 @@ import {
 	ShieldCheckIcon,
 	UsersIcon,
 } from "@heroicons/react/24/outline";
+import { Logo } from "@/components/shared/logo";
 
 const navigation = [
 	{ label: "Dashboard", href: "/admin", icon: HomeIcon, active: true },
@@ -49,7 +50,7 @@ function SidebarItem({
 		<button
 			type="button"
 			className={[
-				"flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left text-sm font-medium transition-all duration-200",
+				"flex w-full items-center cursor-pointer gap-3 rounded-2xl px-3 py-2.5 text-left text-sm font-medium transition-all duration-200",
 				active
 					? "bg-white/10 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
 					: "text-slate-300 hover:bg-white/5 hover:text-white",
@@ -65,14 +66,18 @@ export function AdminSidebar() {
 	return (
 		<aside className="hidden w-72 shrink-0 border-r border-slate-200/80 bg-slate-950 text-slate-100 lg:flex lg:flex-col">
 			<div className="flex items-center gap-3 border-b border-white/10 px-6 py-7">
-				<div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-primary)] text-sm font-black text-[var(--color-ink)] shadow-[0_12px_24px_rgba(255,166,77,0.3)]">
-					SA
+				<div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl">
+					<Logo
+						src="/favicon-trans.png"
+						alt="SA’A SMART WORKS"
+						className="h-8 w-8 object-contain"
+					/>
 				</div>
 				<div>
 					<p className="text-[10px] font-semibold tracking-[0.28em] text-slate-400 uppercase">
 						Workspace
 					</p>
-					<p className="mt-1 text-lg font-semibold text-white">SA’A Admin</p>
+					<p className="text-lg font-semibold text-white">Admin</p>
 				</div>
 			</div>
 
