@@ -1,19 +1,22 @@
 import { sql } from "drizzle-orm";
 import {
-	sqliteTable,
+	bigint,
+	boolean,
+	jsonb,
+	pgTable,
 	text,
 	integer,
 	index,
 	uniqueIndex,
 	check,
-} from "drizzle-orm/sqlite-core";
+} from "drizzle-orm/pg-core";
 import { id, timestamps, demo, enumCheck, nonnegative } from "./helpers";
 import { businessUnits, users } from "./core";
 import { clients, inquiries } from "./services";
 import { projects, trainingSessions, printingJobs } from "./operations";
 import { invoices, expenses } from "./finance";
 
-export const files = sqliteTable(
+export const files = pgTable(
 	"files",
 	{
 		id: id(),
@@ -25,7 +28,7 @@ export const files = sqliteTable(
 			.references(() => users.id),
 		name: text("name").notNull(),
 		mimeType: text("mime_type").notNull(),
-		sizeBytes: integer("size_bytes").notNull(),
+		sizeBytes: bigint("size_bytes", { mode: "number" }).notNull(),
 		storageKey: text("storage_key").notNull().unique(),
 		status: text("status", { enum: ["PENDING", "AVAILABLE", "DELETED"] })
 			.notNull()
@@ -50,11 +53,11 @@ export const files = sqliteTable(
 		]),
 		check(
 			"file_single_owner_check",
-			sql`(${t.clientId} is not null)+(${t.inquiryId} is not null)+(${t.projectId} is not null)+(${t.trainingId} is not null)+(${t.printingJobId} is not null)+(${t.invoiceId} is not null)+(${t.expenseId} is not null) <= 1`,
+			sql`(${t.clientId} is not null)::int + (${t.inquiryId} is not null)::int + (${t.projectId} is not null)::int + (${t.trainingId} is not null)::int + (${t.printingJobId} is not null)::int + (${t.invoiceId} is not null)::int + (${t.expenseId} is not null)::int <= 1`,
 		),
 	],
 );
-export const notifications = sqliteTable(
+export const notifications = pgTable(
 	"notifications",
 	{
 		id: id(),
@@ -67,13 +70,13 @@ export const notifications = sqliteTable(
 		title: text("title").notNull(),
 		body: text("body").notNull(),
 		href: text("href"),
-		readAt: integer("read_at", { mode: "timestamp_ms" }),
+		readAt: bigint("read_at", { mode: "number" }),
 		isDemo: demo(),
 		...timestamps(),
 	},
 	(t) => [index("notifications_user_unread_idx").on(t.userId, t.readAt)],
 );
-export const settings = sqliteTable(
+export const settings = pgTable(
 	"settings",
 	{
 		id: id(),
@@ -81,7 +84,7 @@ export const settings = sqliteTable(
 			.notNull()
 			.references(() => businessUnits.id),
 		key: text("key").notNull(),
-		value: text("value", { mode: "json" }).$type<unknown>().notNull(),
+		value: jsonb("value").$type<unknown>().notNull(),
 		updatedBy: text("updated_by")
 			.notNull()
 			.references(() => users.id),
@@ -89,7 +92,7 @@ export const settings = sqliteTable(
 	},
 	(t) => [uniqueIndex("settings_unit_key_unique").on(t.businessUnitId, t.key)],
 );
-export const auditLogs = sqliteTable(
+export const auditLogs = pgTable(
 	"audit_logs",
 	{
 		id: id(),
@@ -100,13 +103,11 @@ export const auditLogs = sqliteTable(
 		action: text("action").notNull(),
 		entityType: text("entity_type").notNull(),
 		entityId: text("entity_id").notNull(),
-		metadata: text("metadata", { mode: "json" }).$type<
-			Record<string, unknown>
-		>(),
+		metadata: jsonb("metadata").$type<Record<string, unknown>>(),
 		isDemo: demo(),
-		createdAt: integer("created_at", { mode: "timestamp_ms" })
+		createdAt: bigint("created_at", { mode: "number" })
 			.notNull()
-			.default(sql`(unixepoch() * 1000)`),
+			.default(sql`(extract(epoch from now()) * 1000)::bigint`),
 	},
 	(t) => [
 		index("audit_unit_date_idx").on(t.businessUnitId, t.createdAt),

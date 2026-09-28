@@ -1,21 +1,26 @@
 import { sql } from "drizzle-orm";
-import { check, integer, text, type AnySQLiteColumn,  } from "drizzle-orm/sqlite-core";
+import {
+	bigint,
+	boolean,
+	check,
+	text,
+	type AnyPgColumn,
+} from "drizzle-orm/pg-core";
 
 export const id = () => text("id").primaryKey();
 export const timestamps = () => ({
-	createdAt: integer("created_at", { mode: "timestamp_ms" })
+	createdAt: bigint("created_at", { mode: "number" })
 		.notNull()
-		.default(sql`(unixepoch() * 1000)`),
-	updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+		.default(sql`(extract(epoch from now()) * 1000)::bigint`),
+	updatedAt: bigint("updated_at", { mode: "number" })
 		.notNull()
-		.default(sql`(unixepoch() * 1000)`)
-		.$onUpdate(() => new Date()),
+		.default(sql`(extract(epoch from now()) * 1000)::bigint`)
+		.$onUpdate(() => Date.now()),
 });
-export const demo = () =>
-	integer("is_demo", { mode: "boolean" }).notNull().default(false);
+export const demo = () => boolean("is_demo").notNull().default(false);
 export function enumCheck(
 	name: string,
-	column: AnySQLiteColumn,
+	column: AnyPgColumn,
 	values: readonly string[],
 ) {
 	return check(
@@ -28,9 +33,9 @@ export function enumCheck(
 		)})`,
 	);
 }
-export function nonnegative(name: string, column: AnySQLiteColumn) {
+export function nonnegative(name: string, column: AnyPgColumn) {
 	return check(
 		name,
-		sql`typeof(${column}) = 'integer' and ${column} >= 0 and ${column} <= 9007199254740991`,
+		sql`${column} >= 0 and ${column} <= 9007199254740991`,
 	);
 }
