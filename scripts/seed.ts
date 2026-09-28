@@ -9,9 +9,16 @@ async function main() {
 	if (!password || password.length < 8)
 		throw new Error("SEED_PASSWORD must be supplied via the environment.");
 	const target = process.env.DB_TARGET ?? "auto";
-	if (target === "supabase" || (target === "auto" && !!process.env.POSTGRES_URL && !process.env.TURSO_DATABASE_URL)) {
+	if (
+		target === "supabase" ||
+		(target === "auto" &&
+			!!process.env.POSTGRES_URL &&
+			!process.env.TURSO_DATABASE_URL)
+	) {
 		await seedSupabaseDatabase(password);
-		console.log("Supabase sample records seeded; existing rows were left intact.");
+		console.log(
+			"Supabase sample records seeded; existing rows were left intact.",
+		);
 		return;
 	}
 	const { client, db } = openDatabase();
