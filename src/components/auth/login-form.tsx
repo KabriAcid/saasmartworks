@@ -1,23 +1,37 @@
 "use client";
 
 import { useActionState } from "react";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import {
+	EnvelopeIcon,
+	EyeIcon,
+	EyeSlashIcon,
+	LockClosedIcon,
+	UserCircleIcon,
+} from "@heroicons/react/24/outline";
 import { login } from "@/lib/auth/actions";
 
 export default function LoginForm() {
 	const [state, formAction, pending] = useActionState(login, { message: null });
+	const [showPassword, setShowPassword] = useState(false);
 
 	return (
 		<main className="auth-page">
 			<section className="auth-panel" aria-labelledby="login-heading">
 				<div className="auth-icon" aria-hidden="true">
-					<UserCircleIcon />
+					<UserCircleIcon className="inline-block" />
 				</div>
 				<p className="eyebrow">Platform access</p>
 				<h1 id="login-heading">Sign in.</h1>
 				<form className="auth-form" action={formAction}>
-					<label htmlFor="login-email">
-						Email address
+					<div className="auth-field">
+						<label htmlFor="login-email">
+							<EnvelopeIcon
+								className="inline-block h-4 w-4"
+								aria-hidden="true"
+							/>
+							Email address
+						</label>
 						<input
 							id="login-email"
 							name="email"
@@ -26,18 +40,46 @@ export default function LoginForm() {
 							placeholder="you@example.com"
 							required
 						/>
-					</label>
-					<label htmlFor="login-password">
-						Password
-						<input
-							id="login-password"
-							name="password"
-							type="password"
-							autoComplete="current-password"
-							placeholder="Enter your password"
-							required
-						/>
-					</label>
+					</div>
+					<div className="auth-field">
+						<label htmlFor="login-password">
+							<LockClosedIcon
+								className="inline-block h-4 w-4"
+								aria-hidden="true"
+							/>
+							Password
+						</label>
+						<div className="auth-password-field">
+							<input
+								id="login-password"
+								name="password"
+								type={showPassword ? "text" : "password"}
+								autoComplete="current-password"
+								placeholder="Enter your password"
+								required
+							/>
+							<button
+								className="auth-password-toggle"
+								type="button"
+								aria-label={showPassword ? "Hide password" : "Show password"}
+								aria-pressed={showPassword}
+								aria-controls="login-password"
+								onClick={() => setShowPassword((visible) => !visible)}
+							>
+								{showPassword ? (
+									<EyeSlashIcon
+										className="inline-block h-5 w-5"
+										aria-hidden="true"
+									/>
+								) : (
+									<EyeIcon
+										className="inline-block h-5 w-5"
+										aria-hidden="true"
+									/>
+								)}
+							</button>
+						</div>
+					</div>
 					{state.message && (
 						<p className="auth-error" role="alert">
 							{state.message}
