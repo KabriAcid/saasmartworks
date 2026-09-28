@@ -44,7 +44,7 @@ Before adding mutation endpoints, enforce invoice line/header reconciliation, ov
 | manager@saa.example | Demo Services Manager | Professional Services |
 | finance@saa.example | Demo Finance Officer  | Professional Services |
 
-Passwords come only from SEED_PASSWORD. Hashes use Node scrypt with a random 16-byte salt, N=131072, r=8, p=1 and a 64-byte derived key. Verification uses timingSafeEqual. Each account has mustChangePassword=true. Repeat seeds never reset passwords or grant additional roles beyond the defined sample grants. No sessions or authentication endpoints are implemented by these records; the existing login screen is still a prototype.
+Passwords come only from SEED_PASSWORD. New password hashes use bcrypt with 12 rounds; verification remains compatible with legacy Node scrypt hashes. Each account has mustChangePassword=true. Repeat seeds never reset passwords or grant additional roles beyond the defined sample grants. No plaintext password belongs in source.
 
 The role matrix is sample configuration, not a final staff policy. The sample Administrator has all seeded Services permissions; manager covers service operations; finance covers finance modules. A real staff account and finalized role policy should replace shared demo access before launch.
 

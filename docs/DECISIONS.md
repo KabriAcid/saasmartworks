@@ -18,4 +18,4 @@ Authentication, email, storage, and Billstack providers/contracts are not implem
 
 ## 2026-09-28: Supabase PostgreSQL
 
-Owner selected Supabase PostgreSQL as the sole database provider. Drizzle uses PostgreSQL table builders and the postgres-js driver. The 28-table model is documented in MODULE-SCHEMAS.md. Eatery remains an inactive unit only. New record types derive from Drizzle; internal Zod contracts derive through drizzle-zod 0.8.3. Passwords use built-in Node scrypt, with no plaintext seed password in source. Changing the adapter does not migrate or reconcile hosted data automatically.
+Owner selected Supabase PostgreSQL as the sole database provider. Drizzle uses PostgreSQL table builders and the postgres-js driver. The 28-table model is documented in MODULE-SCHEMAS.md. Eatery remains an inactive unit only. New record types derive from Drizzle; internal Zod contracts derive through drizzle-zod 0.8.3. New passwords use bcrypt with 12 rounds; the verifier retains support for legacy Node scrypt hashes. No plaintext password belongs in source. Changing the adapter does not migrate or reconcile hosted data automatically.
