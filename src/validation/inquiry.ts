@@ -1,4 +1,1 @@
-export {
-	inquiryInputSchema as inquiryInput,
-	inquiryStatusSchema as inquiryStatus,
-} from "@/validation/module-schemas";
+export { inquiryInputSchema as inquiryInput, inquiryStatusSchema as inquiryStatus } from './inquiry-input';

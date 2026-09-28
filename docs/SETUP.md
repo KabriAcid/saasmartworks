@@ -34,3 +34,6 @@ Migrations and seeds currently cover business units and categories only, not the
 Radix Primitives powers applicable interactions; Button uses Slot composition. Input and Skeleton are native/CSS shared components, as those are not standalone Radix Primitives. No second theme system is installed.
 
 Public and Admin routes are starter shells. Admin exposes no operational data or actions. Auth/RBAC, inquiries/replies, email, storage, complete schema, and Eatery remain unimplemented. Provider setup may require more than environment keys. Official logo and dark-blue hex remain pending.
+
+## Database update: 2026-09-28
+See MODULE-SCHEMAS.md for the expanded 28-table schema, Turso environment precedence, demo accounts and verification commands. The earlier two-table status is historical. DB_TARGET=auto now prefers TURSO_DATABASE_URL when present. Seed passwords must be supplied through SEED_PASSWORD.

@@ -1,91 +1,63 @@
-import { z } from "zod";
+import { createSelectSchema, createInsertSchema } from 'drizzle-zod';
+import * as tables from '@/db/schema';
+export type * from '@/types/modules';
+export { inquiryInputSchema, inquiryStatusSchema } from './inquiry-input';
 
-export type {
-	BusinessUnit,
-	Contact,
-	Inquiry,
-	InquiryInput,
-	InquiryMessage,
-	InquiryStatus,
-	Service,
-	ServiceCategory,
-} from "@/types/modules";
-
-export const businessUnitSchema = z.object({
-	id: z.string().min(1),
-	slug: z.string().trim().min(1).max(100),
-	name: z.string().trim().min(1).max(200),
-	active: z.boolean().default(false),
-});
-
-export const serviceCategorySchema = z.object({
-	id: z.string().min(1),
-	businessUnitId: z.string().min(1),
-	slug: z.string().trim().min(1).max(100),
-	name: z.string().trim().min(1).max(200),
-});
-
-export const serviceSchema = z.object({
-	id: z.string().min(1),
-	categoryId: z.string().min(1),
-	slug: z.string().trim().min(1).max(100),
-	name: z.string().trim().min(1).max(200),
-	description: z.string().trim().min(1).max(2000),
-	active: z.boolean().default(true),
-	sortOrder: z.number().int().nonnegative().default(0),
-	createdAt: z.coerce.date(),
-	updatedAt: z.coerce.date(),
-});
-
-export const contactSchema = z.object({
-	id: z.string().min(1),
-	name: z.string().trim().min(1).max(150),
-	email: z.email(),
-	phone: z.string().trim().max(40).optional(),
-	organization: z.string().trim().max(200).optional(),
-	createdAt: z.coerce.date(),
-	updatedAt: z.coerce.date(),
-});
-
-export const inquiryStatusSchema = z.enum([
-	"NEW",
-	"OPEN",
-	"AWAITING_CUSTOMER",
-	"RESOLVED",
-	"CLOSED",
-]);
-
-export const inquiryInputSchema = z.object({
-	name: z.string().trim().min(1).max(150),
-	email: z.email(),
-	phone: z.string().trim().max(40).optional(),
-	organization: z.string().trim().max(200).optional(),
-	categoryId: z.string().min(1),
-	serviceId: z.string().min(1),
-	subject: z.string().trim().min(1).max(200),
-	message: z.string().trim().min(1).max(10000),
-});
-
-export const inquirySchema = z.object({
-	id: z.string().min(1),
-	reference: z.string().trim().min(1).max(50),
-	contactId: z.string().min(1),
-	businessUnitId: z.string().min(1),
-	categoryId: z.string().min(1),
-	serviceId: z.string().min(1).optional(),
-	subject: z.string().trim().min(1).max(200),
-	status: inquiryStatusSchema,
-	assignedTo: z.string().min(1).optional(),
-	createdAt: z.coerce.date(),
-	updatedAt: z.coerce.date(),
-});
-
-export const inquiryMessageSchema = z.object({
-	id: z.string().min(1),
-	inquiryId: z.string().min(1),
-	authorType: z.enum(["CONTACT", "STAFF"]),
-	authorId: z.string().min(1).optional(),
-	body: z.string().trim().min(1).max(10000),
-	emailDeliveryStatus: z.enum(["PENDING", "SENT", "FAILED", "NOT_APPLICABLE"]),
-	createdAt: z.coerce.date(),
-});
+// Internal database contracts, not authorization or unrestricted API request schemas.
+export const businessUnitSchema = createSelectSchema(tables.businessUnits);
+export const businessUnitInsertSchema = createInsertSchema(tables.businessUnits);
+export const userSchema = createSelectSchema(tables.users);
+export const userInsertSchema = createInsertSchema(tables.users);
+export const roleSchema = createSelectSchema(tables.roles);
+export const roleInsertSchema = createInsertSchema(tables.roles);
+export const permissionSchema = createSelectSchema(tables.permissions);
+export const permissionInsertSchema = createInsertSchema(tables.permissions);
+export const rolePermissionSchema = createSelectSchema(tables.rolePermissions);
+export const rolePermissionInsertSchema = createInsertSchema(tables.rolePermissions);
+export const userRoleSchema = createSelectSchema(tables.userRoles);
+export const userRoleInsertSchema = createInsertSchema(tables.userRoles);
+export const employeeSchema = createSelectSchema(tables.employees);
+export const employeeInsertSchema = createInsertSchema(tables.employees);
+export const serviceCategorySchema = createSelectSchema(tables.serviceCategories);
+export const serviceCategoryInsertSchema = createInsertSchema(tables.serviceCategories);
+export const serviceSchema = createSelectSchema(tables.services);
+export const serviceInsertSchema = createInsertSchema(tables.services);
+export const contactSchema = createSelectSchema(tables.contacts);
+export const contactInsertSchema = createInsertSchema(tables.contacts);
+export const clientSchema = createSelectSchema(tables.clients);
+export const clientInsertSchema = createInsertSchema(tables.clients);
+export const inquirySchema = createSelectSchema(tables.inquiries);
+export const inquiryInsertSchema = createInsertSchema(tables.inquiries);
+export const inquiryMessageSchema = createSelectSchema(tables.inquiryMessages);
+export const inquiryMessageInsertSchema = createInsertSchema(tables.inquiryMessages);
+export const inquiryAssignmentSchema = createSelectSchema(tables.inquiryAssignments);
+export const inquiryAssignmentInsertSchema = createInsertSchema(tables.inquiryAssignments);
+export const projectSchema = createSelectSchema(tables.projects);
+export const projectInsertSchema = createInsertSchema(tables.projects);
+export const trainingSessionSchema = createSelectSchema(tables.trainingSessions);
+export const trainingSessionInsertSchema = createInsertSchema(tables.trainingSessions);
+export const trainingParticipantSchema = createSelectSchema(tables.trainingParticipants);
+export const trainingParticipantInsertSchema = createInsertSchema(tables.trainingParticipants);
+export const printingJobSchema = createSelectSchema(tables.printingJobs);
+export const printingJobInsertSchema = createInsertSchema(tables.printingJobs);
+export const quotationSchema = createSelectSchema(tables.quotations);
+export const quotationInsertSchema = createInsertSchema(tables.quotations);
+export const quotationItemSchema = createSelectSchema(tables.quotationItems);
+export const quotationItemInsertSchema = createInsertSchema(tables.quotationItems);
+export const invoiceSchema = createSelectSchema(tables.invoices);
+export const invoiceInsertSchema = createInsertSchema(tables.invoices);
+export const invoiceItemSchema = createSelectSchema(tables.invoiceItems);
+export const invoiceItemInsertSchema = createInsertSchema(tables.invoiceItems);
+export const paymentSchema = createSelectSchema(tables.payments);
+export const paymentInsertSchema = createInsertSchema(tables.payments);
+export const expenseSchema = createSelectSchema(tables.expenses);
+export const expenseInsertSchema = createInsertSchema(tables.expenses);
+export const fileRecordSchema = createSelectSchema(tables.files);
+export const fileRecordInsertSchema = createInsertSchema(tables.files);
+export const notificationSchema = createSelectSchema(tables.notifications);
+export const notificationInsertSchema = createInsertSchema(tables.notifications);
+export const settingSchema = createSelectSchema(tables.settings);
+export const settingInsertSchema = createInsertSchema(tables.settings);
+export const auditLogSchema = createSelectSchema(tables.auditLogs);
+export const auditLogInsertSchema = createInsertSchema(tables.auditLogs);
+export const publicUserSchema = userSchema.omit({passwordHash:true});

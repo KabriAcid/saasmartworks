@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm';
-import { sqliteTable, text, integer, index, uniqueIndex, primaryKey, foreignKey, check } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, index, uniqueIndex, foreignKey, check } from 'drizzle-orm/sqlite-core';
 import { id, timestamps, demo, enumCheck, nonnegative } from './helpers';
 import { businessUnits, users } from './core';
 import { clients } from './services';

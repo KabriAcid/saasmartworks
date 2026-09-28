@@ -1,6 +1,6 @@
 import { sql } from 'drizzle-orm';
-import { sqliteTable, text, integer, index, uniqueIndex, primaryKey, foreignKey, check } from 'drizzle-orm/sqlite-core';
-import { id, timestamps, demo, enumCheck, nonnegative } from './helpers';
+import { sqliteTable, text, integer, index, primaryKey, check } from 'drizzle-orm/sqlite-core';
+import { id, timestamps, demo, enumCheck } from './helpers';
 
 export const businessUnits = sqliteTable('business_units', {
   id: id(), slug: text('slug').notNull().unique(), name: text('name').notNull(),

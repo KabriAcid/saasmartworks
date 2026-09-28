@@ -1,84 +1,65 @@
-export interface BusinessUnit {
-	id: string;
-	slug: string;
-	name: string;
-	active: boolean;
-}
+import type * as tables from '@/db/schema';
+import type { z } from 'zod';
+import type { inquiryInputSchema } from '@/validation/inquiry-input';
 
-export interface ServiceCategory {
-	id: string;
-	businessUnitId: string;
-	slug: string;
-	name: string;
-}
-
-export interface Service {
-	id: string;
-	categoryId: string;
-	slug: string;
-	name: string;
-	description: string;
-	active: boolean;
-	sortOrder: number;
-	createdAt: Date;
-	updatedAt: Date;
-}
-
-export interface Contact {
-	id: string;
-	name: string;
-	email: string;
-	phone?: string;
-	organization?: string;
-	createdAt: Date;
-	updatedAt: Date;
-}
-
-export interface InquiryInput {
-	name: string;
-	email: string;
-	phone?: string;
-	organization?: string;
-	categoryId: string;
-	serviceId: string;
-	subject: string;
-	message: string;
-}
-
-export type InquiryStatus =
-	| "NEW"
-	| "OPEN"
-	| "AWAITING_CUSTOMER"
-	| "RESOLVED"
-	| "CLOSED";
-
-export interface Inquiry {
-	id: string;
-	reference: string;
-	contactId: string;
-	businessUnitId: string;
-	categoryId: string;
-	serviceId?: string;
-	subject: string;
-	status: InquiryStatus;
-	assignedTo?: string;
-	createdAt: Date;
-	updatedAt: Date;
-}
-
-export type InquiryAuthorType = "CONTACT" | "STAFF";
-export type EmailDeliveryStatus =
-	| "PENDING"
-	| "SENT"
-	| "FAILED"
-	| "NOT_APPLICABLE";
-
-export interface InquiryMessage {
-	id: string;
-	inquiryId: string;
-	authorType: InquiryAuthorType;
-	authorId?: string;
-	body: string;
-	emailDeliveryStatus: EmailDeliveryStatus;
-	createdAt: Date;
-}
+export type BusinessUnit = typeof tables.businessUnits.$inferSelect;
+export type NewBusinessUnit = typeof tables.businessUnits.$inferInsert;
+export type User = typeof tables.users.$inferSelect;
+export type NewUser = typeof tables.users.$inferInsert;
+export type Role = typeof tables.roles.$inferSelect;
+export type NewRole = typeof tables.roles.$inferInsert;
+export type Permission = typeof tables.permissions.$inferSelect;
+export type NewPermission = typeof tables.permissions.$inferInsert;
+export type RolePermission = typeof tables.rolePermissions.$inferSelect;
+export type NewRolePermission = typeof tables.rolePermissions.$inferInsert;
+export type UserRole = typeof tables.userRoles.$inferSelect;
+export type NewUserRole = typeof tables.userRoles.$inferInsert;
+export type Employee = typeof tables.employees.$inferSelect;
+export type NewEmployee = typeof tables.employees.$inferInsert;
+export type ServiceCategory = typeof tables.serviceCategories.$inferSelect;
+export type NewServiceCategory = typeof tables.serviceCategories.$inferInsert;
+export type Service = typeof tables.services.$inferSelect;
+export type NewService = typeof tables.services.$inferInsert;
+export type Contact = typeof tables.contacts.$inferSelect;
+export type NewContact = typeof tables.contacts.$inferInsert;
+export type Client = typeof tables.clients.$inferSelect;
+export type NewClient = typeof tables.clients.$inferInsert;
+export type Inquiry = typeof tables.inquiries.$inferSelect;
+export type NewInquiry = typeof tables.inquiries.$inferInsert;
+export type InquiryMessage = typeof tables.inquiryMessages.$inferSelect;
+export type NewInquiryMessage = typeof tables.inquiryMessages.$inferInsert;
+export type InquiryAssignment = typeof tables.inquiryAssignments.$inferSelect;
+export type NewInquiryAssignment = typeof tables.inquiryAssignments.$inferInsert;
+export type Project = typeof tables.projects.$inferSelect;
+export type NewProject = typeof tables.projects.$inferInsert;
+export type TrainingSession = typeof tables.trainingSessions.$inferSelect;
+export type NewTrainingSession = typeof tables.trainingSessions.$inferInsert;
+export type TrainingParticipant = typeof tables.trainingParticipants.$inferSelect;
+export type NewTrainingParticipant = typeof tables.trainingParticipants.$inferInsert;
+export type PrintingJob = typeof tables.printingJobs.$inferSelect;
+export type NewPrintingJob = typeof tables.printingJobs.$inferInsert;
+export type Quotation = typeof tables.quotations.$inferSelect;
+export type NewQuotation = typeof tables.quotations.$inferInsert;
+export type QuotationItem = typeof tables.quotationItems.$inferSelect;
+export type NewQuotationItem = typeof tables.quotationItems.$inferInsert;
+export type Invoice = typeof tables.invoices.$inferSelect;
+export type NewInvoice = typeof tables.invoices.$inferInsert;
+export type InvoiceItem = typeof tables.invoiceItems.$inferSelect;
+export type NewInvoiceItem = typeof tables.invoiceItems.$inferInsert;
+export type Payment = typeof tables.payments.$inferSelect;
+export type NewPayment = typeof tables.payments.$inferInsert;
+export type Expense = typeof tables.expenses.$inferSelect;
+export type NewExpense = typeof tables.expenses.$inferInsert;
+export type FileRecord = typeof tables.files.$inferSelect;
+export type NewFileRecord = typeof tables.files.$inferInsert;
+export type Notification = typeof tables.notifications.$inferSelect;
+export type NewNotification = typeof tables.notifications.$inferInsert;
+export type Setting = typeof tables.settings.$inferSelect;
+export type NewSetting = typeof tables.settings.$inferInsert;
+export type AuditLog = typeof tables.auditLogs.$inferSelect;
+export type NewAuditLog = typeof tables.auditLogs.$inferInsert;
+export type PublicUser = Omit<User, 'passwordHash'>;
+export type InquiryInput = z.infer<typeof inquiryInputSchema>;
+export type InquiryStatus = Inquiry['status'];
+export type InquiryAuthorType = InquiryMessage['authorType'];
+export type EmailDeliveryStatus = InquiryMessage['emailDeliveryStatus'];

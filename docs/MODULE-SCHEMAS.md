@@ -1,119 +1,69 @@
-# Module Schemas
+﻿# Non-Eatery Database Modules
 
-The executable Zod contracts for these modules live in `src/validation/module-schemas.ts`, while the shared TypeScript interfaces live in `src/types/modules.ts`. This document explains how those contracts map to persistence. Zod validates application data; it does not generate SQL migrations. The Drizzle definitions in `src/db/schema.ts` remain the migration source.
+Implemented 2026-09-28. Drizzle definitions under src/db/schema/ are the persistence source of truth, exported through src/db/schema.ts. The first migration remains unchanged; 0001_non_eatery_modules adds the new tables and indexes without deleting existing data.
 
-## Status
+## Model groups
 
-- `business_units` and `service_categories` are implemented in `src/db/schema.ts`.
-- The service catalog currently uses seeded categories and in-code capability lists. Service records are not yet persisted.
-- Contact and inquiry forms are presentation-only. Their tables are planned but not implemented.
-- Navigation, shared UI, and admin shell are presentation modules with no direct tables.
+| Group | Tables |
+| --- | --- |
+| Organization and access | business_units, users, roles, permissions, role_permissions, user_roles, employees |
+| Catalog and relationships | service_categories, services, contacts, clients |
+| Inquiries | inquiries, inquiry_messages, inquiry_assignments |
+| Operations | projects, training_sessions, training_participants, printing_jobs |
+| Finance | quotations, quotation_items, invoices, invoice_items, payments, expenses |
+| Shared infrastructure | files, notifications, settings, audit_logs |
 
-Use the exported Zod schemas and inferred types for seed data, form parsing, and repository boundaries. When a planned table is approved, add its Drizzle table beside the corresponding Zod contract and generate a migration.
+28 application tables. Eatery has one inactive business-unit record only: no menu, orders, customers, wallets, or payment-provider tables. Users are staff identities. User-role grants are scoped to a business unit; the demo accounts receive Services access only. Employee records may link to a staff login but are a separate employment concept.
 
-## Core And Services
+## Contracts and integrity
 
-### `business_units` — implemented
+- src/types/modules.ts derives selected/inserted record types from Drizzle; database nullability is explicit. Use PublicUser when returning staff data; never serialize passwordHash.
+- src/validation/module-schemas.ts derives internal record/insert schemas with drizzle-zod. These are internal persistence contracts, not unrestricted API request schemas or authorization.
+- Public inquiry validation stays in src/validation/inquiry-input.ts; src/validation/inquiry.ts retains its existing exports. Nullable database columns differ deliberately from optional form fields.
+- Inquiry message authors now use contactAuthorId or staffAuthorId, with a database check requiring exactly the matching author. The old polymorphic authorId is replaced with real foreign keys.
+- Categories keep the original consultancy/digital/printing IDs. Service identifiers are stable, category-prefixed IDs. Existing public presentation slugs are not silently renamed; the static catalog still needs wiring to these records.
+- Contacts are shared communication identities, not automatically Clients. Clients are unit-scoped relationships with uniqueness per contact/unit. Contact emails are indexed, not used to silently merge people.
+- Composite foreign keys prevent linking an inquiry to another unit's category or a service from another category. Client ownership constrains projects, quotations, invoices and printing jobs. Payments must match their invoice's unit and currency.
+- Database checks enforce status enums, valid author combinations, nonnegative integer amounts, positive item quantities, document arithmetic, and date ordering. Foreign keys default to restrictive deletion.
+- createdAt/updatedAt are millisecond timestamps mapped to Date by Drizzle. updatedAt refreshes on Drizzle updates; raw SQL writers must update it explicitly.
+- Operational demo records carry isDemo, with stable demo IDs and DEMO references. Child/join rows inherit demo context from parents. All contact addresses use reserved example domains.
 
-| Column   | Type    | Rules                         |
-| -------- | ------- | ----------------------------- |
-| `id`     | text    | Primary key                   |
-| `slug`   | text    | Required, unique              |
-| `name`   | text    | Required                      |
-| `active` | boolean | Required, defaults to `false` |
+## Financial model
 
-### `service_categories` — implemented
+Amounts are integer minor units with currency on financial documents and movements. The seed uses NGN: 100 minor units per naira. Line items snapshot their descriptions and prices. Header totals satisfy subtotal - discount + tax; item totals satisfy quantity * unit price. Integer quantities are the initial assumption; fractional billing units require a deliberate schema change.
 
-| Column             | Type | Rules                                       |
-| ------------------ | ---- | ------------------------------------------- |
-| `id`               | text | Primary key                                 |
-| `business_unit_id` | text | Required foreign key to `business_units.id` |
-| `slug`             | text | Required, unique                            |
-| `name`             | text | Required                                    |
+Invoice status is DRAFT, ISSUED or VOID. Paid/outstanding state should be derived from confirmed payments, not maintained as a second conflicting balance. Sample invoice: NGN 150,000; confirmed payment: NGN 50,000; outstanding: NGN 100,000. Sample paid expense: NGN 12,500. No real money moved and no bank/provider calls were made.
 
-### `services` — planned
+Before adding mutation endpoints, enforce invoice line/header reconciliation, overpayment policy, issued-document immutability, valid status transitions, project/client consistency, transactional payment recording, and audit append-only behavior in domain services. Current schema checks do not implement those workflows or a general accounting ledger. Refunds/corrections require a specified reversal model; do not rewrite financial history to simulate them. No Eatery wallets are implemented.
 
-A persisted service catalog record should replace capability-only presentation data.
+## Seed accounts
 
-| Column        | Type      | Rules                                           |
-| ------------- | --------- | ----------------------------------------------- |
-| `id`          | text      | Primary key                                     |
-| `category_id` | text      | Required foreign key to `service_categories.id` |
-| `slug`        | text      | Required, unique within a category              |
-| `name`        | text      | Required                                        |
-| `description` | text      | Required                                        |
-| `active`      | boolean   | Required, defaults to `true`                    |
-| `sort_order`  | integer   | Required, defaults to `0`                       |
-| `created_at`  | timestamp | Required                                        |
-| `updated_at`  | timestamp | Required                                        |
+| Email | Sample role | Unit |
+| --- | --- | --- |
+| admin@saa.example | Demo Administrator | Professional Services |
+| manager@saa.example | Demo Services Manager | Professional Services |
+| finance@saa.example | Demo Finance Officer | Professional Services |
 
-## Contacts And Inquiries
+Passwords come only from SEED_PASSWORD. Hashes use Node scrypt with a random 16-byte salt, N=131072, r=8, p=1 and a 64-byte derived key. Verification uses timingSafeEqual. Each account has mustChangePassword=true. Repeat seeds never reset passwords or grant additional roles beyond the defined sample grants. No sessions or authentication endpoints are implemented by these records; the existing login screen is still a prototype.
 
-Contacts and clients are different concepts. An inquiry creates or references a contact; it does not automatically create a client.
+The role matrix is sample configuration, not a final staff policy. The sample Administrator has all seeded Services permissions; manager covers service operations; finance covers finance modules. A real staff account and finalized role policy should replace shared demo access before launch.
 
-### `contacts` — planned
+## Shared capabilities
 
-| Column         | Type      | Rules             |
-| -------------- | --------- | ----------------- |
-| `id`           | text      | Primary key       |
-| `name`         | text      | Required          |
-| `email`        | text      | Required, indexed |
-| `phone`        | text      | Optional          |
-| `organization` | text      | Optional          |
-| `created_at`   | timestamp | Required          |
-| `updated_at`   | timestamp | Required          |
+Files stores metadata and optional owner links. The sample file is PENDING with zero bytes; it is not a real uploaded/downloadable document. No storage provider is configured. Seed inquiry replies are NOT_APPLICABLE for email delivery; seeding cannot send emails. Audit records must not hold passwords or credentials. Settings must not become a secret store. Notification URLs identify future routes and are not proof those screens exist.
 
-### `inquiries` — planned
+## Running and verifying
 
-| Column             | Type      | Rules                                                                   |
-| ------------------ | --------- | ----------------------------------------------------------------------- |
-| `id`               | text      | Primary key                                                             |
-| `reference`        | text      | Required, unique, user-facing reference                                 |
-| `contact_id`       | text      | Required foreign key to `contacts.id`                                   |
-| `business_unit_id` | text      | Required foreign key to `business_units.id`                             |
-| `category_id`      | text      | Required foreign key to `service_categories.id`                         |
-| `service_id`       | text      | Optional foreign key to `services.id`                                   |
-| `subject`          | text      | Required                                                                |
-| `status`           | text      | Required enum: `NEW`, `OPEN`, `AWAITING_CUSTOMER`, `RESOLVED`, `CLOSED` |
-| `assigned_to`      | text      | Optional future foreign key to an admin user                            |
-| `created_at`       | timestamp | Required                                                                |
-| `updated_at`       | timestamp | Required                                                                |
+Root .env is loaded without logging values. DB_TARGET=turso selects TURSO_DATABASE_URL and TURSO_AUTH_TOKEN (DATABASE_AUTH_TOKEN is a fallback). DB_TARGET=local selects DATABASE_URL and rejects remote URLs. auto prefers a configured Turso URL over the local file setting. The project now uses Turso automatically when its URL exists.
 
-Recommended indexes: `reference`, `contact_id`, `status`, `assigned_to`, and `created_at`.
+- npm run db:generate: generate migration files from the schema.
+- npm run db:migrate: apply migration history to the selected database.
+- npm run db:seed: insert catalog and fictional sample records; requires SEED_PASSWORD.
+- npm run db:verify: read-only counts, integrity checks, invoice-line reconciliation and dashboard queries.
+- npm run test:db: create an isolated ignored local SQLite file, migrate, seed twice and verify constraints, hashes and preservation. Requires SEED_PASSWORD; never runs against Turso.
 
-### `inquiry_messages` — planned
+The test database files are in ignored .db-work/. Do not reset or push-drop a cloud database to reproduce a seed. Use migrations. Seeds run inside one transaction and skip existing keys, preserving edits. No default password is embedded in source or the environment example.
 
-| Column                  | Type      | Rules                                                        |
-| ----------------------- | --------- | ------------------------------------------------------------ |
-| `id`                    | text      | Primary key                                                  |
-| `inquiry_id`            | text      | Required foreign key to `inquiries.id`                       |
-| `author_type`           | text      | Required enum: `CONTACT`, `STAFF`                            |
-| `author_id`             | text      | Optional reference to the author record                      |
-| `body`                  | text      | Required                                                     |
-| `email_delivery_status` | text      | Required enum: `PENDING`, `SENT`, `FAILED`, `NOT_APPLICABLE` |
-| `created_at`            | timestamp | Required                                                     |
+src/db/queries/dashboard.ts supplies unit-filtered query results for future Admin integration. It is an internal repository function, not an exposed endpoint: callers must establish the actor and enforce server-side permissions. Do not connect sensitive data to the unprotected /admin route.
 
-## Form Contract
-
-The current inquiry form field names are defined by `src/validation/inquiry.ts`:
-
-- `name`
-- `email`
-- `phone` (optional)
-- `organization` (optional)
-- `categoryId`
-- `serviceId`
-- `subject`
-- `message`
-
-The `message` field belongs in `inquiry_messages` when the inquiry workflow is implemented; it should not be discarded after submission.
-
-## Presentation-Only Modules
-
-The following modules do not need database tables:
-
-- Shared navigation and glass navbar
-- Shared footer and layout shell
-- Loading, error, and not-found states
-- Public page presentation components
-- Admin route shell before authentication and authorization exist
+During the agent session, the Windows sandbox could not execute tsx's OS-user lookup. Verification used a temporary TypeScript transpiler and Drizzle's migration-generation API; normal npm scripts remain standard for the developer environment.

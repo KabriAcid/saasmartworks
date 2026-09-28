@@ -11,3 +11,6 @@ Radix Primitives supports accessible interactions; native inputs and CSS skeleto
 
 ## Deferred
 Authentication, email, storage, and Billstack providers/contracts are not implemented. Adding future keys alone cannot activate nonexistent integrations. Corporate/Eatery pages, inquiry workflows and full admin modules follow later.
+
+## 2026-09-28: Turso and non-Eatery modules
+Owner authorized Turso migrations and fictional sample data, including password-hashed demo staff accounts. The 28-table model is documented in MODULE-SCHEMAS.md. Eatery remains an inactive unit only. Environment auto-selection now uses Turso when configured. No authentication or financial mutation endpoints were added. New record types derive from Drizzle; internal Zod contracts derive through drizzle-zod 0.8.3. Passwords use built-in Node scrypt, with no plaintext seed password in source.
