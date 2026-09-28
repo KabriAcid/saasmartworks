@@ -4,14 +4,14 @@ Implemented 2026-09-28. Drizzle definitions under src/db/schema/ are the persist
 
 ## Model groups
 
-| Group | Tables |
-| --- | --- |
-| Organization and access | business_units, users, roles, permissions, role_permissions, user_roles, employees |
-| Catalog and relationships | service_categories, services, contacts, clients |
-| Inquiries | inquiries, inquiry_messages, inquiry_assignments |
-| Operations | projects, training_sessions, training_participants, printing_jobs |
-| Finance | quotations, quotation_items, invoices, invoice_items, payments, expenses |
-| Shared infrastructure | files, notifications, settings, audit_logs |
+| Group                     | Tables                                                                             |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| Organization and access   | business_units, users, roles, permissions, role_permissions, user_roles, employees |
+| Catalog and relationships | service_categories, services, contacts, clients                                    |
+| Inquiries                 | inquiries, inquiry_messages, inquiry_assignments                                   |
+| Operations                | projects, training_sessions, training_participants, printing_jobs                  |
+| Finance                   | quotations, quotation_items, invoices, invoice_items, payments, expenses           |
+| Shared infrastructure     | files, notifications, settings, audit_logs                                         |
 
 28 application tables. Eatery has one inactive business-unit record only: no menu, orders, customers, wallets, or payment-provider tables. Users are staff identities. User-role grants are scoped to a business unit; the demo accounts receive Services access only. Employee records may link to a staff login but are a separate employment concept.
 
@@ -30,7 +30,7 @@ Implemented 2026-09-28. Drizzle definitions under src/db/schema/ are the persist
 
 ## Financial model
 
-Amounts are integer minor units with currency on financial documents and movements. The seed uses NGN: 100 minor units per naira. Line items snapshot their descriptions and prices. Header totals satisfy subtotal - discount + tax; item totals satisfy quantity * unit price. Integer quantities are the initial assumption; fractional billing units require a deliberate schema change.
+Amounts are integer minor units with currency on financial documents and movements. The seed uses NGN: 100 minor units per naira. Line items snapshot their descriptions and prices. Header totals satisfy subtotal - discount + tax; item totals satisfy quantity \* unit price. Integer quantities are the initial assumption; fractional billing units require a deliberate schema change.
 
 Invoice status is DRAFT, ISSUED or VOID. Paid/outstanding state should be derived from confirmed payments, not maintained as a second conflicting balance. Sample invoice: NGN 150,000; confirmed payment: NGN 50,000; outstanding: NGN 100,000. Sample paid expense: NGN 12,500. No real money moved and no bank/provider calls were made.
 
@@ -38,11 +38,11 @@ Before adding mutation endpoints, enforce invoice line/header reconciliation, ov
 
 ## Seed accounts
 
-| Email | Sample role | Unit |
-| --- | --- | --- |
-| admin@saa.example | Demo Administrator | Professional Services |
+| Email               | Sample role           | Unit                  |
+| ------------------- | --------------------- | --------------------- |
+| admin@saa.example   | Demo Administrator    | Professional Services |
 | manager@saa.example | Demo Services Manager | Professional Services |
-| finance@saa.example | Demo Finance Officer | Professional Services |
+| finance@saa.example | Demo Finance Officer  | Professional Services |
 
 Passwords come only from SEED_PASSWORD. Hashes use Node scrypt with a random 16-byte salt, N=131072, r=8, p=1 and a 64-byte derived key. Verification uses timingSafeEqual. Each account has mustChangePassword=true. Repeat seeds never reset passwords or grant additional roles beyond the defined sample grants. No sessions or authentication endpoints are implemented by these records; the existing login screen is still a prototype.
 
@@ -58,9 +58,7 @@ Root `.env` is loaded without logging values. Application queries use `POSTGRES_
 
 - npm run db:generate: generate migration files from the schema.
 - npm run db:migrate: apply migration history to the selected database.
-- npm run db:seed: insert catalog and fictional sample records; requires SEED_PASSWORD.
-- npm run db:verify: read-only counts, integrity checks, invoice-line reconciliation and dashboard queries.
-- A database test workflow must use an isolated PostgreSQL database/schema and must never reset or drop the hosted Supabase project. Requires `SEED_PASSWORD` where applicable.
+- No seed, database verification, or isolated-database test script currently exists in the repository.
 
 Do not reset or drop the hosted database to reproduce a seed. Use reviewed migrations. Seeds must run inside a transaction and skip existing keys, preserving edits. No default password is embedded in source or the environment example.
 

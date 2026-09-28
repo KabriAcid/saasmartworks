@@ -33,7 +33,6 @@ Customers do not need accounts to use the future Services experience. The platfo
 ```sh
 npm ci
 npm run db:migrate
-npm run db:seed
 npm run dev
 ```
 
@@ -50,23 +49,21 @@ The current schema and database client live in `src/db/`. PostgreSQL migration h
 ```sh
 npm run db:generate
 npm run db:migrate
-npm run db:seed
 ```
 
 Update the Drizzle schema before generating migrations. Existing Supabase data is not modified by changing the adapter; review generated migration SQL against the hosted schema before applying it. No seed command is available unless its script exists in the repository.
 
 ## Available Scripts
 
-| Command               | Description                                              |
-| --------------------- | -------------------------------------------------------- |
-| `npm run dev`         | Start the Next.js development server                     |
-| `npm run build`       | Create a production build                                |
-| `npm run start`       | Serve a production build                                 |
-| `npm run typecheck`   | Run TypeScript without emitting files                    |
-| `npm run lint`        | Run ESLint                                               |
-| `npm run db:generate` | Generate SQL migrations from the schema                  |
-| `npm run db:migrate`  | Apply migrations to the configured database              |
-| `npm run db:seed`     | Seed records when a seed script is present               |
+| Command               | Description                                 |
+| --------------------- | ------------------------------------------- |
+| `npm run dev`         | Start the Next.js development server        |
+| `npm run build`       | Create a production build                   |
+| `npm run start`       | Serve a production build                    |
+| `npm run typecheck`   | Run TypeScript without emitting files       |
+| `npm run lint`        | Run ESLint                                  |
+| `npm run db:generate` | Generate SQL migrations from the schema     |
+| `npm run db:migrate`  | Apply migrations to the configured database |
 
 ## Project Structure
 
