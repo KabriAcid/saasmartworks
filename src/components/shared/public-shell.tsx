@@ -7,8 +7,9 @@ import { SiteHeader } from "@/components/shared/site-header";
 export function PublicShell({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const isAdminRoute = pathname?.startsWith("/admin") ?? false;
+	const isLoginRoute = pathname === "/login";
 
-	if (isAdminRoute) {
+	if (isAdminRoute || isLoginRoute) {
 		return <>{children}</>;
 	}
 
