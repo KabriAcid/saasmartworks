@@ -50,10 +50,10 @@ function SidebarItem({
 		<button
 			type="button"
 			className={[
-				"flex w-full items-center cursor-pointer gap-3 rounded-2xl px-3 py-2.5 text-left text-sm font-medium transition-all duration-200",
+				"flex w-full items-center cursor-pointer gap-3 rounded-2xl px-3 py-2.5 text-left text-sm font-medium transition-all duration-300 ease-out",
 				active
 					? "bg-white/10 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
-					: "text-slate-300 hover:bg-white/5 hover:text-white",
+					: "text-slate-300 hover:translate-x-1 hover:bg-white/5 hover:pl-4 hover:text-white",
 			].join(" ")}
 		>
 			<Icon className="h-5 w-5 shrink-0" />
@@ -83,7 +83,7 @@ export function AdminSidebar() {
 
 			<nav className="space-y-2 px-4 py-5">
 				{navigation.map(({ label, icon: Icon, active }) => (
-					<div key={label}>
+					<div key={label} className="group">
 						<SidebarItem icon={Icon} label={label} active={active} />
 					</div>
 				))}
