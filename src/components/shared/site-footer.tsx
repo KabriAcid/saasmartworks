@@ -9,7 +9,7 @@ export function SiteFooter() {
 				<div className="footer-brand">
 					<Link className="wordmark" href="/">
 						<Logo
-							src="/favicon.png"
+							src="/favicon-trans.png"
 							className="wordmark-mark"
 							width={48}
 							height={48}
