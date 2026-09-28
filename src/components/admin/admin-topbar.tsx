@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { logout } from "@/app/auth/actions";
+import { logout } from "@/lib/auth/actions";
 
 export function AdminTopbar() {
 	const [isProfileOpen, setIsProfileOpen] = useState(false);

@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
-import { login } from "@/app/auth/actions";
+import { login } from "@/lib/auth/actions";
 
 export default function LoginForm() {
 	const [state, formAction, pending] = useActionState(login, { message: null });

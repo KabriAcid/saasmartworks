@@ -1,12 +1,12 @@
 "use server";
 
 import { randomBytes } from "node:crypto";
+import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { eq } from "drizzle-orm";
 import { openDatabase } from "@/db/client";
 import { users } from "@/db/schema";
-import { hashPassword, verifyPassword } from "@/lib/passwords";
+import { verifyPassword, hashPassword } from "@/lib/passwords";
 import { sessionCookieName, signSession } from "@/lib/auth/session";
 import { loginSchema } from "@/validation/login";
 
