@@ -28,6 +28,8 @@
     "drizzle-zod": "0.8.3",
     "next": "16.3.6",
     "nextjs-toploader": "3.9.17",
+    "pg": "8.23.0",
+    "postgres": "3.4.9",
     "radix-ui": "1.6.7",
     "react": "19.3.0",
     "react-dom": "19.3.0",

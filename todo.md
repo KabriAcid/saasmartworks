@@ -3,3 +3,7 @@
 - Admins should be able to manage the user's account.
 - Manage the services in the guest pages.
 - 
+
+## GUEST PAGES
+- Add a border bottom on hover of navbar links
+- Hide the layouts in the admin login page.
