@@ -41,12 +41,7 @@ export async function login(
 			.from(users)
 			.innerJoin(userRoles, eq(userRoles.userId, users.id))
 			.innerJoin(roles, eq(roles.id, userRoles.roleId))
-			.where(
-				and(
-					eq(users.email, parsed.data.email),
-					eq(roles.name, "Admin"),
-				),
-			)
+			.where(and(eq(users.email, parsed.data.email), eq(roles.name, "Admin")))
 			.limit(1);
 
 		const passwordMatches = await verifyPassword(
