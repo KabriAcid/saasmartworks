@@ -1,47 +1,47 @@
 {
-  "name": "saa-smart-works",
-  "version": "0.1.0",
-  "private": true,
-  "engines": {
-    "node": ">=22.13.0"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint .",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
-  },
-  "dependencies": {
-    "@heroicons/react": "2.2.0",
-    "@next/env": "16.3.6",
-    "@supabase/supabase-js": "2.117.2",
-    "bcrypt": "6.0.0",
-    "drizzle-orm": "0.45.3",
-    "drizzle-zod": "0.8.3",
-    "jose": "6.2.12",
-    "next": "16.3.6",
-    "nextjs-toploader": "3.9.17",
-    "postgres": "3.4.9",
-    "radix-ui": "1.6.7",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "zod": "4.6.5"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "4.3.3",
-    "@types/node": "24.19.0",
-    "@types/react": "19.3.0",
-    "@types/react-dom": "19.3.0",
-    "drizzle-kit": "0.31.11",
-    "eslint": "9.39.5",
-    "eslint-config-next": "16.3.6",
-    "postcss": "8.5.28",
-    "tailwindcss": "4.3.3",
-    "tsx": "4.23.15",
-    "typescript": "6.0.3",
-    "vercel": "60.1.3"
-  }
+	"name": "saa-smart-works",
+	"version": "0.1.0",
+	"private": true,
+	"engines": {
+		"node": ">=22.13.0"
+	},
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint .",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate"
+	},
+	"dependencies": {
+		"@heroicons/react": "2.2.0",
+		"@next/env": "16.3.6",
+		"@supabase/supabase-js": "2.117.2",
+		"bcrypt": "6.0.0",
+		"drizzle-orm": "0.45.3",
+		"drizzle-zod": "0.8.3",
+		"jose": "6.2.12",
+		"next": "16.3.6",
+		"nextjs-toploader": "3.9.17",
+		"postgres": "3.4.9",
+		"radix-ui": "1.6.7",
+		"react": "19.3.0",
+		"react-dom": "19.3.0",
+		"zod": "4.6.5"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "4.3.3",
+		"@types/node": "24.19.0",
+		"@types/react": "19.3.0",
+		"@types/react-dom": "19.3.0",
+		"drizzle-kit": "0.31.11",
+		"eslint": "9.39.5",
+		"eslint-config-next": "16.3.6",
+		"postcss": "8.5.28",
+		"tailwindcss": "4.3.3",
+		"tsx": "4.23.15",
+		"typescript": "6.0.3",
+		"vercel": "60.1.3"
+	}
 }
