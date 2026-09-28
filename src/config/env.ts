@@ -6,7 +6,9 @@ export function databaseEnvironment() {
 		.object({ DATABASE_URL: z.string().url() })
 		.safeParse({ DATABASE_URL: url });
 	if (!parsed.success)
-		throw new Error("Set POSTGRES_URL to a valid Supabase PostgreSQL connection URL.");
+		throw new Error(
+			"Set POSTGRES_URL to a valid Supabase PostgreSQL connection URL.",
+		);
 	const value = parsed.data;
 	if (!/^postgres(ql)?:\/\//i.test(value.DATABASE_URL))
 		throw new Error("POSTGRES_URL must use the PostgreSQL protocol.");

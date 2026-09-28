@@ -17,7 +17,7 @@ Customers do not need accounts to use the future Services experience. The platfo
 
 - Next.js App Router, React, and TypeScript
 - Tailwind CSS
-- Drizzle ORM with SQLite through libSQL for the initial local database
+- Drizzle ORM with Supabase PostgreSQL
 - Zod for runtime validation
 - npm with exact dependency versions and a committed lockfile
 
@@ -39,13 +39,13 @@ npm run dev
 
 Open <http://localhost:3000> for Services and <http://localhost:3000/admin> for Admin.
 
-The database defaults to `file:./local.db` when `DATABASE_URL` is not set. If your existing `.env` sets `DATABASE_URL` to another database, preserve its other values and deliberately set only `DATABASE_URL=file:./local.db` for local SQLite development. Do not overwrite an existing `.env` with `.env.example`; the example is a reference, and existing provider credentials must remain private. The generated local database file is ignored by Git.
+Set `POSTGRES_URL` to the Supabase PostgreSQL pooled connection string. Set `POSTGRES_URL_NON_POOLING` to the direct connection string for migrations when available. Do not overwrite an existing `.env` with `.env.example`; preserve provider credentials and keep database URLs server-only.
 
 On Windows PowerShell, use `npm.cmd` if script execution policy prevents running `npm` commands. See [docs/SETUP.md](docs/SETUP.md) for additional environment and project-structure notes.
 
 ## Database Workflow
 
-The current schema and database client live in `src/db/`. SQL migration history is generated into `drizzle/` and should be committed; the local SQLite database file should not be committed.
+The current schema and database client live in `src/db/`. PostgreSQL migration history is generated into `drizzle/` and should be reviewed and committed.
 
 ```sh
 npm run db:generate
@@ -53,9 +53,7 @@ npm run db:migrate
 npm run db:seed
 ```
 
-Update the Drizzle schema before generating migrations. The current migration and seed cover business units and service categories only. Seeding is repeatable and does not create users, clients, or credentials.
-
-SQLite file storage is for local development and is not durable production storage on Vercel. Production persistence and migration operations need a deliberate storage and deployment decision. Existing MongoDB/Atlas configuration is not used by this adapter; switching to MongoDB requires a separate migration, not just an environment-variable change.
+Update the Drizzle schema before generating migrations. Existing Supabase data is not modified by changing the adapter; review generated migration SQL against the hosted schema before applying it. No seed command is available unless its script exists in the repository.
 
 ## Available Scripts
 
@@ -68,7 +66,7 @@ SQLite file storage is for local development and is not durable production stora
 | `npm run lint`        | Run ESLint                                               |
 | `npm run db:generate` | Generate SQL migrations from the schema                  |
 | `npm run db:migrate`  | Apply migrations to the configured database              |
-| `npm run db:seed`     | Insert the starter business units and service categories |
+| `npm run db:seed`     | Seed records when a seed script is present               |
 
 ## Project Structure
 
@@ -85,6 +83,6 @@ docs/                Setup notes and architectural decisions
 
 ## Current Scope and Next Work
 
-The database currently contains business units and service categories. Contacts, clients, inquiries, authentication and role-based access, email, file storage, and operational Admin modules remain future work. Service and Eatery integrations are not activated by adding environment variables alone. The project does not yet have a production database configuration.
+The schema contains the planned application tables, but Contacts, Clients, inquiries, authentication and role-based access, email, file storage, and operational Admin modules remain future work. Service and Eatery integrations are not activated by adding environment variables alone.
 
 Read [docs/DECISIONS.md](docs/DECISIONS.md) for current owner-approved decisions and [architecture.md](architecture.md) for broader architectural context. Where the older architecture document conflicts with current decisions, `docs/DECISIONS.md` and the repository instructions take precedence.

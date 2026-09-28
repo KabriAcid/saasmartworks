@@ -26,9 +26,9 @@ On Windows PowerShell execution-policy restrictions, use npm.cmd rather than cha
 - .agents/skills/: project-specific agent guidance.
 
 ## Database and environments
-DATABASE_URL=file:./local.db is the local SQLite default when the variable is absent. Do not replace an existing MongoDB DATABASE_URL silently: the validator rejects incompatible URLs. Atlas keys remain preserved for later decisions. DATABASE_AUTH_TOKEN is used only for a configured remote libSQL connection.
+Set `POSTGRES_URL` to the Supabase PostgreSQL pooled connection string for application requests. Set `POSTGRES_URL_NON_POOLING` to the direct connection string for Drizzle schema migrations when available. Never prefix database credentials with `NEXT_PUBLIC_`. Preserve existing `.env` values and remove obsolete provider variables only after confirming they are unused.
 
-Migrations and seeds currently cover business units and categories only, not the complete business schema. Seeds do not create fake clients or admin passwords. Local SQLite files are not durable Vercel production storage. Remote storage and production migration policy require a separate decision.
+Drizzle migrations are PostgreSQL-only. The checked-in schema describes the application model; switching the connection does not migrate or reconcile existing hosted tables or data. Review generated migrations against the live schema before applying them.
 
 ## UI and remaining work
 Radix Primitives powers applicable interactions; Button uses Slot composition. Input and Skeleton are native/CSS shared components, as those are not standalone Radix Primitives. No second theme system is installed.
@@ -36,4 +36,4 @@ Radix Primitives powers applicable interactions; Button uses Slot composition. I
 Public and Admin routes are starter shells. Admin exposes no operational data or actions. Auth/RBAC, inquiries/replies, email, storage, complete schema, and Eatery remain unimplemented. Provider setup may require more than environment keys. Official logo and dark-blue hex remain pending.
 
 ## Database update: 2026-09-28
-See MODULE-SCHEMAS.md for the expanded 28-table schema, Turso environment precedence, demo accounts and verification commands. The earlier two-table status is historical. DB_TARGET=auto now prefers TURSO_DATABASE_URL when present. Seed passwords must be supplied through SEED_PASSWORD.
+See MODULE-SCHEMAS.md for the 28-table schema and database conventions. Supabase PostgreSQL is the only configured provider. Seed passwords must be supplied through `SEED_PASSWORD` when a seed workflow is available.

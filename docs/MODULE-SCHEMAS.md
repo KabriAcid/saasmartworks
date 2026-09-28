@@ -54,15 +54,15 @@ Files stores metadata and optional owner links. The sample file is PENDING with 
 
 ## Running and verifying
 
-Root .env is loaded without logging values. DB_TARGET=turso selects TURSO_DATABASE_URL and TURSO_AUTH_TOKEN (DATABASE_AUTH_TOKEN is a fallback). DB_TARGET=local selects DATABASE_URL and rejects remote URLs. auto prefers a configured Turso URL over the local file setting. The project now uses Turso automatically when its URL exists.
+Root `.env` is loaded without logging values. Application queries use `POSTGRES_URL`; Drizzle migrations prefer `POSTGRES_URL_NON_POOLING` and fall back to `POSTGRES_URL`.
 
 - npm run db:generate: generate migration files from the schema.
 - npm run db:migrate: apply migration history to the selected database.
 - npm run db:seed: insert catalog and fictional sample records; requires SEED_PASSWORD.
 - npm run db:verify: read-only counts, integrity checks, invoice-line reconciliation and dashboard queries.
-- npm run test:db: create an isolated ignored local SQLite file, migrate, seed twice and verify constraints, hashes and preservation. Requires SEED_PASSWORD; never runs against Turso.
+- A database test workflow must use an isolated PostgreSQL database/schema and must never reset or drop the hosted Supabase project. Requires `SEED_PASSWORD` where applicable.
 
-The test database files are in ignored .db-work/. Do not reset or push-drop a cloud database to reproduce a seed. Use migrations. Seeds run inside one transaction and skip existing keys, preserving edits. No default password is embedded in source or the environment example.
+Do not reset or drop the hosted database to reproduce a seed. Use reviewed migrations. Seeds must run inside a transaction and skip existing keys, preserving edits. No default password is embedded in source or the environment example.
 
 src/db/queries/dashboard.ts supplies unit-filtered query results for future Admin integration. It is an internal repository function, not an exposed endpoint: callers must establish the actor and enforce server-side permissions. Do not connect sensitive data to the unprotected /admin route.
 

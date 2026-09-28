@@ -4,7 +4,7 @@ Read PROJECT-CONTEXT.md, architecture.md, and docs/DECISIONS.md. Newer owner dec
 
 - One Next.js App Router application. Root app/ owns routes; all UI components live in src/components/. No workspaces, apps/, or packages/.
 - npm only, one root lockfile, exact dependency versions. Use dev/build/start scripts.
-- Drizzle + SQLite is the approved initial local setup. MongoDB requires a separate migration, not an environment toggle.
+- Supabase PostgreSQL through Drizzle is the approved database. Never switch database providers with an environment toggle.
 - Preserve .env and never print secrets. Root .env loads through Next.js or @next/env for scripts.
 - Explain dependency purpose and compatibility before installing. Providers still TBD must not be invented.
 - Use Radix Primitives for applicable interactions; native inputs and CSS skeletons use shared tokens. Heroicons only for icons.

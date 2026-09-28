@@ -34,8 +34,5 @@ export function enumCheck(
 	);
 }
 export function nonnegative(name: string, column: AnyPgColumn) {
-	return check(
-		name,
-		sql`${column} >= 0 and ${column} <= 9007199254740991`,
-	);
+	return check(name, sql`${column} >= 0 and ${column} <= 9007199254740991`);
 }

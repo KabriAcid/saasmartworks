@@ -4,7 +4,7 @@ import { databaseEnvironment } from "@/config/env";
 import * as schema from "./schema";
 
 export function openDatabase() {
-  const env = databaseEnvironment();
-  const client = postgres(env.DATABASE_URL, { prepare: false });
-  return { client, db: drizzle(client, { schema }) };
+	const env = databaseEnvironment();
+	const client = postgres(env.DATABASE_URL, { prepare: false });
+	return { client, db: drizzle(client, { schema }) };
 }

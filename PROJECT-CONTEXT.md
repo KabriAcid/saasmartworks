@@ -1,4 +1,4 @@
-> Current implementation override (2026-09-27): use one Next.js app with root app/ and src/components/, no monorepo. Initial local database: Drizzle + SQLite. Read docs/DECISIONS.md; older structure/database sections below are historical.
+> Current implementation override (2026-09-28): use one Next.js app with root app/ and src/components/, no monorepo. Database: Supabase PostgreSQL through Drizzle. Read docs/DECISIONS.md; older structure/database sections below are historical.
 
 # SA'A SMART WORKS — Project Context & AI Engineering Guide
 
