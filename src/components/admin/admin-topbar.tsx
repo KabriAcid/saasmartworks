@@ -11,9 +11,19 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { logout } from "@/lib/auth/actions";
 
-export function AdminTopbar() {
+export function AdminTopbar({
+	user,
+}: {
+	user: { name: string; email: string; role: string };
+}) {
 	const [isProfileOpen, setIsProfileOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement | null>(null);
+	const initials = user.name
+		.split(/\s+/)
+	.filter(Boolean)
+	.slice(0, 2)
+	.map((part) => part[0].toUpperCase())
+	.join("");
 
 	useEffect(() => {
 		function handlePointerDown(event: MouseEvent) {
@@ -74,11 +84,11 @@ export function AdminTopbar() {
 							aria-label="Open profile menu"
 						>
 							<div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-primary)] text-sm font-bold text-[var(--color-ink)]">
-								AD
+								{initials}
 							</div>
 							<div className="hidden text-left sm:block">
-								<p className="text-sm font-semibold text-slate-900">Admin</p>
-								<p className="text-[11px] text-slate-500">Operations</p>
+								<p className="text-sm font-semibold text-slate-900">{user.name}</p>
+								<p className="text-[11px] text-slate-500">{user.role}</p>
 							</div>
 							<ChevronDownIcon className="h-4 w-4 text-slate-500" />
 						</button>
@@ -86,9 +96,9 @@ export function AdminTopbar() {
 						{isProfileOpen && (
 							<div className="admin-shadow-popover absolute right-0 top-full z-30 mt-3 w-56 rounded-2xl border border-slate-200/70 bg-white/90 p-2 backdrop-blur-xl">
 								<div className="border-b border-slate-200/80 px-3 py-2">
-									<p className="text-sm font-semibold text-slate-900">Admin</p>
+									<p className="text-sm font-semibold text-slate-900">{user.name}</p>
 									<p className="text-xs text-slate-500">
-										operations@saasmartworks.com
+										{user.email}
 									</p>
 								</div>
 								<div className="space-y-1 py-2">

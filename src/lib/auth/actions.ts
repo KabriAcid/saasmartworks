@@ -1,11 +1,11 @@
 "use server";
 
 import { randomBytes } from "node:crypto";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { openDatabase } from "@/db/client";
-import { users } from "@/db/schema";
+import { roles, users, userRoles } from "@/db/schema";
 import { verifyPassword, hashPassword } from "@/lib/passwords";
 import { sessionCookieName, signSession } from "@/lib/auth/session";
 import { loginSchema } from "@/validation/login";
@@ -39,7 +39,14 @@ export async function login(
 				status: users.status,
 			})
 			.from(users)
-			.where(eq(users.email, parsed.data.email))
+			.innerJoin(userRoles, eq(userRoles.userId, users.id))
+			.innerJoin(roles, eq(roles.id, userRoles.roleId))
+			.where(
+				and(
+					eq(users.email, parsed.data.email),
+					eq(roles.name, "Admin"),
+				),
+			)
 			.limit(1);
 
 		const passwordMatches = await verifyPassword(
