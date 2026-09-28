@@ -52,7 +52,7 @@ function SidebarItem({
 			className={[
 				"flex w-full items-center cursor-pointer gap-3 rounded-2xl px-3 py-2.5 text-left text-sm font-medium transition-all duration-300 ease-out",
 				active
-					? "bg-white/10 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
+					? "admin-shadow-active bg-white/10 text-white"
 					: "text-slate-300 hover:translate-x-1 hover:bg-white/5 hover:pl-4 hover:text-white",
 			].join(" ")}
 		>
@@ -66,7 +66,7 @@ export function AdminSidebar() {
 	return (
 		<aside className="hidden w-72 shrink-0 border-r border-slate-200/80 bg-slate-950 text-slate-100 lg:flex lg:flex-col">
 			<div className="flex items-center gap-3 border-b border-white/10 px-6 py-7">
-				<div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl">
+				<div className="admin-shadow-glow flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl">
 					<Logo
 						src="/favicon-trans.png"
 						alt="SA’A SMART WORKS"

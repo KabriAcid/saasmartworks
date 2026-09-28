@@ -28,7 +28,7 @@ export function AdminTopbar() {
 
 	return (
 		<header className="sticky top-4 z-20 px-4 pb-4 sm:px-6 lg:px-8">
-			<div className="flex h-20 items-center justify-between rounded-[999px] border border-white/80 bg-white/70 px-4 shadow-[0_18px_45px_rgba(31,41,51,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-2xl sm:px-5">
+			<div className="admin-shadow-shell flex h-20 items-center justify-between rounded-[999px] border border-white/80 bg-white/70 px-4 backdrop-blur-2xl sm:px-5">
 				<div>
 					<span className="mt-1 text-lg font-bold text-[var(--color-ink)] sm:text-xl">
 						Dashboard
@@ -38,7 +38,7 @@ export function AdminTopbar() {
 				<div className="flex items-center gap-3">
 					<button
 						type="button"
-						className="hidden cursor-pointer items-center gap-2 rounded-full bg-white/60 px-3 py-2 text-sm font-medium text-slate-600 shadow-[0_8px_18px_rgba(15,23,42,0.04)] transition hover:bg-white sm:flex"
+						className="admin-shadow-soft hidden cursor-pointer items-center gap-2 rounded-full bg-white/60 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-white sm:flex"
 					>
 						<MagnifyingGlassIcon className="h-4 w-4" />
 						Search
@@ -46,7 +46,7 @@ export function AdminTopbar() {
 
 					<button
 						type="button"
-						className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white/60 p-2.5 text-slate-700 shadow-[0_8px_18px_rgba(15,23,42,0.04)] transition hover:bg-white"
+						className="admin-shadow-soft inline-flex cursor-pointer items-center justify-center rounded-full bg-white/60 p-2.5 text-slate-700 transition hover:bg-white"
 						aria-label="Notifications"
 					>
 						<svg
@@ -67,7 +67,7 @@ export function AdminTopbar() {
 					<div className="relative" ref={menuRef}>
 						<button
 							type="button"
-							className="flex cursor-pointer items-center gap-3 rounded-full bg-white/60 px-2.5 py-1.5 shadow-[0_8px_18px_rgba(15,23,42,0.04)] transition hover:bg-white"
+							className="admin-shadow-soft flex cursor-pointer items-center gap-3 rounded-full bg-white/60 px-2.5 py-1.5 transition hover:bg-white"
 							onClick={() => setIsProfileOpen((value) => !value)}
 							aria-expanded={isProfileOpen}
 							aria-label="Open profile menu"
@@ -83,7 +83,7 @@ export function AdminTopbar() {
 						</button>
 
 						{isProfileOpen && (
-							<div className="absolute right-0 top-full z-30 mt-3 w-56 rounded-2xl border border-slate-200/70 bg-white/90 p-2 shadow-[0_24px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+							<div className="admin-shadow-popover absolute right-0 top-full z-30 mt-3 w-56 rounded-2xl border border-slate-200/70 bg-white/90 p-2 backdrop-blur-xl">
 								<div className="border-b border-slate-200/80 px-3 py-2">
 									<p className="text-sm font-semibold text-slate-900">Admin</p>
 									<p className="text-xs text-slate-500">
