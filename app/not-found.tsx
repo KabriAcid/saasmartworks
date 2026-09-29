@@ -48,7 +48,7 @@ export default function NotFound() {
 
                         <div className="relative">
                             {/* 3D Large Text for a 404 with text gradient of primary and secondary */}
-                            <h1 className="text-8xl font-black tracking-[-0.08em] sm:text-9xl" aria-label="404">4<span className="text-[var(--color-primary)]">0</span>4</h1>
+                            <h1 className="text-10xl font-bold tracking-[-0.08em] sm:text-9xl" aria-label="404">4 <span className="text-[var(--color-primary)]"> 0 </span> 4</h1>
                         </div>
                     </div>
                 </div>
