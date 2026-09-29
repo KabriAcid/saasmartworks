@@ -4,7 +4,12 @@ import Link from "next/link";
 import { MagnifyingGlassIcon, ArrowRightIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import { serviceCategories } from "@/lib/services-data";
 import { ModuleHeader } from "@/components/admin/shared/module-header";
+import { serviceCategories } from "@/lib/services-data";
+import { CollectionManager } from "./collection-manager";
 
+export function ServiceCatalogue({ categoriesOnly = false }: { categoriesOnly?: boolean }) {
+ return <CollectionManager title={categoriesOnly ? "Service Categories" : "Services"} singular={categoriesOnly ? "category" : "service"} withBullets={!categoriesOnly} initialEntries={serviceCategories.map(category => ({ id: category.id, title: category.title, description: category.description, bullets: category.capabilities }))} />;
+}
 export function ServiceCatalogue({ categoriesOnly = false }: { categoriesOnly?: boolean }) {
  const [search, setSearch] = useState("");
  const [categoryId, setCategoryId] = useState("");
@@ -28,4 +33,3 @@ export function ServiceCatalogue({ categoriesOnly = false }: { categoriesOnly?: 
   {count === 0 && <div className="admin-shadow-soft rounded-2xl bg-white px-6 py-14 text-center"><Squares2X2Icon className="mx-auto h-8 w-8 text-slate-400" /><p className="mt-3 text-sm text-slate-600">No matching results</p><button type="button" onClick={() => { setSearch(""); setCategoryId(""); }} className="mt-4 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-[#172B3A]">Clear filters</button></div>}
  </div>;
 }
-
