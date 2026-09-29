@@ -55,7 +55,7 @@ export function EmployeeDirectory({ employees }: { employees: Employee[] }) {
 					<p className="text-sm font-medium text-[#FFA64D]">
 						People &amp; Organization
 					</p>
-					<h2 className="mt-1 break-words text-xl font-bold tracking-tight text-[#172B3A] sm:text-2xl">
+					<h2 className="mt-1 break-words text-lg! leading-snug! font-bold tracking-tight text-[#172B3A] sm:text-xl! mb-0! leading-snug!">
 						Employees
 					</h2>
 					<p className="mt-1 max-w-xl text-sm leading-6 text-slate-500">
@@ -63,7 +63,7 @@ export function EmployeeDirectory({ employees }: { employees: Employee[] }) {
 					</p>
 				</div>
 				<span className="w-fit rounded-lg bg-orange-50 px-3 py-2 text-xs font-medium text-orange-800">
-					Sample directory · Preview
+					Employee directory
 				</span>
 			</header>
 
@@ -95,7 +95,7 @@ export function EmployeeDirectory({ employees }: { employees: Employee[] }) {
 					<div>
 						<h2
 							id="directory-heading"
-							className="text-sm font-semibold text-[#172B3A]"
+							className="text-xs! sm:text-sm! font-semibold text-[#172B3A] mb-0! leading-snug!"
 						>
 							Employee directory
 						</h2>
@@ -192,7 +192,7 @@ export function EmployeeDirectory({ employees }: { employees: Employee[] }) {
 												{employee.name}
 											</Dialog.Title>
 											<Dialog.Description className="mt-1 text-sm text-slate-500">
-												Employee profile · Sample record
+												Employee profile
 											</Dialog.Description>
 											<Dialog.Close
 												aria-label="Close profile"
