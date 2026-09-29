@@ -14,6 +14,8 @@ import { login } from "@/lib/auth/actions";
 export default function LoginForm() {
 	const [state, formAction, pending] = useActionState(login, { message: null });
 	const [showPassword, setShowPassword] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	return (
 		<main className="auth-page">
@@ -38,6 +40,8 @@ export default function LoginForm() {
 							type="email"
 							autoComplete="email"
 							placeholder="you@example.com"
+							value={email}
+							onChange={(event) => setEmail(event.target.value)}
 							required
 						/>
 					</div>
@@ -56,6 +60,8 @@ export default function LoginForm() {
 								type={showPassword ? "text" : "password"}
 								autoComplete="current-password"
 								placeholder="Enter your password"
+								value={password}
+								onChange={(event) => setPassword(event.target.value)}
 								required
 							/>
 							<button

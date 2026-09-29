@@ -47,9 +47,7 @@ export async function login(
 				status: users.status,
 			})
 			.from(users)
-			.innerJoin(userRoles, eq(userRoles.userId, users.id))
-			.innerJoin(roles, eq(roles.id, userRoles.roleId))
-			.where(and(eq(users.email, parsed.data.email), eq(roles.name, "Admin")))
+			.where(eq(users.email, parsed.data.email))
 			.limit(1);
 
 		const passwordMatches = await verifyPassword(
@@ -59,6 +57,17 @@ export async function login(
 		if (!user || user.status !== "ACTIVE" || !passwordMatches) {
 			return { message: "Invalid email or password." };
 		}
+
+		const [adminRole] = await db
+			.select({ id: roles.id })
+			.from(userRoles)
+			.innerJoin(roles, eq(roles.id, userRoles.roleId))
+			.where(and(eq(userRoles.userId, user.id), eq(roles.name, "Admin")))
+			.limit(1);
+		if (!adminRole) {
+			return { message: "Your account does not have admin access." };
+		}
+
 		token = await signSession(user.id);
 	} catch {
 		return { message: "Sign-in is temporarily unavailable. Please try again." };
