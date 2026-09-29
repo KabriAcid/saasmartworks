@@ -1,4 +1,5 @@
 "use client";
+import { AdminTextarea, AdminInput } from "@/components/admin/shared/form-fields";
 import { useState } from "react";
 import { ArrowDownTrayIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 import { ModuleHeader } from "@/components/admin/shared/module-header";
@@ -25,14 +26,14 @@ export function ContentEditor({ title, description, href, fields }: { title: str
     </div>
     <div className="space-y-5 p-5 sm:p-6">{fields.map(field => <div key={field.key}>
      <label htmlFor={field.key} className="mb-2 block text-xs font-semibold text-slate-700">{field.label}</label>
-     {view === "review" ? <p className="whitespace-pre-wrap break-words text-sm leading-7 text-slate-600">{values[field.key] || "—"}</p> : field.multiline ? <textarea id={field.key} rows={4} value={values[field.key]} onChange={event => setValues({ ...values, [field.key]: event.target.value })} className="w-full resize-y rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2.5 text-sm leading-6 text-slate-700" /> : <input id={field.key} value={values[field.key]} onChange={event => setValues({ ...values, [field.key]: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2.5 text-sm text-slate-700" />}
+     {view === "review" ? <p className="whitespace-pre-wrap break-words text-sm leading-7 text-slate-600">{values[field.key] || "—"}</p> : field.multiline ? <AdminTextarea fieldLabel={field.label} id={field.key} rows={4} value={values[field.key]} onChange={event => setValues({ ...values, [field.key]: event.target.value })} className="w-full resize-y rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2.5 text-sm leading-6 text-slate-700" /> : <AdminInput fieldLabel={field.label} id={field.key} value={values[field.key]} onChange={event => setValues({ ...values, [field.key]: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2.5 text-sm text-slate-700" />}
     </div>)}</div>
    </section>
    <aside className="admin-shadow-soft rounded-2xl bg-white p-5 sm:p-6">
     <h3 className="text-xs! font-semibold text-[#172B3A] sm:text-sm!">Content workspace</h3>
     <p className="mt-2 text-xs leading-6 text-slate-500">Review wording and download your changes as a draft. Edits stay on this page until you leave; they do not update the website.</p>
     <p className="mt-4 rounded-lg bg-slate-50 p-3 text-xs text-slate-600" role="status">{dirty ? "You have unsaved changes." : "No changes to this content."}</p>
-    <button type="button" onClick={download} className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#FFA64D] px-3 py-2.5 text-xs font-semibold text-[#172B3A]"><ArrowDownTrayIcon className="h-4 w-4" />Download draft</button>
+    <button type="button" onClick={download} className="button"><ArrowDownTrayIcon className="h-4 w-4" />Download draft</button>
     <button type="button" disabled={!dirty} onClick={() => { setValues(Object.fromEntries(fields.map(field => [field.key, field.value]))); setNotice(""); }} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-medium text-slate-500 hover:bg-slate-50 disabled:opacity-40"><ArrowPathIcon className="h-4 w-4" />Reset changes</button>
     <p role="status" className="mt-3 text-xs leading-5 text-slate-500">{notice}</p>
    </aside>

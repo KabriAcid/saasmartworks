@@ -200,7 +200,7 @@ a {
 }
 :focus-visible {
 	outline: 3px solid var(--color-primary);
-	outline-offset: 4px;
+	outline-offset: 0;
 }
 .shell {
 	width: min(100% - 2.5rem, 72rem);
@@ -705,6 +705,15 @@ h3 {
 	opacity: 0.65;
 	transform: none;
 }
+
+.admin-field-control { display: block; min-width: 0; }
+.admin-field-input { position: relative; display: block; }
+.admin-field-input > svg { position: absolute; top: 1.35rem; left: .75rem; width: 1rem; height: 1rem; color: var(--color-muted); pointer-events: none; }
+.admin-field-input > :is(input, textarea, select) { padding-left: 2.25rem; }
+.admin-field-input > :is(input, textarea, select):is(:focus, :active) { outline: none; border-color: var(--color-primary); box-shadow: none; }
+.admin-field-input > [aria-invalid="true"] { border-color: #dc2626; }
+.admin-field-error { display: block; margin-top: .35rem; color: #b91c1c; font-size: .75rem; font-weight: 400; }
+.button:is(:focus-visible, :active) { outline: 2px solid var(--color-dark); outline-offset: 0; }
 .button-secondary {
 	background: transparent;
 	border: 1px solid rgb(31 41 51 / 18%);
@@ -1386,7 +1395,7 @@ h3 {
 }
 .auth-password-toggle:focus-visible {
 	outline: 2px solid var(--color-primary);
-	outline-offset: 2px;
+	outline-offset: 0;
 }
 .auth-error {
 	margin: 0;

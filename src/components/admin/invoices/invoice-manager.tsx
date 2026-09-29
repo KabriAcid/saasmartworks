@@ -1,5 +1,6 @@
 "use client";
 
+import { AdminInput, AdminSelect } from "@/components/admin/shared/form-fields";
 import { useState } from "react";
 import {
 	MagnifyingGlassIcon,
@@ -152,7 +153,7 @@ export function InvoiceManager() {
 				<button
 					type="button"
 					onClick={createInvoice}
-					className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#FFA64D] px-4 py-2.5 text-xs font-semibold text-[#172B3A]"
+					className="button"
 				>
 					<PlusIcon className="h-4 w-4" />
 					New invoice
@@ -249,7 +250,7 @@ export function InvoiceManager() {
 							<div className="grid gap-4 sm:grid-cols-2">
 								<label className="block text-xs font-semibold text-slate-700">
 									Reference
-									<input
+									<AdminInput fieldLabel="Reference"
 										required
 										value={editor.reference}
 										onChange={(event) =>
@@ -260,7 +261,7 @@ export function InvoiceManager() {
 								</label>
 								<label className="block text-xs font-semibold text-slate-700">
 									Client
-									<input
+									<AdminInput fieldLabel="Client"
 										required
 										value={editor.client}
 										onChange={(event) =>
@@ -271,7 +272,7 @@ export function InvoiceManager() {
 								</label>
 								<label className="block text-xs font-semibold text-slate-700">
 									Project
-									<input
+									<AdminInput fieldLabel="Project"
 										value={editor.project}
 										onChange={(event) =>
 											setEditor({ ...editor, project: event.target.value })
@@ -281,7 +282,7 @@ export function InvoiceManager() {
 								</label>
 								<label className="block text-xs font-semibold text-slate-700">
 									Total (minor units)
-									<input
+									<AdminInput fieldLabel="Total (minor units)"
 										required
 										type="number"
 										min="0"
@@ -299,7 +300,7 @@ export function InvoiceManager() {
 							<div className="grid gap-4 sm:grid-cols-2">
 								<label className="block text-xs font-semibold text-slate-700">
 									Status
-									<select
+									<AdminSelect fieldLabel="Status"
 										value={editor.status}
 										onChange={(event) =>
 											setEditor({
@@ -314,11 +315,11 @@ export function InvoiceManager() {
 												{value.label}
 											</option>
 										))}
-									</select>
+									</AdminSelect>
 								</label>
 								<label className="block text-xs font-semibold text-slate-700">
 									Due date
-									<input
+									<AdminInput fieldLabel="Due date"
 										type="date"
 										value={editor.dueAt}
 										onChange={(event) =>
@@ -338,7 +339,7 @@ export function InvoiceManager() {
 								</button>
 								<button
 									type="submit"
-									className="cursor-pointer rounded-lg bg-[#FFA64D] px-4 py-2 text-xs font-semibold text-[#172B3A]"
+									className="button"
 								>
 									Save invoice
 								</button>

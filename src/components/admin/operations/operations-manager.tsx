@@ -1,4 +1,5 @@
 "use client";
+import { AdminInput, AdminTextarea, AdminSelect } from "@/components/admin/shared/form-fields";
 import { useState } from "react";
 import {
 	MagnifyingGlassIcon,
@@ -231,7 +232,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 							status: "PENDING",
 						})
 					}
-					className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#FFA64D] px-4 py-2.5 text-xs font-semibold text-[#172B3A]"
+					className="button"
 				>
 					<PlusIcon className="h-4 w-4" />
 					New {meta.noun}
@@ -317,7 +318,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 						<form onSubmit={save} className="mt-5 space-y-4">
 							<label className="block text-xs font-semibold text-slate-700">
 								Name or title
-								<input
+								<AdminInput fieldLabel="Name or title"
 									required
 									value={editor.title}
 									onChange={(event) =>
@@ -329,7 +330,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 							<div className="grid gap-4 sm:grid-cols-2">
 								<label className="block text-xs font-semibold text-slate-700">
 									{meta.secondary}
-									<input
+									<AdminInput fieldLabel={meta.secondary}
 										required
 										value={editor.secondary}
 										onChange={(event) =>
@@ -340,7 +341,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 								</label>
 								<label className="block text-xs font-semibold text-slate-700">
 									{meta.owner}
-									<input
+									<AdminInput fieldLabel={meta.owner}
 										value={editor.owner}
 										onChange={(event) =>
 											setEditor({ ...editor, owner: event.target.value })
@@ -351,7 +352,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 							</div>
 							<label className="block text-xs font-semibold text-slate-700">
 								Details
-								<textarea
+								<AdminTextarea fieldLabel="Details"
 									required
 									rows={3}
 									value={editor.details}
@@ -363,7 +364,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 							</label>
 							<label className="block text-xs font-semibold text-slate-700">
 								Status
-								<select
+								<AdminSelect fieldLabel="Status"
 									value={editor.status}
 									onChange={(event) =>
 										setEditor({
@@ -378,7 +379,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 											{value.label}
 										</option>
 									))}
-								</select>
+								</AdminSelect>
 							</label>
 							<div className="flex justify-end gap-2 border-t border-slate-100 pt-4">
 								<button
@@ -390,7 +391,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 								</button>
 								<button
 									type="submit"
-									className="cursor-pointer rounded-lg bg-[#FFA64D] px-4 py-2 text-xs font-semibold text-[#172B3A]"
+									className="button"
 								>
 									Save {meta.noun}
 								</button>
