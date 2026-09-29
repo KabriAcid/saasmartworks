@@ -49,7 +49,7 @@
 
 .not-found-3d {
 	display: inline-block;
-	background: linear-gradient(135deg, #ffa64d 8%, #ff7b45 44%, #172b3a 92%);
+	background: #ffa64d;
 	background-clip: text;
 	-webkit-background-clip: text;
 	color: transparent;
