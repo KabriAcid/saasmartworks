@@ -40,7 +40,7 @@ export function AdminSidebar({ role = "ADMIN" }: AdminSidebarProps) {
 	};
 
 	return (
-		<aside className="hidden h-screen w-72 shrink-0 flex-col overflow-hidden bg-[#172B3A] text-slate-100 lg:flex">
+		<aside className="fixed inset-y-0 left-0 z-30 hidden h-dvh w-72 flex-col overflow-hidden bg-[#172B3A] text-slate-100 lg:flex">
 			<div className="flex shrink-0 items-center gap-3 border-b border-white/10 px-6 py-7">
 				<div className="admin-shadow-glow flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl">
 					<Logo
@@ -61,7 +61,7 @@ export function AdminSidebar({ role = "ADMIN" }: AdminSidebarProps) {
 
 			<nav
 				aria-label="Admin navigation"
-				className="flex-1 overflow-y-auto px-4 py-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+				className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 			>
 				<Link
 					href="/admin"
