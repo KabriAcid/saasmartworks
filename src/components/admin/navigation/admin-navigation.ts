@@ -34,11 +34,6 @@ export const navigationGroups: NavigationGroup[] = [
         links: [
             { label: "Employees", href: "/admin/employees", roles: ["ADMIN"] },
             {
-                label: "Attendance & GPS",
-                href: "/admin/attendance",
-                roles: ["ADMIN"],
-            },
-            {
                 label: "Departments",
                 href: "/admin/departments",
                 roles: ["ADMIN"],

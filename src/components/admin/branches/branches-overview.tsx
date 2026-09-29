@@ -33,8 +33,8 @@ export function BranchesOverview() {
 						</div>
 						<h4 className="mt-4 text-xs! sm:text-sm! font-semibold text-[#172B3A] mb-0! leading-snug!">A place for every workplace</h4>
 						<p className="mx-auto mt-2 max-w-sm text-xs leading-6 text-slate-500">No workplaces to display. Branch and location records will appear in this directory.</p>
-						<Link href="/admin/attendance" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#FFA64D] px-4 py-2.5 text-xs font-semibold text-[#172B3A] transition-colors hover:bg-[#FFA64D]/80">
-							Explore attendance <ArrowRightIcon aria-hidden="true" className="h-3.5 w-3.5" />
+						<Link href="/admin/employees" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#FFA64D] px-4 py-2.5 text-xs font-semibold text-[#172B3A] transition-colors hover:bg-[#FFA64D]/80">
+							Browse employees <ArrowRightIcon aria-hidden="true" className="h-3.5 w-3.5" />
 						</Link>
 					</div>
 				</section>
@@ -47,14 +47,14 @@ export function BranchesOverview() {
 						<h3 id="workplaces-title" className="mt-5 text-xs! sm:text-sm! font-semibold text-[#172B3A] mb-0! leading-snug!">Workplaces at a glance</h3>
 						<p className="mt-2 text-xs leading-6 text-slate-500">Keep workplace information together, so your team can find the locations that matter to their work.</p>
 					</section>
-					<section aria-labelledby="location-attendance-title" className="admin-shadow-soft rounded-2xl bg-white p-5 sm:p-6">
+					<section aria-labelledby="location-workflow-title" className="admin-shadow-soft rounded-2xl bg-white p-5 sm:p-6">
 						<div className="flex items-center gap-3">
 							<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50"><ShieldCheckIcon aria-hidden="true" className="h-4 w-4 text-emerald-600" /></div>
-							<h3 id="location-attendance-title" className="text-xs! sm:text-sm! font-semibold text-[#172B3A] mb-0! leading-snug!">Location-assisted attendance</h3>
+							<h3 id="location-workflow-title" className="text-xs! sm:text-sm! font-semibold text-[#172B3A] mb-0! leading-snug!">Workplace information</h3>
 						</div>
-						<p className="mt-4 text-xs leading-6 text-slate-500">Workplace locations provide the context for attendance checks. Visit Attendance & GPS for an overview of the clock-in workflow.</p>
-						<Link href="/admin/attendance" className="mt-4 inline-flex items-center gap-1.5 rounded-lg py-1 text-xs font-semibold text-[#172B3A] transition-opacity hover:opacity-60">
-							View Attendance &amp; GPS <ArrowRightIcon aria-hidden="true" className="h-3.5 w-3.5" />
+						<p className="mt-4 text-xs leading-6 text-slate-500">Workplace records will help keep branch information, team assignments, and operating context together.</p>
+						<Link href="/admin/employees" className="mt-4 inline-flex items-center gap-1.5 rounded-lg py-1 text-xs font-semibold text-[#172B3A] transition-opacity hover:opacity-60">
+							View employees <ArrowRightIcon aria-hidden="true" className="h-3.5 w-3.5" />
 						</Link>
 					</section>
 				</aside>

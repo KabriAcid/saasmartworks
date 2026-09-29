@@ -47,40 +47,8 @@ export default function NotFound() {
 						</div>
 
 						<div className="relative">
-							<div className="rounded-[1.75rem] border border-slate-200 bg-slate-950 p-5 text-slate-100 shadow-[0_28px_60px_rgba(15,23,42,0.2)]">
-								<div className="flex items-center justify-between border-b border-white/10 pb-4">
-									<div>
-										<p className="text-[10px] font-semibold tracking-[0.28em] text-slate-400 uppercase">
-											Status
-										</p>
-										<p className="mt-2 text-2xl font-bold text-white">404</p>
-									</div>
-									<div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-primary)] text-[var(--color-ink)] shadow-[0_12px_24px_rgba(255,166,77,0.28)]">
-										<MagnifyingGlassIcon className="h-5 w-5" />
-									</div>
-								</div>
-
-								<div className="mt-5 space-y-3">
-									<Link
-										href="/services"
-										className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/10"
-									>
-										Explore services
-									</Link>
-									<Link
-										href="/about"
-										className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/10"
-									>
-										Learn about SA’A
-									</Link>
-									<Link
-										href="/login"
-										className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/10"
-									>
-										Platform sign in
-									</Link>
-								</div>
-							</div>
+							{/* 3D Large Text for a 404 with text gradient of primary and secondary */}
+							<h1 className="text-8xl font-black tracking-[-0.06em] text-slate-950 sm:text-9xl">404</h1>
 						</div>
 					</div>
 				</div>
