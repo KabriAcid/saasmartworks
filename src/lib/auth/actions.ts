@@ -9,6 +9,7 @@ import { roles, users, userRoles } from "@/db/schema";
 import { verifyPassword, hashPassword } from "@/lib/passwords";
 import { sessionCookieName, signSession } from "@/lib/auth/session";
 import { loginSchema } from "@/validation/login";
+import { isMockAuthEnabled, matchesMockCredentials } from "./mock";
 
 export type LoginState = { message: string | null };
 let dummyPasswordHash: Promise<string> | undefined;
@@ -27,6 +28,13 @@ export async function login(
 	});
 	if (!parsed.success) {
 		return { message: "Enter a valid email address and password." };
+	}
+
+	if (isMockAuthEnabled()) {
+		if (!matchesMockCredentials(parsed.data.email, parsed.data.password)) {
+			return { message: "Invalid demo email or password." };
+		}
+		redirect("/admin");
 	}
 
 	let token: string;
