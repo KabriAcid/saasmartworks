@@ -1,5 +1,6 @@
 "use client";
 
+import { AdminFieldIcon } from "@/components/admin/shared/form-fields";
 import { AdminInput, AdminSelect } from "@/components/admin/shared/form-fields";
 import { useState } from "react";
 import {
@@ -248,7 +249,7 @@ export function InvoiceManager() {
 						</div>
 						<form onSubmit={save} className="mt-5 space-y-4">
 							<div className="grid gap-4 sm:grid-cols-2">
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Reference" />
 									Reference
 									<AdminInput fieldLabel="Reference"
 										required
@@ -259,7 +260,7 @@ export function InvoiceManager() {
 										className={inputClass}
 									/>
 								</label>
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Client" />
 									Client
 									<AdminInput fieldLabel="Client"
 										required
@@ -270,7 +271,7 @@ export function InvoiceManager() {
 										className={inputClass}
 									/>
 								</label>
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Project" />
 									Project
 									<AdminInput fieldLabel="Project"
 										value={editor.project}
@@ -280,7 +281,7 @@ export function InvoiceManager() {
 										className={inputClass}
 									/>
 								</label>
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Total (minor units)" />
 									Total (minor units)
 									<AdminInput fieldLabel="Total (minor units)"
 										required
@@ -298,7 +299,7 @@ export function InvoiceManager() {
 								</label>
 							</div>
 							<div className="grid gap-4 sm:grid-cols-2">
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Status" />
 									Status
 									<AdminSelect fieldLabel="Status"
 										value={editor.status}
@@ -317,7 +318,7 @@ export function InvoiceManager() {
 										))}
 									</AdminSelect>
 								</label>
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Due date" />
 									Due date
 									<AdminInput fieldLabel="Due date"
 										type="date"

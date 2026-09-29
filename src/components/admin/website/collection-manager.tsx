@@ -1,4 +1,5 @@
 "use client";
+import { AdminFieldIcon } from "@/components/admin/shared/form-fields";
 import { AdminInput, AdminTextarea } from "@/components/admin/shared/form-fields";
 import { useRef, useState } from "react";
 import { Dialog, AlertDialog } from "radix-ui";
@@ -50,9 +51,9 @@ export function CollectionManager({ title, singular, initialEntries, withBullets
   <Dialog.Root open={!!draft} onOpenChange={open => { if (!open) setDraft(null); }}><Dialog.Portal><Dialog.Overlay className="fixed inset-0 z-40 bg-[#172B3A]/40 backdrop-blur-sm" /><Dialog.Content className="admin-shadow-popover fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100%-2rem)] max-w-xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-5 sm:p-6">
    <Dialog.Title className="pr-8 text-sm! font-semibold text-[#172B3A]">{editing ? "Edit" : "Add"} {singular}</Dialog.Title><Dialog.Description className="mt-2 text-xs text-slate-500">Complete the information below. Required fields are marked *.</Dialog.Description><Dialog.Close aria-label="Close editor" className="absolute top-4 right-4 rounded-lg p-2 hover:bg-slate-100"><XMarkIcon className="h-4 w-4" /></Dialog.Close>
    {draft && <form onSubmit={apply} className="mt-5 space-y-4">
-    <label className="block text-xs font-semibold text-slate-700">{faq ? "Question" : "Name"} *<AdminInput fieldLabel={faq ? "Question" : "Name"} required value={draft.title} onChange={event => setDraft({ ...draft, title: event.target.value })} className={field} /></label>
-    <label className="block text-xs font-semibold text-slate-700">{faq ? "Answer" : "Description"} *<AdminTextarea fieldLabel={faq ? "Answer" : "Description"} required rows={4} value={draft.description} onChange={event => setDraft({ ...draft, description: event.target.value })} className={field} /></label>
-    {withBullets && <label className="block text-xs font-semibold text-slate-700">Bullet points<AdminTextarea fieldLabel="Bullet points" rows={6} value={draft.bullets?.join("\n") ?? ""} onChange={event => setDraft({ ...draft, bullets: event.target.value.split("\n") })} className={field} /><span className="mt-1 block font-normal text-slate-500">One bullet point per line. Remove a line to delete it.</span></label>}
+    <label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel={faq ? "Question" : "Name"} />{faq ? "Question" : "Name"} *<AdminInput fieldLabel={faq ? "Question" : "Name"} required value={draft.title} onChange={event => setDraft({ ...draft, title: event.target.value })} className={field} /></label>
+    <label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel={faq ? "Answer" : "Description"} />{faq ? "Answer" : "Description"} *<AdminTextarea fieldLabel={faq ? "Answer" : "Description"} required rows={4} value={draft.description} onChange={event => setDraft({ ...draft, description: event.target.value })} className={field} /></label>
+    {withBullets && <label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Bullet points" />Bullet points<AdminTextarea fieldLabel="Bullet points" rows={6} value={draft.bullets?.join("\n") ?? ""} onChange={event => setDraft({ ...draft, bullets: event.target.value.split("\n") })} className={field} /><span className="mt-1 block font-normal text-slate-500">One bullet point per line. Remove a line to delete it.</span></label>}
     {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
     <div className="flex justify-end gap-2 border-t border-slate-100 pt-4"><Dialog.Close type="button" className={button + " hover:bg-slate-100"}>Cancel</Dialog.Close><button type="submit" className="button">{editing ? "Apply changes" : `Add ${singular}`}</button></div>
    </form>}

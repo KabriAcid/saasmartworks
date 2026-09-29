@@ -1,5 +1,6 @@
 "use client";
 
+import { AdminFieldIcon } from "@/components/admin/shared/form-fields";
 import { AdminInput, AdminSelect } from "@/components/admin/shared/form-fields";
 import { useState } from "react";
 import {
@@ -211,7 +212,7 @@ export function CustomerManager({
 							</button>
 						</div>
 						<form onSubmit={save} className="mt-5 space-y-4">
-							<label className="block text-xs font-semibold text-slate-700">
+							<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Name" />
 								Name *
 								<AdminInput fieldLabel="Name"
 									required
@@ -223,7 +224,7 @@ export function CustomerManager({
 								/>
 							</label>
 							<div className="grid gap-4 sm:grid-cols-2">
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Email" />
 									Email *
 									<AdminInput fieldLabel="Email"
 										required
@@ -235,7 +236,7 @@ export function CustomerManager({
 										className={inputClass}
 									/>
 								</label>
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Phone" />
 									Phone
 									<AdminInput fieldLabel="Phone"
 										value={editor.phone}
@@ -246,7 +247,7 @@ export function CustomerManager({
 									/>
 								</label>
 							</div>
-							<label className="block text-xs font-semibold text-slate-700">
+							<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Organization" />
 								Organization
 								<AdminInput fieldLabel="Organization"
 									value={editor.organization}
@@ -258,7 +259,7 @@ export function CustomerManager({
 							</label>
 							{isClients && (
 								<>
-									<label className="block text-xs font-semibold text-slate-700">
+									<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Reference" />
 										Reference
 										<AdminInput fieldLabel="Reference"
 											value={editor.reference}
@@ -268,7 +269,7 @@ export function CustomerManager({
 											className={inputClass}
 										/>
 									</label>
-									<label className="block text-xs font-semibold text-slate-700">
+									<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Status" />
 										Status
 										<AdminSelect fieldLabel="Status"
 											value={editor.status}

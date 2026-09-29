@@ -1,4 +1,5 @@
 "use client";
+import { AdminFieldIcon } from "@/components/admin/shared/form-fields";
 import { AdminInput, AdminTextarea, AdminSelect } from "@/components/admin/shared/form-fields";
 import { useState } from "react";
 import {
@@ -316,7 +317,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 							</button>
 						</div>
 						<form onSubmit={save} className="mt-5 space-y-4">
-							<label className="block text-xs font-semibold text-slate-700">
+							<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Name or title" />
 								Name or title
 								<AdminInput fieldLabel="Name or title"
 									required
@@ -328,7 +329,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 								/>
 							</label>
 							<div className="grid gap-4 sm:grid-cols-2">
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel={meta.secondary} />
 									{meta.secondary}
 									<AdminInput fieldLabel={meta.secondary}
 										required
@@ -339,7 +340,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 										className={inputClass}
 									/>
 								</label>
-								<label className="block text-xs font-semibold text-slate-700">
+								<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel={meta.owner} />
 									{meta.owner}
 									<AdminInput fieldLabel={meta.owner}
 										value={editor.owner}
@@ -350,7 +351,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 									/>
 								</label>
 							</div>
-							<label className="block text-xs font-semibold text-slate-700">
+							<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Details" />
 								Details
 								<AdminTextarea fieldLabel="Details"
 									required
@@ -362,7 +363,7 @@ export function OperationsManager({ kind }: { kind: Kind }) {
 									className={inputClass}
 								/>
 							</label>
-							<label className="block text-xs font-semibold text-slate-700">
+							<label className="block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel="Status" />
 								Status
 								<AdminSelect fieldLabel="Status"
 									value={editor.status}

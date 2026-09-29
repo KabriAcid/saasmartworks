@@ -1,4 +1,5 @@
 "use client";
+import { AdminFieldIcon } from "@/components/admin/shared/form-fields";
 import { AdminTextarea, AdminInput } from "@/components/admin/shared/form-fields";
 import { useState } from "react";
 import { ArrowDownTrayIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
@@ -25,7 +26,7 @@ export function ContentEditor({ title, description, href, fields }: { title: str
      <div className="flex gap-1 rounded-lg bg-slate-50 p-1">{(["edit", "review"] as const).map(mode => <button key={mode} type="button" aria-pressed={view === mode} onClick={() => setView(mode)} className={`rounded-md px-3 py-1.5 text-xs font-medium ${view === mode ? "bg-white text-[#172B3A] shadow-sm" : "text-slate-500"}`}>{mode === "edit" ? "Edit content" : "Review"}</button>)}</div>
     </div>
     <div className="space-y-5 p-5 sm:p-6">{fields.map(field => <div key={field.key}>
-     <label htmlFor={field.key} className="mb-2 block text-xs font-semibold text-slate-700">{field.label}</label>
+     <label htmlFor={field.key} className="mb-2 block text-xs font-semibold text-slate-700"><AdminFieldIcon fieldLabel={field.label} />{field.label}</label>
      {view === "review" ? <p className="whitespace-pre-wrap break-words text-sm leading-7 text-slate-600">{values[field.key] || "—"}</p> : field.multiline ? <AdminTextarea fieldLabel={field.label} id={field.key} rows={4} value={values[field.key]} onChange={event => setValues({ ...values, [field.key]: event.target.value })} className="w-full resize-y rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2.5 text-sm leading-6 text-slate-700" /> : <AdminInput fieldLabel={field.label} id={field.key} value={values[field.key]} onChange={event => setValues({ ...values, [field.key]: event.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3 py-2.5 text-sm text-slate-700" />}
     </div>)}</div>
    </section>
