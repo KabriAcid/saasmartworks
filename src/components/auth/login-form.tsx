@@ -9,13 +9,19 @@ import {
 	LockClosedIcon,
 	UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 import { login } from "@/lib/auth/actions";
 
-export default function LoginForm() {
+export default function LoginForm({ mockMode }: { mockMode: boolean }) {
+	const router = useRouter();
 	const [state, formAction, pending] = useActionState(login, { message: null });
 	const [showPassword, setShowPassword] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const handleMockSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		router.push("/admin");
+	};
 
 	return (
 		<main className="auth-page">
@@ -25,7 +31,11 @@ export default function LoginForm() {
 				</div>
 				<p className="eyebrow">Platform access</p>
 				<h1 id="login-heading">Sign in.</h1>
-				<form className="auth-form" action={formAction}>
+				<form
+					className="auth-form"
+					action={mockMode ? undefined : formAction}
+					onSubmit={mockMode ? handleMockSubmit : undefined}
+				>
 					<div className="auth-field">
 						<label htmlFor="login-email">
 							<EnvelopeIcon
@@ -94,9 +104,9 @@ export default function LoginForm() {
 					<button
 						className="w-100 block button"
 						type="submit"
-						disabled={pending}
+						disabled={!mockMode && pending}
 					>
-						{pending ? "Signing in..." : "Sign in"}
+						{!mockMode && pending ? "Signing in..." : "Sign in"}
 					</button>
 				</form>
 			</section>
