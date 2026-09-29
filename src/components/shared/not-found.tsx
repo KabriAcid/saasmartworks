@@ -12,11 +12,7 @@ export default function NotFound() {
 
 			<div className="shell relative">
 				<div className="mx-auto max-w-5xl rounded-[2rem] border border-white/80 bg-white/75 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.12)] backdrop-blur-2xl sm:p-8 lg:p-12">
-						<div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-						<div className="order-first flex min-h-[14rem] min-w-0 items-center justify-center overflow-visible lg:min-h-[28rem]">
-							{/* 3D Large Text for a 404 with text gradient of primary and secondary */}
-							<h2 className="not-found-3d whitespace-nowrap text-[clamp(9rem,27vw,22rem)] font-black leading-[0.72] tracking-[-0.12em]" aria-label="404">404</h2>
-						</div>
+					<div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
 						<div>
 							<div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/10 px-3 py-1.5 text-[11px] font-bold tracking-[0.24em] text-[var(--color-ink)] uppercase">
 								<span>404 Error</span>
@@ -50,6 +46,10 @@ export default function NotFound() {
 							</div>
 						</div>
 
+						<div className="relative">
+							{/* 3D Large Text for a 404 with text gradient of primary and secondary */}
+							<h2 className="not-found-3d text-8xl font-black tracking-[-0.08em] sm:text-9xl" aria-label="404">404</h2>
+						</div>
 					</div>
 				</div>
 			</div>
