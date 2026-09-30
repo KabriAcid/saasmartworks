@@ -177,7 +177,6 @@ export default function LoginForm() {
 							Email address
 						</label>
 						<input
-							id="recovery-email"
 							className="input"
 							type="email"
 							autoComplete="email"

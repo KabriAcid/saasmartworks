@@ -41,7 +41,7 @@ export default function HomePage() {
 						Borno State and beyond.
 					</p>
 					<div className="mt-8 flex flex-wrap gap-action-gap">
-						<Link className="button button-secondary" href="/services">
+						<Link className="button button-outline" href="/services">
 							Explore services
 						</Link>
 						<Link className="button" href="/contact">
@@ -115,7 +115,10 @@ export default function HomePage() {
 									key={label}
 								>
 									<span className="grid size-9 place-items-center rounded-icon bg-primary/[0.16] text-primary-icon">
-										<Icon className="h-[1.15rem] w-[1.15rem]" aria-hidden="true" />
+										<Icon
+											className="h-[1.15rem] w-[1.15rem]"
+											aria-hidden="true"
+										/>
 									</span>
 									<span className="font-label text-primary-icon text-index font-extrabold tracking-[0.1em]">
 										{String(index + 1).padStart(2, "0")}
@@ -135,7 +138,9 @@ export default function HomePage() {
 						/>
 						<div className="eatery-preview-shade" />
 						<div className="absolute inset-x-6 bottom-6 text-white">
-							<span className="eyebrow mb-[0.65rem] text-primary-soft">Another side of SA'A SMART WORKS</span>
+							<span className="eyebrow mb-[0.65rem] text-primary-soft">
+								Another side of SA'A SMART WORKS
+							</span>
 							<h3 className="mb-[0.6rem] text-feature">SA’A Eatery</h3>
 							<p className="m-0 max-w-preview-copy text-on-image-muted">
 								A future business unit for good food, warm hospitality, and a

@@ -56,6 +56,7 @@ export default function ContactPage() {
 						<span className="field-label">Name</span>
 						<input
 							id="name"
+							className="input"
 							name="name"
 							autoComplete="name"
 							placeholder="Your full name"
@@ -68,6 +69,7 @@ export default function ContactPage() {
 						</span>
 						<input
 							id="organization"
+							className="input"
 							name="organization"
 							autoComplete="organization"
 							placeholder="Organization or institution"
@@ -77,6 +79,7 @@ export default function ContactPage() {
 						<span className="field-label">Email</span>
 						<input
 							id="email"
+							className="input"
 							name="email"
 							type="email"
 							autoComplete="email"
@@ -90,6 +93,7 @@ export default function ContactPage() {
 						</span>
 						<input
 							id="phone"
+							className="input"
 							name="phone"
 							type="tel"
 							autoComplete="tel"
@@ -98,7 +102,13 @@ export default function ContactPage() {
 					</label>
 					<label htmlFor="categoryId">
 						<span className="field-label">Service category</span>
-						<select id="categoryId" name="categoryId" defaultValue="" required>
+						<select
+							className="input"
+							id="categoryId"
+							name="categoryId"
+							defaultValue=""
+							required
+						>
 							<option value="" disabled>
 								Select a service
 							</option>
@@ -111,7 +121,13 @@ export default function ContactPage() {
 					</label>
 					<label htmlFor="serviceId">
 						<span className="field-label">Specific service</span>
-						<select id="serviceId" name="serviceId" defaultValue="" required>
+						<select
+							className="input"
+							id="serviceId"
+							name="serviceId"
+							defaultValue=""
+							required
+						>
 							<option value="" disabled>
 								Select an area of help
 							</option>
@@ -131,6 +147,7 @@ export default function ContactPage() {
 						<span className="field-label">Subject</span>
 						<input
 							id="subject"
+							className="input"
 							name="subject"
 							placeholder="What would you like help with?"
 							required
@@ -140,6 +157,7 @@ export default function ContactPage() {
 						<span className="field-label">How can we help?</span>
 						<textarea
 							id="message"
+							className="input"
 							name="message"
 							rows={6}
 							placeholder="Tell us about your project, timeline, or challenge."
