@@ -29,6 +29,9 @@
 	--color-glass-panel: rgb(255 255 255 / 72%);
 	--color-glass-panel-border: rgb(255 255 255 / 78%);
 	--color-dialog: rgb(255 255 255 / 96%);
+	--color-footer-muted: rgb(255 255 255 / 68%);
+	--color-footer-subtle: rgb(255 255 255 / 55%);
+	--color-footer-divider: rgb(255 255 255 / 14%);
 	--shadow-card: 0 18px 45px rgb(31 41 51 / 8%), 0 2px 8px rgb(31 41 51 / 5%);
 	--shadow-glass-panel:
 		0 24px 60px rgb(31 41 51 / 10%), inset 0 1px 0 rgb(255 255 255 / 88%);
@@ -61,6 +64,7 @@
 	--container-preview-copy: 25rem;
 	--breakpoint-nav: 52rem;
 	--breakpoint-compact: 34rem;
+	--grid-template-columns-footer: 1.6fr repeat(3, minmax(0, 1fr));
 }
 
 .admin-shadow-shell {
@@ -1063,75 +1067,6 @@ h3 {
 	font-family: Arial, sans-serif;
 	font-size: 0.78rem;
 }
-.site-footer {
-	background: var(--color-dark);
-	color: white;
-	padding-top: 3rem;
-}
-.footer-grid {
-	display: grid;
-	grid-template-columns: 1.6fr repeat(3, 1fr);
-	gap: 2rem;
-	padding-bottom: 2.5rem;
-}
-.site-footer p {
-	color: rgb(255 255 255 / 68%);
-	max-width: 24rem;
-}
-.footer-grid nav,
-.footer-contact {
-	display: flex;
-	flex-direction: column;
-	gap: 0.55rem;
-	font-family: Arial, sans-serif;
-	font-size: 0.86rem;
-}
-.footer-grid nav a,
-.footer-contact a {
-	color: rgb(255 255 255 / 68%);
-	transition:
-		color 180ms ease,
-		transform 180ms ease;
-}
-.footer-grid nav a:hover,
-.footer-contact a:hover {
-	color: var(--color-primary);
-	transform: translateX(2px);
-}
-.footer-brand {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-.footer-intro {
-	margin: 1.25rem 0 1.4rem;
-}
-.footer-cta {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.45rem;
-	color: var(--color-primary);
-	font-family: Arial, sans-serif;
-	font-size: 0.82rem;
-	font-weight: 800;
-}
-.footer-cta span {
-	font-size: 1rem;
-}
-.footer-label {
-	color: white !important;
-	font-weight: 800;
-	margin: 0 0 0.4rem;
-}
-.footer-bottom {
-	display: flex;
-	justify-content: space-between;
-	border-top: 1px solid rgb(255 255 255 / 14%);
-	padding-block: 1.2rem;
-	color: rgb(255 255 255 / 55%);
-	font-family: Arial, sans-serif;
-	font-size: 0.75rem;
-}
 .stack-list {
 	display: flex;
 	flex-direction: column;
@@ -1526,12 +1461,6 @@ h3 {
 	.compact,
 	.capability-grid {
 		grid-template-columns: 1fr;
-	}
-	.footer-grid,
-	.footer-bottom {
-		grid-template-columns: 1fr;
-		display: grid;
-		gap: 1rem;
 	}
 }
 @media (prefers-reduced-motion: reduce) {
