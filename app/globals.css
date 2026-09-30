@@ -42,6 +42,7 @@
 	--text-lead: 1.08rem;
 	--text-feature: 2rem;
 	--text-feature--line-height: 1.12;
+	--tracking-status: 0.08em;
 	--font-label: Arial, sans-serif;
 	--spacing-action-gap: 0.8rem;
 	--spacing-feature-gap: clamp(2rem, 6vw, 6rem);
@@ -53,6 +54,9 @@
 	--radius-dialog: 1.25rem;
 	--spacing-panel: clamp(1.5rem, 5vw, 2.5rem);
 	--blur-glass-panel: 22px;
+	--blur-proof: 16px;
+	--spacing-proof-icon: 1.15rem;
+	--scale-feature-hover: 1.04;
 	--container-copy: 38rem;
 	--container-preview-copy: 25rem;
 	--breakpoint-nav: 52rem;
@@ -554,9 +558,6 @@ a {
 .page-hero {
 	padding: 5rem 0 4rem;
 }
-.service-carousel {
-	width: 100%;
-}
 .service-carousel-contained {
 	width: min(100% - 2.5rem, 72rem);
 	margin-inline: auto;
@@ -576,7 +577,6 @@ a {
 	box-shadow: 0 24px 60px rgb(31 41 51 / 14%);
 }
 .service-carousel-image {
-	object-fit: cover;
 	animation: carousel-image-in 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .service-carousel-shade {
@@ -753,18 +753,6 @@ h3 {
 	align-items: start;
 	gap: clamp(2rem, 7vw, 7rem);
 }
-.faq-intro {
-	position: sticky;
-	top: 6rem;
-}
-.faq-intro > p:last-child {
-	max-width: 24rem;
-	color: var(--color-muted);
-}
-.faq-list {
-	display: grid;
-	gap: 0.75rem;
-}
 .faq-item {
 	overflow: hidden;
 	border: 1px solid rgb(255 255 255 / 78%);
@@ -787,42 +775,6 @@ h3 {
 	box-shadow:
 		0 18px 42px rgb(31 41 51 / 10%),
 		inset 0 1px 0 rgb(255 255 255 / 94%);
-}
-.faq-trigger {
-	display: flex;
-	width: 100%;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1rem;
-	border: 0;
-	background: transparent;
-	padding: 1.25rem 1.4rem;
-	color: var(--color-ink);
-	font-size: 1rem;
-	font-weight: 700;
-	text-align: left;
-	cursor: pointer;
-}
-.faq-icon {
-	display: grid;
-	width: 2rem;
-	height: 2rem;
-	flex: none;
-	place-items: center;
-	border-radius: 999px;
-	background: rgb(255 166 77 / 16%);
-	color: var(--color-primary-strong);
-	transition:
-		transform 260ms ease,
-		background 260ms ease;
-}
-.faq-icon svg {
-	width: 1.1rem;
-	height: 1.1rem;
-}
-.faq-item.is-open .faq-icon {
-	background: var(--color-primary);
-	transform: rotate(45deg);
 }
 .faq-panel {
 	display: grid;
@@ -1066,6 +1018,12 @@ h3 {
 		var(--color-surface) 52%,
 		var(--color-surface-warm) 100%
 	);
+}
+.feature-split {
+	display: grid;
+	grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+	align-items: stretch;
+	gap: var(--spacing-feature-gap);
 }
 .eatery-preview-shade {
 	position: absolute;
@@ -1519,8 +1477,9 @@ h3 {
 		grid-template-columns: 1fr;
 		gap: 2rem;
 	}
-	.faq-intro {
-		position: static;
+	.feature-split {
+		grid-template-columns: 1fr;
+		gap: 2rem;
 	}
 	.service-card {
 		grid-template-columns: 1fr;
@@ -1612,8 +1571,7 @@ h3 {
 	.service-carousel-image,
 	.service-carousel-caption,
 	.faq-panel,
-	.faq-answer p,
-	.faq-icon {
+	.faq-answer p {
 		animation: none !important;
 		transition: none !important;
 	}

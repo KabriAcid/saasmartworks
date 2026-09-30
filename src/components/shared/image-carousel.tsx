@@ -43,7 +43,7 @@ export function ImageCarousel({
 
 	return (
 		<section
-			className={`service-carousel${contained ? " service-carousel-contained" : ""}`}
+			className={`w-full service-carousel${contained ? " service-carousel-contained" : ""}`}
 			aria-label={label}
 			aria-roledescription="carousel"
 			onMouseEnter={() => setPaused(true)}
@@ -52,7 +52,7 @@ export function ImageCarousel({
 			<div className="service-carousel-frame">
 				<Image
 					key={activeIndex}
-					className="service-carousel-image"
+					className="service-carousel-image object-cover"
 					src={activeImage.src}
 					alt={activeImage.alt}
 					fill

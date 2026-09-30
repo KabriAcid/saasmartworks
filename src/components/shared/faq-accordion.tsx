@@ -39,15 +39,15 @@ export function FaqAccordion() {
 			className="faq-section shell section-space"
 			aria-labelledby="faq-heading"
 		>
-			<div className="faq-intro">
+			<div className="sticky top-24 max-nav:static">
 				<p className="eyebrow">Common questions</p>
 				<h2 id="faq-heading">A clearer path to the right support.</h2>
-				<p>
+				<p className="max-w-sm text-muted">
 					Some useful answers before you make an inquiry. We are happy to
 					discuss the details of your specific situation.
 				</p>
 			</div>
-			<div className="faq-list">
+			<div className="grid gap-3">
 				{faqItems.map((item, index) => {
 					const isOpen = openIndex === index;
 					const panelId = `faq-panel-${index}`;
@@ -57,15 +57,18 @@ export function FaqAccordion() {
 							key={item.question}
 						>
 							<button
-								className="faq-trigger"
+								className="flex w-full items-center justify-between gap-4 border-0 bg-transparent px-5.5 py-5 text-left text-base font-bold text-ink"
 								type="button"
 								aria-controls={panelId}
 								aria-expanded={isOpen}
 								onClick={() => setOpenIndex(isOpen ? null : index)}
 							>
 								<span>{item.question}</span>
-								<span className="faq-icon" aria-hidden="true">
-									<PlusIcon />
+								<span
+									className={`grid size-8 shrink-0 place-items-center rounded-full transition-all duration-300 ${isOpen ? "rotate-45 bg-primary text-ink" : "bg-primary-tint text-primary-strong"}`}
+									aria-hidden="true"
+								>
+									<PlusIcon className="size-4.5" />
 								</span>
 							</button>
 							<div
