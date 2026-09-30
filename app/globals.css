@@ -31,8 +31,7 @@
 	--color-dialog: rgb(255 255 255 / 96%);
 	--shadow-card: 0 18px 45px rgb(31 41 51 / 8%), 0 2px 8px rgb(31 41 51 / 5%);
 	--shadow-glass-panel:
-		0 24px 60px rgb(31 41 51 / 10%),
-		inset 0 1px 0 rgb(255 255 255 / 88%);
+		0 24px 60px rgb(31 41 51 / 10%), inset 0 1px 0 rgb(255 255 255 / 88%);
 	--shadow-dialog: 0 24px 60px rgb(31 41 51 / 24%);
 	--shadow-proof:
 		0 12px 28px rgb(31 41 51 / 6%), inset 0 1px 0 rgb(255 255 255 / 82%);
@@ -1457,31 +1456,6 @@ h3 {
 	padding: var(--spacing-panel);
 	box-shadow: var(--shadow-glass-panel);
 	backdrop-filter: blur(var(--blur-glass-panel)) saturate(130%);
-}
-.auth-form {
-	display: grid;
-	gap: 1rem;
-}
-.auth-field {
-	display: grid;
-	gap: 0.4rem;
-	min-width: 0;
-}
-.auth-form label {
-	display: flex;
-	align-items: center;
-	gap: 0.4rem;
-	font-size: 0.85rem;
-	font-weight: 700;
-}
-.auth-form label svg {
-	display: inline-block;
-	flex: 0 0 auto;
-}
-.auth-error {
-	margin: 0;
-	color: var(--color-danger-strong);
-	font-size: 0.875rem;
 }
 .dialog {
 	width: min(100% - 2rem, 28rem);

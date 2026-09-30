@@ -41,7 +41,10 @@ export default function LoginForm() {
 
 	return (
 		<main className="grid min-h-svh place-items-center px-5 py-16">
-			<section className="glass-panel w-full max-w-md" aria-labelledby="login-heading">
+			<section
+				className="glass-panel w-full max-w-md"
+				aria-labelledby="login-heading"
+			>
 				<Link
 					className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted no-underline hover:text-ink"
 					href="/"
@@ -59,11 +62,14 @@ export default function LoginForm() {
 				<h1 className="mb-3 max-w-none text-4xl sm:text-5xl" id="login-heading">
 					Sign in.
 				</h1>
-				<form className="auth-form" onSubmit={handleSubmit}>
-					<div className="auth-field">
-						<label htmlFor="login-email">
+				<form className="grid gap-4" onSubmit={handleSubmit}>
+					<div className="grid min-w-0 gap-1.5">
+						<label
+							className="flex items-center gap-1.5 text-sm font-bold"
+							htmlFor="login-email"
+						>
 							<EnvelopeIcon
-								className="inline-block h-4 w-4"
+								className="inline-block h-4 w-4 shrink-0"
 								aria-hidden="true"
 							/>
 							Email address
@@ -80,10 +86,13 @@ export default function LoginForm() {
 							required
 						/>
 					</div>
-					<div className="auth-field">
-						<label htmlFor="login-password">
+					<div className="grid min-w-0 gap-1.5">
+						<label
+							className="flex items-center gap-1.5 text-sm font-bold"
+							htmlFor="login-password"
+						>
 							<LockClosedIcon
-								className="inline-block h-4 w-4"
+								className="inline-block h-4 w-4 shrink-0"
 								aria-hidden="true"
 							/>
 							Password
@@ -178,7 +187,7 @@ export default function LoginForm() {
 							required
 						/>
 						{recoveryMessage && (
-							<p className="auth-error" role="status">
+							<p className="m-0 text-sm text-danger-strong" role="status">
 								{recoveryMessage}
 							</p>
 						)}
