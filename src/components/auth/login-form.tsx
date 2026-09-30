@@ -1,6 +1,6 @@
 "use client";
 
- import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	ArrowLeftIcon,
 	EnvelopeIcon,
@@ -40,17 +40,25 @@ export default function LoginForm() {
 	};
 
 	return (
-		<main className="auth-page">
-			<section className="auth-panel" aria-labelledby="login-heading">
-				<Link className="auth-back-link" href="/">
+		<main className="grid min-h-svh place-items-center px-5 py-16">
+			<section className="glass-panel w-full max-w-md" aria-labelledby="login-heading">
+				<Link
+					className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted no-underline hover:text-ink"
+					href="/"
+				>
 					<ArrowLeftIcon className="inline-block h-4 w-4" aria-hidden="true" />
 					Back to homepage
 				</Link>
-				<div className="auth-icon" aria-hidden="true">
-					<UserCircleIcon className="inline-block" />
+				<div
+					className="mb-6 grid size-13 place-items-center rounded-2xl bg-primary-tint text-primary-strong"
+					aria-hidden="true"
+				>
+					<UserCircleIcon className="inline-block h-5 w-5" />
 				</div>
 				<p className="eyebrow">Platform access</p>
-				<h1 id="login-heading">Sign in.</h1>
+				<h1 className="mb-3 max-w-none text-4xl sm:text-5xl" id="login-heading">
+					Sign in.
+				</h1>
 				<form className="auth-form" onSubmit={handleSubmit}>
 					<div className="auth-field">
 						<label htmlFor="login-email">
@@ -62,6 +70,7 @@ export default function LoginForm() {
 						</label>
 						<input
 							id="login-email"
+							className="input"
 							name="email"
 							type="email"
 							autoComplete="email"
@@ -79,11 +88,12 @@ export default function LoginForm() {
 							/>
 							Password
 						</label>
-						<div className="auth-password-field">
+						<div className="relative">
 							<input
 								id="login-password"
 								name="password"
 								type={showPassword ? "text" : "password"}
+								className="input pr-12"
 								autoComplete="current-password"
 								placeholder="Enter your password"
 								value={password}
@@ -91,7 +101,7 @@ export default function LoginForm() {
 								required
 							/>
 							<button
-								className="auth-password-toggle"
+								className="button-icon absolute top-1/2 right-2 -translate-y-1/2"
 								type="button"
 								aria-label={showPassword ? "Hide password" : "Show password"}
 								aria-pressed={showPassword}
@@ -112,9 +122,9 @@ export default function LoginForm() {
 							</button>
 						</div>
 					</div>
-					<div className="auth-forgot-row">
+					<div className="flex justify-end">
 						<button
-							className="auth-forgot-link"
+							className="button-link"
 							type="button"
 							onClick={() => {
 								setRecoveryEmail(email);
@@ -125,22 +135,24 @@ export default function LoginForm() {
 							Forgot password?
 						</button>
 					</div>
-					<button className="w-100 block button" type="submit">
+					<button className="button button-block" type="submit">
 						Sign in
 					</button>
 				</form>
 			</section>
 			<dialog
 				ref={dialogRef}
-				className="auth-reset-dialog"
+				className="dialog"
 				aria-labelledby="recovery-heading"
 				onClose={() => setIsForgotPasswordOpen(false)}
 			>
-				<div className="auth-reset-content">
-					<div className="auth-reset-header">
-						<h2 id="recovery-heading">Reset your password</h2>
+				<div className="grid gap-4 p-6 sm:p-8">
+					<div className="flex items-center justify-between gap-4">
+						<h2 className="m-0 text-xl" id="recovery-heading">
+							Reset your password
+						</h2>
 						<button
-							className="auth-reset-close"
+							className="button-icon button-icon-lg flex-none"
 							type="button"
 							aria-label="Close dialog"
 							onClick={() => setIsForgotPasswordOpen(false)}
@@ -148,13 +160,16 @@ export default function LoginForm() {
 							<XMarkIcon className="inline-block h-5 w-5" aria-hidden="true" />
 						</button>
 					</div>
-					<p className="auth-reset-description">
+					<p className="m-0 text-sm text-muted">
 						Enter your account email to continue with password recovery.
 					</p>
-					<form className="auth-reset-form" onSubmit={handleRecoverySubmit}>
-						<label htmlFor="recovery-email">Email address</label>
+					<form className="grid gap-3" onSubmit={handleRecoverySubmit}>
+						<label className="text-sm font-bold" htmlFor="recovery-email">
+							Email address
+						</label>
 						<input
 							id="recovery-email"
+							className="input"
 							type="email"
 							autoComplete="email"
 							placeholder="you@example.com"
@@ -167,7 +182,7 @@ export default function LoginForm() {
 								{recoveryMessage}
 							</p>
 						)}
-						<button className="button" type="submit">
+						<button className="button button-secondary" type="submit">
 							Continue
 						</button>
 					</form>
