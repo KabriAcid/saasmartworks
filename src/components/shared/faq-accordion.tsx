@@ -72,14 +72,14 @@ export function FaqAccordion() {
 								</span>
 							</button>
 							<div
-								className="faq-panel"
 								id={panelId}
 								role="region"
 								aria-hidden={!isOpen}
+								hidden={!isOpen}
 							>
-								<div className="faq-answer">
-									<p>{item.answer}</p>
-								</div>
+								<p className="m-0 px-18 pb-5.5 text-base leading-relaxed text-muted">
+									{item.answer}
+								</p>
 							</div>
 						</div>
 					);
