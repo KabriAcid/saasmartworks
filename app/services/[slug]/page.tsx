@@ -59,7 +59,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 				<div className="capability-grid">
 					{category.capabilities.map((capability, index) => (
 						<div className="detail-capability" key={capability}>
-							<span className="service-bullet" aria-hidden="true">
+							<span className="grid size-7 shrink-0 place-items-center rounded-service-bullet bg-primary-bullet text-index font-extrabold tracking-bullet text-primary-strong" aria-hidden="true">
 								{String(index + 1).padStart(2, "0")}
 							</span>
 							<span>{capability}</span>

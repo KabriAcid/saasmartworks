@@ -52,42 +52,57 @@ export default function ServicesPage() {
 						Support shaped around the work you need to do.
 					</h2>
 				</div>
-				<div className="stack-list">
+				<div className="mt-8 flex w-full flex-col items-stretch gap-5">
 					{serviceCategories.map((category) => (
-						<article className="service-card" key={category.id}>
-							<div className="service-card-header">
-								<div className="service-card-icon" aria-hidden="true">
+						<article
+							className="service-card relative grid min-h-0 w-full grid-cols-1 items-stretch gap-6 p-service-card nav:min-h-72 nav:gap-7"
+							key={category.id}
+						>
+							<div className="flex items-center justify-between gap-4">
+								<div
+									className="grid size-16 place-items-center rounded-service-icon border border-primary/30 bg-primary/15 text-primary-icon"
+									aria-hidden="true"
+								>
 									{(() => {
 										const Icon =
 											categoryIcons[category.id as keyof typeof categoryIcons];
-										return <Icon />;
+										return <Icon className="size-8" />;
 									})()}
 								</div>
 								<span className="card-number">/ {category.number}</span>
 							</div>
-							<div className="service-card-copy">
-								<p className="service-card-kicker">{category.shortTitle}</p>
-								<h2>{category.title}</h2>
-								<p>{category.description}</p>
+							<div>
+								<p className="eyebrow mt-0! mb-0! text-primary-strong!">
+									{category.shortTitle}
+								</p>
+								<h2 className="mt-2! mb-3! text-2xl! md:text-3xl!">
+									{category.title}
+								</h2>
+								<p className="m-0 max-w-xl text-muted">
+									{category.description}
+								</p>
 							</div>
-							<ul className="service-capabilities">
+							<ul className="m-0 grid w-full list-none grid-cols-1 gap-3 p-0 nav:grid-cols-2">
 								{category.capabilities.map((capability, index) => (
-									<li key={capability}>
-										<span className="service-bullet" aria-hidden="true">
+									<li
+										className="flex min-h-13 w-full items-center gap-3 rounded-xl border border-ink/10 bg-white/40 px-3 py-2.5 font-label text-sm leading-snug text-muted"
+										key={capability}
+									>
+										<span className="grid size-7 shrink-0 place-items-center rounded-service-bullet bg-primary-bullet text-index font-extrabold tracking-bullet text-primary-strong" aria-hidden="true">
 											{String(index + 1).padStart(2, "0")}
 										</span>
 										<span>{capability}</span>
 									</li>
 								))}
 							</ul>
-							<div className="service-card-action">
+							<div className="flex items-center justify-between gap-3 border-t border-ink/10 pt-5 font-label text-xs font-bold text-muted">
 								<span>Explore this discipline</span>
 								<Link
-									className="service-arrow"
+									className="grid size-10 flex-none place-items-center rounded-full border border-primary-link/30 bg-primary text-ink transition-transform hover:translate-x-0.5"
 									href={`/services/${category.slug}`}
 									aria-label={`Explore ${category.shortTitle}`}
 								>
-									<ArrowRightIcon aria-hidden="true" />
+									<ArrowRightIcon className="size-4" aria-hidden="true" />
 								</Link>
 							</div>
 						</article>
