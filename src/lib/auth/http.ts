@@ -1,6 +1,6 @@
 import "server-only";
 import { NextRequest, NextResponse } from "next/server";
-import { randomBytes } from "node:crypto";
+import { randomBytes, randomUUID } from "node:crypto";
 import { and, eq } from "drizzle-orm";
 import { openDatabase } from "@/db/client";
 import { users } from "@/db/schema";
@@ -20,6 +20,8 @@ function limit(key: string) {
   value.count++; attempts.set(key, value);
 }
 export async function authHandler(request: NextRequest, operation: "login" | "logout" | "me" | "change-password") {
+  const requestId = randomUUID();
+  let stage = "request";
   const json = (data: unknown, status = 200) => NextResponse.json(data, { status, headers: { "Cache-Control": "no-store" } });
   try {
     if (request.method !== "GET" && request.headers.get("origin") !== request.nextUrl.origin) throw new AuthError(403, "INVALID_ORIGIN", "Request origin is not allowed.");
@@ -30,16 +32,21 @@ export async function authHandler(request: NextRequest, operation: "login" | "lo
     if (raw.length > 8192) throw new AuthError(413, "TOO_LARGE", "Request is too large.");
     let input: unknown;
     try { input = JSON.parse(raw); } catch { throw new AuthError(400, "INVALID_JSON", "Invalid JSON body."); }
+    stage = "database-configuration";
     const { db } = openDatabase();
     if (operation === "login") {
       const parsed = credentialsSchema.safeParse(input);
       if (!parsed.success) throw new AuthError(422, "INVALID_INPUT", "Enter a valid email and password.");
       limit(`login:${parsed.data.email}`);
+      stage = "user-query";
       const [user] = await db.select().from(users).where(eq(users.email, parsed.data.email)).limit(1);
       dummyHash ??= hashPassword(randomBytes(24).toString("hex"));
+      stage = "password-verification";
       const valid = await verifyPassword(parsed.data.password, user?.passwordHash ?? await dummyHash);
       if (!valid || !user || user.status !== "ACTIVE") throw new AuthError(401, "INVALID_CREDENTIALS", "Invalid email or password.");
+      stage = "session-signing";
       const token = await signSession(user.id, credentialVersion(user.passwordHash));
+      stage = "permission-query";
       const identity = await identityForToken(token);
       const response = json({ data: identity }); response.cookies.set(sessionCookieName, token, cookieOptions); return response;
     }
@@ -56,6 +63,9 @@ export async function authHandler(request: NextRequest, operation: "login" | "lo
     const response = json({ data: await identityForToken(token) }); response.cookies.set(sessionCookieName, token, cookieOptions); return response;
   } catch (error) {
     if (error instanceof AuthError) return json({ error: { code: error.code, message: error.message } }, error.status);
-    return json({ error: { code: "UNAVAILABLE", message: "Authentication is temporarily unavailable." } }, 503);
+    const cause = error instanceof Error ? error.cause : undefined;
+    const code = cause && typeof cause === "object" && "code" in cause ? String(cause.code) : error && typeof error === "object" && "code" in error ? String(error.code) : "UNKNOWN";
+    console.error("Authentication failed", { requestId, operation, stage, code: /^[A-Z0-9_]{1,40}$/.test(code) ? code : "UNKNOWN" });
+    return json({ error: { code: "UNAVAILABLE", message: "Authentication is temporarily unavailable. Please try again.", requestId } }, 503);
   }
 }
