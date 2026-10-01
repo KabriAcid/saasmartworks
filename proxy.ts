@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifySession, sessionCookieName } from "@/lib/auth/session";
 import { identityForToken, AuthError } from "@/lib/auth/authorization";
-import { routePermission } from "@/lib/auth/permissions";
+import { routePermission, landingPath } from "@/lib/auth/permissions";
 
 export async function proxy(request: NextRequest) {
   const api = request.nextUrl.pathname.startsWith("/api/");
@@ -12,6 +12,10 @@ export async function proxy(request: NextRequest) {
     if (identity.user.mustChangePassword) return api ? NextResponse.json({ error: { code: "PASSWORD_CHANGE_REQUIRED", message: "Change your password first." } }, { status: 403 }) : NextResponse.redirect(new URL("/change-password", request.url));
     const path = api ? request.nextUrl.pathname.replace(/^\/api/, "") : request.nextUrl.pathname;
     const permission = routePermission(path);
+    if (!api && path.replace(/\/$/, "") === "/admin" && !identity.permissions.includes("PERM-DASHBOARD-VIEW")) {
+      const destination = landingPath(identity.permissions);
+      if (destination) return NextResponse.redirect(new URL(destination, request.url));
+    }
     if (!permission || !identity.permissions.includes(permission)) return NextResponse.json({ error: { code: "FORBIDDEN", message: "You do not have access to this page." } }, { status: 403 });
     return NextResponse.next();
   } catch (error) {

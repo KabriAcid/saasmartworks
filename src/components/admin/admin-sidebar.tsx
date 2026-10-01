@@ -62,7 +62,7 @@ export function AdminSidebar({ permissions }: AdminSidebarProps) {
 				aria-label="Admin navigation"
 				className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 			>
-				<Link
+				{permissions.includes("PERM-DASHBOARD-VIEW") && <Link
 					href="/admin"
 					aria-current={pathname === "/admin" ? "page" : undefined}
 					className={`relative mb-3 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:pl-4 ${
@@ -77,7 +77,7 @@ export function AdminSidebar({ permissions }: AdminSidebarProps) {
 
 					<HomeIcon className="h-5 w-5 shrink-0" />
 					<span>Dashboard</span>
-				</Link>
+				</Link>}
 
 				<div className="space-y-1">
 					{visibleGroups.map(({ label, icon: Icon, links }) => {
