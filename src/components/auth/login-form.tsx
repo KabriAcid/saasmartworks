@@ -8,13 +8,13 @@ import {
 	LockClosedIcon,
 	XMarkIcon,
 	UserCircleIcon,
+	ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { sessionResponseSchema } from "@/validation/auth";
+import { landingPath } from "@/lib/auth/permissions";
 
 export default function LoginForm() {
-	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -31,18 +31,23 @@ export default function LoginForm() {
 	}, [isForgotPasswordOpen]);
 
 	const [pending, setPending] = useState(false);
+	const [redirecting, setRedirecting] = useState(false);
 	const [error, setError] = useState("");
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		if (pending) return;
 		setPending(true); setError("");
 		try {
 			const response = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
 			const body = await response.json();
-			if (!response.ok) { setError(body.error?.message ?? "Sign-in failed."); return; }
+			if (!response.ok) { setError(body.error?.message ?? "Sign-in failed."); setPending(false); return; }
 			const result = sessionResponseSchema.parse(body);
-			router.replace(result.data.user.mustChangePassword ? "/change-password" : "/admin"); router.refresh();
-		} catch { setError("Unable to sign in. Please try again."); }
-		finally { setPending(false); }
+			const destination = result.data.user.mustChangePassword ? "/change-password" : landingPath(result.data.permissions);
+			if (!destination) { setError("Your account has no available landing page. Contact your administrator."); setPending(false); return; }
+			setRedirecting(true);
+			// Start a fresh authenticated request without refreshing the login route.
+			window.location.replace(destination);
+		} catch { setError("Unable to sign in. Please try again."); setPending(false); setRedirecting(false); }
 	};
 	const handleRecoverySubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -143,8 +148,9 @@ export default function LoginForm() {
 							</button>
 						</div>
 					</div>
-					<button className="button button-block" type="submit" disabled={pending}>
-						{pending ? "Signing in…" : "Sign in"}
+					<button className="button button-block" type="submit" disabled={pending} aria-busy={pending}>
+						{pending && <ArrowPathIcon aria-hidden="true" className="h-4 w-4 animate-spin motion-reduce:animate-none" />}
+						<span role="status">{redirecting ? "Opening your workspace…" : pending ? "Signing in…" : "Sign in"}</span>
 					</button>
 					<Link
 							className="mt-2 block w-full text-center text-sm text-muted no-underline opacity-60 transition-opacity hover:opacity-100 focus-visible:opacity-100"
