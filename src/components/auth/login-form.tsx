@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-	ArrowLeftIcon,
 	EnvelopeIcon,
 	EyeIcon,
 	EyeSlashIcon,
@@ -45,13 +44,6 @@ export default function LoginForm() {
 				className="glass-panel w-full max-w-md"
 				aria-labelledby="login-heading"
 			>
-				<Link
-					className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted no-underline hover:text-ink"
-					href="/"
-				>
-					<ArrowLeftIcon className="inline-block h-4 w-4" aria-hidden="true" />
-					Back to homepage
-				</Link>
 				<div
 					className="mb-6 grid size-13 place-items-center rounded-2xl bg-primary-tint text-primary-strong"
 					aria-hidden="true"
@@ -59,9 +51,7 @@ export default function LoginForm() {
 					<UserCircleIcon className="inline-block h-5 w-5" />
 				</div>
 				<p className="eyebrow">Platform access</p>
-				<h3 className="mb-3 max-w-none text-4xl sm:text-5xl">
-					Sign in.
-				</h3>
+				<h2 className="mb-3 max-w-none text-4xl sm:text-5xl">Sign in.</h2>
 				<form className="grid gap-4" onSubmit={handleSubmit}>
 					<div className="grid min-w-0 gap-1.5">
 						<label
@@ -147,6 +137,12 @@ export default function LoginForm() {
 					<button className="button button-block" type="submit">
 						Sign in
 					</button>
+					<Link
+							className="block text-center mb-6 inline-flex items-center gap-1.5 text-sm text-muted no-underline hover:text-ink"
+							href="/"
+						>
+							Back to homepage
+						</Link>
 				</form>
 			</section>
 			<dialog
@@ -157,9 +153,9 @@ export default function LoginForm() {
 			>
 				<div className="grid gap-4 p-6 sm:p-8">
 					<div className="flex items-center justify-between gap-4">
-						<h5 className="m-0 text-xl" id="recovery-heading">
+						<h4 className="font-bold m-0 text-xl">
 							Reset your password
-						</h5>
+						</h4>
 						<button
 							className="button-icon button-icon-lg flex-none"
 							type="button"
@@ -192,8 +188,8 @@ export default function LoginForm() {
 						)}
 						<div className="flex justify-end gap-3">
 							<button className="button" type="submit">
-							Continue
-						</button>
+								Continue
+							</button>
 						</div>
 					</form>
 				</div>
