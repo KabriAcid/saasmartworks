@@ -66,6 +66,17 @@ export async function authHandler(request: NextRequest, operation: "login" | "lo
     const cause = error instanceof Error ? error.cause : undefined;
     const code = cause && typeof cause === "object" && "code" in cause ? String(cause.code) : error && typeof error === "object" && "code" in error ? String(error.code) : "UNKNOWN";
     console.error("Authentication failed", { requestId, operation, stage, code: /^[A-Z0-9_]{1,40}$/.test(code) ? code : "UNKNOWN" });
+    // Log the underlying exception, not Drizzle's query/parameter wrapper.
+    const exception = cause instanceof Error ? cause : error;
+    const redact = (value: string) => value
+      .replace(/postgres(?:ql)?:\/\/[^\s]+/gi, "[database URL redacted]")
+      .replace(/(\nparams:)[\s\S]*/i, "$1 [redacted]");
+    if (exception instanceof Error) {
+      console.error(redact(`${exception.name}: ${exception.message}`));
+      if (exception.stack) console.error(redact(exception.stack));
+    } else {
+      console.error("Authentication threw a non-Error value.");
+    }
     return json({ error: { code: "UNAVAILABLE", message: "Authentication is temporarily unavailable. Please try again.", requestId } }, 503);
   }
 }
