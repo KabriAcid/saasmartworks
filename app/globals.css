@@ -934,6 +934,15 @@ h3 {
 .section-space {
 	padding-block: 5rem;
 }
+
+#login-email[aria-invalid="true"],
+#login-password[aria-invalid="true"] {
+	border-color: var(--color-danger-border);
+}
+#login-email[aria-invalid="true"]:focus-visible,
+#login-password[aria-invalid="true"]:focus-visible {
+	box-shadow: inset 0 0 0 1px var(--color-danger-border);
+}
 .section-heading {
 	max-width: 45rem;
 }

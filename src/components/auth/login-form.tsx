@@ -61,10 +61,10 @@ export default function LoginForm() {
 				>
 					<UserCircleIcon className="inline-block h-5 w-5" />
 				</div>
-				<h2 className="text-primary mb-3 max-w-none text-4xl sm:text-5xl">Sign in.</h2>
+				<h2 id="login-heading" className="text-primary mb-3 max-w-none text-4xl sm:text-5xl">Sign in.</h2>
 				<form className="grid gap-4" onSubmit={handleSubmit}>
 					{error && (
-						<p role="alert" className="m-0 w-full text-center text-sm font-medium text-red-600">
+						<p id="login-error" role="alert" className="m-0 w-full text-center text-sm font-medium text-red-600">
 							{error}
 						</p>
 					)}
@@ -81,17 +81,20 @@ export default function LoginForm() {
 						</label>
 						<input
 							id="login-email"
+							aria-invalid={!!error}
+							aria-describedby={error ? "login-error" : undefined}
 							className="input"
 							name="email"
 							type="email"
 							autoComplete="email"
 							placeholder="you@example.com"
 							value={email}
-							onChange={(event) => setEmail(event.target.value)}
+							onChange={(event) => { setEmail(event.target.value); setError(""); }}
 							required
 						/>
 					</div>
 					<div className="grid min-w-0 gap-1.5">
+						<div className="flex items-center justify-between gap-3">
 						<label
 							className="flex items-center gap-1.5 text-sm font-bold"
 							htmlFor="login-password"
@@ -102,16 +105,20 @@ export default function LoginForm() {
 							/>
 							Password
 						</label>
+						<button className="button-link shrink-0 text-xs" type="button" onClick={() => { setRecoveryEmail(email); setRecoveryMessage(""); setIsForgotPasswordOpen(true); }}>Forgot password?</button>
+						</div>
 						<div className="relative">
 							<input
 								id="login-password"
+								aria-invalid={!!error}
+								aria-describedby={error ? "login-error" : undefined}
 								name="password"
 								type={showPassword ? "text" : "password"}
 								className="input pr-12"
 								autoComplete="current-password"
 								placeholder="Enter your password"
 								value={password}
-								onChange={(event) => setPassword(event.target.value)}
+								onChange={(event) => { setPassword(event.target.value); setError(""); }}
 								required
 							/>
 							<button
@@ -136,24 +143,11 @@ export default function LoginForm() {
 							</button>
 						</div>
 					</div>
-					<div className="flex justify-end">
-						<button
-							className="button-link"
-							type="button"
-							onClick={() => {
-								setRecoveryEmail(email);
-								setRecoveryMessage("");
-								setIsForgotPasswordOpen(true);
-							}}
-						>
-							Forgot password?
-						</button>
-					</div>
 					<button className="button button-block" type="submit" disabled={pending}>
 						{pending ? "Signing in…" : "Sign in"}
 					</button>
 					<Link
-							className="block text-center mb-6 inline-flex items-center gap-1.5 text-sm text-muted no-underline hover:text-ink"
+							className="mt-2 block w-full text-center text-sm text-muted no-underline opacity-60 transition-opacity hover:opacity-100 focus-visible:opacity-100"
 							href="/"
 						>
 							Back to homepage
@@ -168,7 +162,7 @@ export default function LoginForm() {
 			>
 				<div className="grid gap-4 p-6 sm:p-8">
 					<div className="flex items-center justify-between gap-4">
-						<h4 className="font-bold m-0 text-xl">
+						<h4 id="recovery-heading" className="font-bold m-0 text-xl">
 							Reset your password
 						</h4>
 						<button
@@ -190,6 +184,7 @@ export default function LoginForm() {
 						<input
 							className="input"
 							type="email"
+							id="recovery-email"
 							autoComplete="email"
 							placeholder="you@example.com"
 							value={recoveryEmail}
