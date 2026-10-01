@@ -61,9 +61,13 @@ export default function LoginForm() {
 				>
 					<UserCircleIcon className="inline-block h-5 w-5" />
 				</div>
-				<p className="eyebrow">Platform access</p>
-				<h2 className="mb-3 max-w-none text-4xl sm:text-5xl">Sign in.</h2>
+				<h2 className="text-primary mb-3 max-w-none text-4xl sm:text-5xl">Sign in.</h2>
 				<form className="grid gap-4" onSubmit={handleSubmit}>
+					{error && (
+						<p role="alert" className="m-0 w-full text-center text-sm font-medium text-red-600">
+							{error}
+						</p>
+					)}
 					<div className="grid min-w-0 gap-1.5">
 						<label
 							className="flex items-center gap-1.5 text-sm font-bold"
@@ -145,7 +149,6 @@ export default function LoginForm() {
 							Forgot password?
 						</button>
 					</div>
-					{error && <p role="alert">{error}</p>}
 					<button className="button button-block" type="submit" disabled={pending}>
 						{pending ? "Signing in…" : "Sign in"}
 					</button>
