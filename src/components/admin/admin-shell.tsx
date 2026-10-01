@@ -4,14 +4,16 @@ import { AdminTopbar } from "@/components/admin/admin-topbar";
 export default function AdminShell({
 	children,
 	user,
+	permissions,
 }: {
 	children: React.ReactNode;
 	user: { id: string; name: string; email: string; role: string };
+	permissions: string[];
 }) {
 	return (
 		<div className="min-h-screen bg-[var(--color-surface)] text-[var(--color-ink)]">
 			<div className="flex min-h-screen">
-				<AdminSidebar />
+				<AdminSidebar permissions={permissions} />
 
 				<div className="flex min-w-0 flex-1 flex-col lg:ml-72">
 					<AdminTopbar user={user} />

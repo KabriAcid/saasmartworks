@@ -4,27 +4,26 @@ import { ChevronDownIcon, HomeIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { routePermission } from "@/lib/auth/permissions";
 import { Logo } from "@/components/shared/logo";
 import {
 	navigationGroups,
-	type AccessRole,
 } from "@/components/admin/navigation/admin-navigation";
 
 type AdminSidebarProps = {
-	role?: AccessRole;
+	permissions: string[];
 };
 
-export function AdminSidebar({ role = "ADMIN" }: AdminSidebarProps) {
+export function AdminSidebar({ permissions }: AdminSidebarProps) {
 	const pathname = usePathname();
 
 	const isRouteActive = (href: string) =>
 		pathname === href || pathname.startsWith(`${href}/`);
 
 	const visibleGroups = navigationGroups
-		.filter((group) => group.roles.includes(role))
 		.map((group) => ({
 			...group,
-			links: group.links.filter((link) => link.roles.includes(role)),
+			links: group.links.filter((link) => permissions.includes(routePermission(link.href) ?? "")),
 		}))
 		.filter((group) => group.links.length > 0);
 

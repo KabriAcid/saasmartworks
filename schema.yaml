@@ -1,0 +1,321 @@
+# Database Schema: public (supabase-cinnabar-crystal)
+
+# --- IDENTITY & ACCESS MANAGEMENT ---
+
+users:
+  id: text
+  name: text
+  email: text
+  password_hash: text
+  status: text
+  must_change_password: bool
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+roles:
+  id: text
+  name: text
+  description: text
+  created_at: int8
+  updated_at: int8
+
+permissions:
+  id: text
+  description: text
+
+user_roles:
+  user_id: text
+  role_id: text
+  business_unit_id: text
+
+role_permissions:
+  role_id: text
+  permission_id: text
+
+
+# --- CORE ORGANIZATION & PEOPLE ---
+
+business_units:
+  id: text
+
+employees:
+  id: text
+  business_unit_id: text
+  user_id: text
+  employee_number: text
+  name: text
+  email: text
+  job_title: text
+  status: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+contacts:
+  id: text
+  name: text
+  email: text
+  phone: text
+  organization: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+clients:
+  id: text
+  business_unit_id: text
+  contact_id: text
+  reference: text
+  status: text
+  notes: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+
+# --- OPERATIONS, PROJECTS & TRAINING ---
+
+projects:
+  id: text
+  business_unit_id: text
+  client_id: text
+  reference: text
+  name: text
+  description: text
+  manager_id: text
+  status: text
+  start_date: int8
+  end_date: int8
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+printing_jobs:
+  id: text
+  business_unit_id: text
+  client_id: text
+  reference: text
+  title: text
+  specifications: text
+  quantity: int8
+  assigned_to: text
+  due_at: int8
+  status: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+training_sessions:
+  id: text
+  business_unit_id: text
+  client_id: text
+  project_id: text
+  title: text
+  theme: text
+  venue: text
+  facilitator_id: text
+  start_date: int8
+  end_date: int8
+  status: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+training_participants:
+  training_id: text
+  contact_id: text
+  attendance: text
+
+
+# --- CRM & INQUIRIES ---
+
+inquiries:
+  id: text
+  reference: text
+  contact_id: text
+  business_unit_id: text
+  category_id: text
+  service_id: text
+  subject: text
+  status: text
+  assigned_to: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+inquiry_assignments:
+  id: text
+  inquiry_id: text
+  assigned_to: text
+  assigned_by: text
+  created_at: int8
+  updated_at: int8
+
+inquiry_messages:
+  id: text
+  inquiry_id: text
+  author_type: text
+  contact_author_id: text
+  staff_author_id: text
+  body: text
+  email_delivery_status: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+
+# --- FINANCE & BILLING ---
+
+quotations:
+  id: text
+  business_unit_id: text
+  client_id: text
+  project_id: text
+  reference: text
+  currency: text
+  status: text
+  subtotal_minor: int8
+  discount_minor: int8
+  tax_minor: int8
+  total_minor: int8
+  due_at: int8
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+quotation_items:
+  id: text
+  quotation_id: text
+  description: text
+  quantity: int8
+  unit_price_minor: int8
+  total_minor: int8
+
+invoices:
+  id: text
+  business_unit_id: text
+  client_id: text
+  project_id: text
+  reference: text
+  currency: text
+  status: text
+  subtotal_minor: int8
+  discount_minor: int8
+  tax_minor: int8
+  total_minor: int8
+  quotation_id: text
+  due_at: int8
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+invoice_items:
+  id: text
+  invoice_id: text
+  description: text
+  quantity: int8
+  unit_price_minor: int8
+  total_minor: int8
+
+payments:
+  id: text
+  business_unit_id: text
+  invoice_id: text
+  reference: text
+  external_reference: text
+  currency: text
+  amount_minor: int8
+  method: text
+  status: text
+  received_at: int8
+  recorded_by: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+expenses:
+  id: text
+  business_unit_id: text
+  project_id: text
+  reference: text
+  description: text
+  category: text
+  amount_minor: int8
+  currency: text
+  incurred_at: int8
+  status: text
+  recorded_by: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+
+# --- SYSTEM & SERVICES ---
+
+services:
+  id: text
+  category_id: text
+  slug: text
+  name: text
+  description: text
+  active: bool
+  sort_order: int8
+  created_at: int8
+  updated_at: int8
+
+service_categories:
+  id: text
+  business_unit_id: text
+
+files:
+  id: text
+  business_unit_id: text
+  uploaded_by: text
+  name: text
+  mime_type: text
+  size_bytes: int8
+  storage_key: text
+  status: text
+  client_id: text
+  inquiry_id: text
+  project_id: text
+  training_id: text
+  printing_job_id: text
+  invoice_id: text
+  expense_id: text
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+settings:
+  id: text
+  business_unit_id: text
+  key: text
+  value: text
+  updated_by: text
+  created_at: int8
+  updated_at: int8
+
+notifications:
+  id: text
+  business_unit_id: text
+  user_id: text
+  title: text
+  body: text
+  href: text
+  read_at: int8
+  is_demo: bool
+  created_at: int8
+  updated_at: int8
+
+audit_logs:
+  id: text
+  business_unit_id: text
+  actor_id: text
+  action: text
+  entity_type: text
+  entity_id: text
+  metadata: text
+  is_demo: bool
+  created_at: int8

@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { sessionResponseSchema } from "@/validation/auth";
 
 export default function LoginForm() {
 	const router = useRouter();
@@ -29,9 +30,19 @@ export default function LoginForm() {
 		if (!isForgotPasswordOpen && dialog.open) dialog.close();
 	}, [isForgotPasswordOpen]);
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const [pending, setPending] = useState(false);
+	const [error, setError] = useState("");
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		router.push("/admin");
+		setPending(true); setError("");
+		try {
+			const response = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
+			const body = await response.json();
+			if (!response.ok) { setError(body.error?.message ?? "Sign-in failed."); return; }
+			const result = sessionResponseSchema.parse(body);
+			router.replace(result.data.user.mustChangePassword ? "/change-password" : "/admin"); router.refresh();
+		} catch { setError("Unable to sign in. Please try again."); }
+		finally { setPending(false); }
 	};
 	const handleRecoverySubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -134,8 +145,9 @@ export default function LoginForm() {
 							Forgot password?
 						</button>
 					</div>
-					<button className="button button-block" type="submit">
-						Sign in
+					{error && <p role="alert">{error}</p>}
+					<button className="button button-block" type="submit" disabled={pending}>
+						{pending ? "Signing in…" : "Sign in"}
 					</button>
 					<Link
 							className="block text-center mb-6 inline-flex items-center gap-1.5 text-sm text-muted no-underline hover:text-ink"

@@ -17,8 +17,8 @@ function getSigningKey() {
 	return new TextEncoder().encode(secret);
 }
 
-export async function signSession(userId: string) {
-	return new SignJWT({})
+export async function signSession(userId: string, credentialVersion: string) {
+	return new SignJWT({ credentialVersion })
 		.setProtectedHeader({ alg: "HS256" })
 		.setIssuer(issuer)
 		.setAudience(audience)
@@ -32,10 +32,11 @@ export async function verifySession(token: string): Promise<JWTPayload | null> {
 	try {
 		const { payload } = await jwtVerify(token, getSigningKey(), {
 			algorithms: ["HS256"],
+			requiredClaims: ["sub", "iat", "exp", "credentialVersion"],
 			issuer,
 			audience,
 		});
-		return typeof payload.sub === "string" ? payload : null;
+		return typeof payload.sub === "string" && payload.sub.length > 0 && typeof payload.credentialVersion === "string" ? payload : null;
 	} catch {
 		return null;
 	}
