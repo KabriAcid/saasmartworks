@@ -115,10 +115,7 @@ export default function HomePage() {
 									key={label}
 								>
 									<span className="grid size-9 place-items-center rounded-icon bg-primary/[0.16] text-primary-icon">
-										<Icon
-											className="size-proof-icon"
-											aria-hidden="true"
-										/>
+										<Icon className="size-proof-icon" aria-hidden="true" />
 									</span>
 									<span className="font-label text-primary-icon text-index font-extrabold tracking-widest">
 										{String(index + 1).padStart(2, "0")}

@@ -59,9 +59,9 @@ export default function LoginForm() {
 					<UserCircleIcon className="inline-block h-5 w-5" />
 				</div>
 				<p className="eyebrow">Platform access</p>
-				<h1 className="mb-3 max-w-none text-4xl sm:text-5xl" id="login-heading">
+				<h3 className="mb-3 max-w-none text-4xl sm:text-5xl">
 					Sign in.
-				</h1>
+				</h3>
 				<form className="grid gap-4" onSubmit={handleSubmit}>
 					<div className="grid min-w-0 gap-1.5">
 						<label
@@ -157,9 +157,9 @@ export default function LoginForm() {
 			>
 				<div className="grid gap-4 p-6 sm:p-8">
 					<div className="flex items-center justify-between gap-4">
-						<h2 className="m-0 text-xl" id="recovery-heading">
+						<h5 className="m-0 text-xl" id="recovery-heading">
 							Reset your password
-						</h2>
+						</h5>
 						<button
 							className="button-icon button-icon-lg flex-none"
 							type="button"
@@ -190,9 +190,11 @@ export default function LoginForm() {
 								{recoveryMessage}
 							</p>
 						)}
-						<button className="button button-secondary" type="submit">
+						<div className="flex justify-end gap-3">
+							<button className="button" type="submit">
 							Continue
 						</button>
+						</div>
 					</form>
 				</div>
 			</dialog>
